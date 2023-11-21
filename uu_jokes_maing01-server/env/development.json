@@ -1,7 +1,7 @@
 {
   "port": 50200,
   "uuSubAppDataStoreMap": {
-    "primary": "mongodb://127.0.0.1:27017/jokesMainPrimary"
+    "primary": "mongodb://127.0.0.1:27017/homeworkMainPrimary"
   },
   "asid_license_owner_list": ["8165-8386-1"],
   "asid": "11111111111111111111111111111111",

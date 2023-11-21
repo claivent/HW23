@@ -6,6 +6,9 @@
       "schemaMap": {
         "jokesMain": {
           "realization": "dao/JokesMainMongo"
+        },
+        "joke": {
+          "realization": "dao/JokeMongo"
         }
       }
     }

@@ -1,7 +1,7 @@
 {
-  "appName": "Application uuJokes",
+  "appName": "Application uuShopping",
   "About": {
-    "header": "About application uuJokes",
+    "header": "About application uuShopping",
     "creatorsHeader": "Application creators",
     "termsOfUse": "Terms of use"
   },
@@ -31,6 +31,8 @@
   },
   "Menu": {
     "home": "Welcome",
+    "slist": "Shopping list",
+    "slists": "Lists",
     "about": "About Application"
   }
 }

@@ -1,7 +1,7 @@
 {
-  "appName": "Aplikace uuJokes",
+  "appName": "Aplikace uuShopping",
   "About": {
-    "header": "O aplikaci uuJokes",
+    "header": "O aplikaci uuShopping",
     "creatorsHeader": "Tvůrci aplikace",
     "termsOfUse": "Podmínky užívání"
   },
@@ -31,6 +31,8 @@
   },
   "Menu": {
     "home": "Vítejte",
+    "slist": "Nákupní seznam",
+    "slists": "Seznamy",
     "about": "O aplikaci"
   }
 }

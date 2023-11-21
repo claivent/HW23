@@ -19,6 +19,23 @@ const Calls = {
   //   return Calls.call("get", commandUri, dtoIn);
   // },
 
+  deleteSlist(dtoIn){
+    console.log("Calls delete", dtoIn);
+    const commandUri = Calls.getCommandUri("slist/delete");
+    return Calls.call("post", commandUri);
+  },
+
+  createSlist(dtoIn){
+    console.log("Calls create", dtoIn);
+    const commandUri = Calls.getCommandUri("slist/create");
+    return Calls.call("post", commandUri);
+  },
+
+  loadSlistsList(dtoIn){
+    const commandUri = Calls.getCommandUri("slist/list");
+    return Calls.call("get", commandUri);
+  },
+
   loadIdentityProfiles() {
     const commandUri = Calls.getCommandUri("sys/uuAppWorkspace/initUve");
     return Calls.call("get", commandUri);

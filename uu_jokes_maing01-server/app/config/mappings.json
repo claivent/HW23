@@ -28,7 +28,7 @@
       },
       "joke/create": {
         "realization": "api/controllers/JokeController.create",
-        "httpMethod": "POST",
+        "httpMethod": "GET",
         "type": "CMD"
       }
     }

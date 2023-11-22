@@ -28,6 +28,10 @@
       "joke/create": {
         "sysStateList": ["active"],
         "profileList": ["Public"]
+      },
+      "slist/create": {
+        "sysStateList": ["active"],
+        "profileList": ["Authorities","Executives","Readers"]
       }
     }
   }

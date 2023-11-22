@@ -9,6 +9,9 @@
         },
         "joke": {
           "realization": "dao/JokeMongo"
+        },
+        "slist": {
+          "realization": "dao/SlistMongo"
         }
       }
     }

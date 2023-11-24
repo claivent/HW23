@@ -17,6 +17,10 @@ class SlistAbl {
 
   }
 
+  async delete(awid, dtoIn) {
+    
+  }
+
   async list(awid, dtoIn) {
      let uuAppErrorMap = {};
     // validation of dtoIn

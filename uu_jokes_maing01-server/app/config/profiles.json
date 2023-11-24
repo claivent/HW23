@@ -40,6 +40,10 @@
       "slist/list": {
         "sysStateList": ["active"],
         "profileList": ["Authorities","Executives"]
+      },
+      "slist/delete": {
+        "sysStateList": ["active"],
+        "profileList": ["Executives"]
       }
     }
   }

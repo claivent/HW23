@@ -45,6 +45,11 @@
         "realization": "api/controllers/SlistController.list",
         "httpMethod": "GET",
         "type": "CMD"
+      },
+      "slist/delete": {
+        "realization": "api/controllers/SlistController.delete",
+        "httpMethod": "POST",
+        "type": "CMD"
       }
     }
   }

@@ -3,6 +3,10 @@ const SlistAbl = require("../../abl/slist-abl.js");
 
 class SlistController {
 
+  delete(ucEnv) {
+    return SlistAbl.delete(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+  }
+
   list(ucEnv) {
     return SlistAbl.list(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
   }

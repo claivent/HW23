@@ -17,3 +17,7 @@ const slistListDtoInType  = shape({
     pageSize: integer()
   })
 });
+
+const slistDeleteDtoInType = shape({
+  id: id().isRequired()
+});

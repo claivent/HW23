@@ -1,0 +1,24 @@
+ {
+    "id": 10000000001,
+    "awid": 2222222222222222222,
+    "sys": {
+      "cts": "2023-11-23T15:30:45.123Z",
+      "mts": "2023-11-24T16:30:45.123Z",
+      "revision": 1
+    },
+    "name": "Grocery List 1",
+    "owner_id": "150-456-120",
+    "owner_name": "John Doe",
+    "members": ["1", "2"],
+    "shoppingItems": [
+      {
+        "id": "1",
+        "quantity": 10,
+        "unit": "Kg",
+        "isActive": true
+      }
+    ],
+    "isArchived": false
+  }
+
+

@@ -1,0 +1,388 @@
+[
+  {
+    "id": 10000000001,
+    "awid": 2222222222222222222,
+    "sys": {
+      "cts": "2023-11-23T15:30:45.123Z",
+      "mts": "2023-11-24T16:30:45.123Z",
+      "revision": 1
+    },
+    "name": "Grocery List 1",
+    "owner_id": "150-456-120",
+    "owner_name": "John Doe",
+    "members": ["1", "2"],
+    "shoppingItems": [
+      {
+        "id": "1",
+        "quantity": 10,
+        "unit": "Kg",
+        "isActive": true
+      }
+    ],
+    "isArchived": false
+  },
+  {
+    "id": 10000000002,
+    "awid": 2222222222222222222,
+    "sys": {
+      "cts": "2023-11-23T16:30:45.123Z",
+      "mts": "2023-11-24T17:30:45.123Z",
+      "revision": 2
+    },
+    "name": "Grocery List 2",
+    "owner_id": "151-456-121",
+    "owner_name": "Alice Johnson",
+    "members": ["5", "6"],
+    "shoppingItems": [
+      {
+        "id": "4",
+        "quantity": 15,
+        "unit": "Pieces",
+        "isActive": true
+      },
+      {
+        "id": "5",
+        "quantity": 8,
+        "unit": "Kg",
+        "isActive": false
+      }
+    ],
+    "isArchived": false
+  },
+  {
+    "id": 10000000003,
+    "awid": 2222222222222222222,
+    "sys": {
+      "cts": "2023-11-25T12:45:30.567Z",
+      "mts": "2023-11-26T14:20:10.789Z",
+      "revision": 3
+    },
+    "name": "Shopping List 3",
+    "owner_id": "152-456-122",
+    "owner_name": "Bob Smith",
+    "members": ["7", "8"],
+    "shoppingItems": [
+      {
+        "id": "8",
+        "quantity": 5,
+        "unit": "Kg",
+        "isActive": true
+      },
+      {
+        "id": "9",
+        "quantity": 50,
+        "unit": "Pieces",
+        "isActive": false
+      }
+    ],
+    "isArchived": true
+  },
+  {
+    "id": 10000000004,
+    "awid": 2222222222222222222,
+    "sys": {
+      "cts": "2023-11-27T09:15:20.987Z",
+      "mts": "2023-11-28T10:40:35.678Z",
+      "revision": 4
+    },
+    "name": "Grocery List 4",
+    "owner_id": "153-456-123",
+    "owner_name": "Eva Nováková",
+    "members": ["10", "11"],
+    "shoppingItems": [
+      {
+        "id": "12",
+        "quantity": 30,
+        "unit": "Kg",
+        "isActive": false
+      },
+      {
+        "id": "13",
+        "quantity": 2,
+        "unit": "Pieces",
+        "isActive": true
+      }
+    ],
+    "isArchived": false
+  },
+  {
+    "id": 10000000005,
+    "awid": 2222222222222222222,
+    "sys": {
+      "cts": "2023-11-29T14:50:55.789Z",
+      "mts": "2023-11-30T15:55:40.456Z",
+      "revision": 5
+    },
+    "name": "Shopping List 5",
+    "owner_id": "154-456-124",
+    "owner_name": "Martin Vlasák",
+    "members": ["12", "13"],
+    "shoppingItems": [
+      {
+        "id": "15",
+        "quantity": 12,
+        "unit": "Kg",
+        "isActive": true
+      },
+      {
+        "id": "16",
+        "quantity": 40,
+        "unit": "Pieces",
+        "isActive": false
+      }
+    ],
+    "isArchived": true
+  },
+  {
+    "id": 10000000006,
+    "awid": 2222222222222222222,
+    "sys": {
+      "cts": "2023-12-01T11:30:25.345Z",
+      "mts": "2023-12-02T12:25:15.789Z",
+      "revision": 6
+    },
+    "name": "Grocery List 6",
+    "owner_id": "155-456-125",
+    "owner_name": "Karolína Procházková",
+    "members": ["14", "15"],
+    "shoppingItems": [
+      {
+        "id": "18",
+        "quantity": 20,
+        "unit": "Kg",
+        "isActive": false
+      },
+      {
+        "id": "19",
+        "quantity": 15,
+        "unit": "Pieces",
+        "isActive": true
+      }
+    ],
+    "isArchived": false
+  },
+  {
+    "id": 10000000007,
+    "awid": 2222222222222222222,
+    "sys": {
+      "cts": "2023-12-03T09:05:10.123Z",
+      "mts": "2023-12-04T10:15:30.567Z",
+      "revision": 7
+    },
+    "name": "Shopping List 7",
+    "owner_id": "156-456-126",
+    "owner_name": "Pavel Malý",
+    "members": ["16", "17"],
+    "shoppingItems": [
+      {
+        "id": "21",
+        "quantity": 8,
+        "unit": "Kg",
+        "isActive": true
+      },
+      {
+        "id": "22",
+        "quantity": 25,
+        "unit": "Pieces",
+        "isActive": false
+      }
+    ],
+    "isArchived": true
+  },
+  {
+    "id": 10000000008,
+    "awid": 2222222222222222222,
+    "sys": {
+      "cts": "2023-12-05T13:40:50.987Z",
+      "mts": "2023-12-06T14:55:45.345Z",
+      "revision": 8
+    },
+    "name": "Grocery List 8",
+    "owner_id": "157-456-127",
+    "owner_name": "Jana Novotná",
+    "members": ["18", "19"],
+    "shoppingItems": [
+      {
+        "id": "24",
+        "quantity": 18,
+        "unit": "Kg",
+        "isActive": false
+      },
+      {
+        "id": "25",
+        "quantity": 10,
+        "unit": "Pieces",
+        "isActive": true
+      }
+    ],
+    "isArchived": false
+  },
+  {
+    "id": 10000000009,
+    "awid": 2222222222222222222,
+    "sys": {
+      "cts": "2023-12-07T11:20:35.456Z",
+      "mts": "2023-12-08T12:30:25.789Z",
+      "revision": 9
+    },
+    "name": "Shopping List 9",
+    "owner_id": "158-456-128",
+    "owner_name": "Miroslav Kovář",
+    "members": ["20", "21"],
+    "shoppingItems": [
+      {
+        "id": "28",
+        "quantity": 22,
+        "unit": "Kg",
+        "isActive": true
+      },
+      {
+        "id": "29",
+        "quantity": 30,
+        "unit": "Pieces",
+        "isActive": false
+      }
+    ],
+    "isArchived": true
+  },
+  {
+    "id": 10000000010,
+    "awid": 2222222222222222222,
+    "sys": {
+      "cts": "2023-12-09T09:10:15.123Z",
+      "mts": "2023-12-10T10:25:40.567Z",
+      "revision": 10
+    },
+    "name": "Grocery List 10",
+    "owner_id": "159-456-129",
+    "owner_name": "Elena Šimková",
+    "members": ["22", "23"],
+    "shoppingItems": [
+      {
+        "id": "31",
+        "quantity": 12,
+        "unit": "Kg",
+        "isActive": false
+      },
+      {
+        "id": "32",
+        "quantity": 18,
+        "unit": "Pieces",
+        "isActive": true
+      }
+    ],
+    "isArchived": false
+  },
+  {
+    "id": 10000000011,
+    "awid": 2222222222222222222,
+    "sys": {
+      "cts": "2023-12-11T13:50:30.789Z",
+      "mts": "2023-12-12T14:55:45.345Z",
+      "revision": 11
+    },
+    "name": "Shopping List 11",
+    "owner_id": "160-456-130",
+    "owner_name": "Tomáš Prokop",
+    "members": ["24", "25"],
+    "shoppingItems": [
+      {
+        "id": "35",
+        "quantity": 25,
+        "unit": "Kg",
+        "isActive": true
+      },
+      {
+        "id": "36",
+        "quantity": 5,
+        "unit": "Pieces",
+        "isActive": false
+      }
+    ],
+    "isArchived": true
+  },
+  {
+    "id": 10000000012,
+    "awid": 2222222222222222222,
+    "sys": {
+      "cts": "2023-12-13T11:30:25.123Z",
+      "mts": "2023-12-14T12:40:35.567Z",
+      "revision": 12
+    },
+    "name": "Grocery List 12",
+    "owner_id": "161-456-131",
+    "owner_name": "Veronika Křížová",
+    "members": ["26", "27"],
+    "shoppingItems": [
+      {
+        "id": "39",
+        "quantity": 15,
+        "unit": "Kg",
+        "isActive": false
+      },
+      {
+        "id": "40",
+        "quantity": 20,
+        "unit": "Pieces",
+        "isActive": true
+      }
+    ],
+    "isArchived": false
+  },
+  {
+    "id": 10000000013,
+    "awid": 2222222222222222222,
+    "sys": {
+      "cts": "2023-12-15T09:05:10.456Z",
+      "mts": "2023-12-16T10:15:30.789Z",
+      "revision": 13
+    },
+    "name": "Shopping List 13",
+    "owner_id": "162-456-132",
+    "owner_name": "Lukáš Novák",
+    "members": ["28", "29"],
+    "shoppingItems": [
+      {
+        "id": "43",
+        "quantity": 18,
+        "unit": "Kg",
+        "isActive": true
+      },
+      {
+        "id": "44",
+        "quantity": 12,
+        "unit": "Pieces",
+        "isActive": false
+      }
+    ],
+    "isArchived": true
+  },
+  {
+    "id": 10000000014,
+    "awid": 2222222222222222222,
+    "sys": {
+      "cts": "2023-12-17T13:40:50.987Z",
+      "mts": "2023-12-18T14:55:45.345Z",
+      "revision": 14
+    },
+    "name": "Grocery List 14",
+    "owner_id": "163-456-133",
+    "owner_name": "Petra Černá",
+    "members": ["30", "31"],
+    "shoppingItems": [
+      {
+        "id": "46",
+        "quantity": 10,
+        "unit": "Kg",
+        "isActive": false
+      },
+      {
+        "id": "47",
+        "quantity": 25,
+        "unit": "Pieces",
+        "isActive": true
+      }
+    ],
+    "isArchived": false
+  }
+]

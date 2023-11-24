@@ -6,6 +6,7 @@ const slistCreateDtoInType = shape({
 });
 
 const slistGetDtoInType = shape({
-  name: uu5String(3, 100).isRequired(),
-  notes: string(0, 4000).isRequired()
+  id: id().isRequired()
 });
+
+

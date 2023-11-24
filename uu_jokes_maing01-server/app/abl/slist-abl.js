@@ -7,6 +7,7 @@ const Errors = require("../api/errors/slist-error.js");
 const Warnings = require("../api/warnings/slist-warnings");
 const ShopList = require("../_mock/list.json");
 const ShopLists = require("../_mock/lists.json");
+const { Utils } = require("uu_appg01_server");
 
 class SlistAbl {
 
@@ -17,13 +18,21 @@ class SlistAbl {
 
   async get(awid, dtoIn) {
     let uuAppErrorMap = {};
-
+    // validation of dtoIn
+    const validationResult = this.validator.validate("slistGetDtoInType", dtoIn);
+    uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      uuAppErrorMap,
+      Warnings.Create.UnsupportedKeys.code,
+      Errors.Create.InvalidDtoIn
+    );
 
     // prepare and return dtoOut
     const dtoOut = { ...dtoIn };
     dtoOut.awid = awid;
     dtoOut.uuAppErrorMap = uuAppErrorMap;
-    dtoOut.mockList = ShopList;
+    dtoOut.mockList = ShopLists.find(lst=>lst.id === dtoIn.id)
 
     return dtoOut;
 
@@ -58,6 +67,7 @@ class SlistAbl {
 
     // prepare and return dtoOut
     const dtoOut = { ...dtoIn , addedValues};
+    dtoOut.id = "5f91a4c8e485b9a64c89d236";
     dtoOut.awid = awid;
     dtoOut.addedValues;
     dtoOut.uuAppErrorMap = uuAppErrorMap;

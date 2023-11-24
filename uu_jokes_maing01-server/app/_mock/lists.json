@@ -1,6 +1,6 @@
 [
   {
-    "id": 10000000001,
+    "id": "5f91a4c8e485b9a64c89d237",
     "awid": 2222222222222222222,
     "sys": {
       "cts": "2023-11-23T15:30:45.123Z",
@@ -22,7 +22,7 @@
     "isArchived": false
   },
   {
-    "id": 10000000002,
+    "id": "5f91a4c8e485b9a64c89d238",
     "awid": 2222222222222222222,
     "sys": {
       "cts": "2023-11-23T16:30:45.123Z",
@@ -50,7 +50,7 @@
     "isArchived": false
   },
   {
-    "id": 10000000003,
+    "id": "5f91a4c8e485b9a64c89d239",
     "awid": 2222222222222222222,
     "sys": {
       "cts": "2023-11-25T12:45:30.567Z",
@@ -78,7 +78,7 @@
     "isArchived": true
   },
   {
-    "id": 10000000004,
+    "id": "5f91a4c8e485b9a64c89d23a",
     "awid": 2222222222222222222,
     "sys": {
       "cts": "2023-11-27T09:15:20.987Z",
@@ -106,7 +106,7 @@
     "isArchived": false
   },
   {
-    "id": 10000000005,
+    "id": "5f91a4c8e485b9a64c89d23b",
     "awid": 2222222222222222222,
     "sys": {
       "cts": "2023-11-29T14:50:55.789Z",
@@ -134,7 +134,7 @@
     "isArchived": true
   },
   {
-    "id": 10000000006,
+    "id": "5f91a4c8e485b9a64c89d23c",
     "awid": 2222222222222222222,
     "sys": {
       "cts": "2023-12-01T11:30:25.345Z",
@@ -162,7 +162,7 @@
     "isArchived": false
   },
   {
-    "id": 10000000007,
+    "id": "5f91a4c8e485b9a64c89d23d"  ,
     "awid": 2222222222222222222,
     "sys": {
       "cts": "2023-12-03T09:05:10.123Z",
@@ -190,7 +190,7 @@
     "isArchived": true
   },
   {
-    "id": 10000000008,
+    "id": "5f91a4c8e485b9a64c89d23e",
     "awid": 2222222222222222222,
     "sys": {
       "cts": "2023-12-05T13:40:50.987Z",
@@ -218,7 +218,7 @@
     "isArchived": false
   },
   {
-    "id": 10000000009,
+    "id": "5f91a4c8e485b9a64c89d23f",
     "awid": 2222222222222222222,
     "sys": {
       "cts": "2023-12-07T11:20:35.456Z",
@@ -246,7 +246,7 @@
     "isArchived": true
   },
   {
-    "id": 10000000010,
+    "id": "5f91a4c8e485b9a64c89d240"  ,
     "awid": 2222222222222222222,
     "sys": {
       "cts": "2023-12-09T09:10:15.123Z",
@@ -267,118 +267,6 @@
       {
         "id": "32",
         "quantity": 18,
-        "unit": "Pieces",
-        "isActive": true
-      }
-    ],
-    "isArchived": false
-  },
-  {
-    "id": 10000000011,
-    "awid": 2222222222222222222,
-    "sys": {
-      "cts": "2023-12-11T13:50:30.789Z",
-      "mts": "2023-12-12T14:55:45.345Z",
-      "revision": 11
-    },
-    "name": "Shopping List 11",
-    "owner_id": "160-456-130",
-    "owner_name": "Tomáš Prokop",
-    "members": ["24", "25"],
-    "shoppingItems": [
-      {
-        "id": "35",
-        "quantity": 25,
-        "unit": "Kg",
-        "isActive": true
-      },
-      {
-        "id": "36",
-        "quantity": 5,
-        "unit": "Pieces",
-        "isActive": false
-      }
-    ],
-    "isArchived": true
-  },
-  {
-    "id": 10000000012,
-    "awid": 2222222222222222222,
-    "sys": {
-      "cts": "2023-12-13T11:30:25.123Z",
-      "mts": "2023-12-14T12:40:35.567Z",
-      "revision": 12
-    },
-    "name": "Grocery List 12",
-    "owner_id": "161-456-131",
-    "owner_name": "Veronika Křížová",
-    "members": ["26", "27"],
-    "shoppingItems": [
-      {
-        "id": "39",
-        "quantity": 15,
-        "unit": "Kg",
-        "isActive": false
-      },
-      {
-        "id": "40",
-        "quantity": 20,
-        "unit": "Pieces",
-        "isActive": true
-      }
-    ],
-    "isArchived": false
-  },
-  {
-    "id": 10000000013,
-    "awid": 2222222222222222222,
-    "sys": {
-      "cts": "2023-12-15T09:05:10.456Z",
-      "mts": "2023-12-16T10:15:30.789Z",
-      "revision": 13
-    },
-    "name": "Shopping List 13",
-    "owner_id": "162-456-132",
-    "owner_name": "Lukáš Novák",
-    "members": ["28", "29"],
-    "shoppingItems": [
-      {
-        "id": "43",
-        "quantity": 18,
-        "unit": "Kg",
-        "isActive": true
-      },
-      {
-        "id": "44",
-        "quantity": 12,
-        "unit": "Pieces",
-        "isActive": false
-      }
-    ],
-    "isArchived": true
-  },
-  {
-    "id": 10000000014,
-    "awid": 2222222222222222222,
-    "sys": {
-      "cts": "2023-12-17T13:40:50.987Z",
-      "mts": "2023-12-18T14:55:45.345Z",
-      "revision": 14
-    },
-    "name": "Grocery List 14",
-    "owner_id": "163-456-133",
-    "owner_name": "Petra Černá",
-    "members": ["30", "31"],
-    "shoppingItems": [
-      {
-        "id": "46",
-        "quantity": 10,
-        "unit": "Kg",
-        "isActive": false
-      },
-      {
-        "id": "47",
-        "quantity": 25,
         "unit": "Pieces",
         "isActive": true
       }

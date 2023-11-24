@@ -2,11 +2,11 @@
 const SlistAbl = require("../../abl/slist-abl.js");
 
 class SlistController {
-
   create(ucEnv) {
-    return SlistAbl.create(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+    const awid = ucEnv.getUri().getAwid();
+    const dtoIn = ucEnv.parameters;
+    return SlistAbl.create(awid, dtoIn);
   }
-
 }
 
 module.exports = new SlistController();

@@ -9,9 +9,11 @@ class SlistAbl {
 
   constructor() {
     this.validator = Validator.load();
-  }
 
-  create(awid, dtoIn) {
+  }
+  cTime = new Date().toISOString();
+
+  create(awid, dtoIn, cTime=this.cTime) {
     let uuAppErrorMap = {};
 
     // validation of dtoIn
@@ -26,8 +28,8 @@ class SlistAbl {
 
     const addedValues = {
       sys: {
-        cts: "sys.cts",
-        mts: "sys.mts",
+        cts: this.cTime,
+        mts: this.cTime,
         rev: 0
       },
       owner_id: "100-55-44",

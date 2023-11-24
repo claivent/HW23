@@ -9,4 +9,11 @@ const slistGetDtoInType = shape({
   id: id().isRequired()
 });
 
-
+const slistListDtoInType  = shape({
+  sortBy: oneOf(["name", "notes"]),
+  order: oneOf(["asc", "desc"]),
+  pageInfo: shape({
+    pageIndex: integer(),
+    pageSize: integer()
+  })
+});

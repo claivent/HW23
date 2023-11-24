@@ -9,10 +9,35 @@ const ShopList = require("../_mock/list.json");
 const ShopLists = require("../_mock/lists.json");
 const { Utils } = require("uu_appg01_server");
 
+
 class SlistAbl {
 
   constructor() {
     this.validator = Validator.load();
+
+  }
+
+  async list(awid, dtoIn) {
+     let uuAppErrorMap = {};
+    // validation of dtoIn
+    const validationResult = this.validator.validate("slistListDtoInType", dtoIn);
+    uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      uuAppErrorMap,
+      Warnings.Create.UnsupportedKeys.code,
+      Errors.Create.InvalidDtoIn
+    );
+
+    // prepare and return dtoOut
+    const dtoOut = { ...dtoIn };
+    dtoOut.awid = awid;
+    dtoOut.uuAppErrorMap = uuAppErrorMap;
+    dtoOut.itemList = ShopLists;
+
+
+    return dtoOut;
+
 
   }
 

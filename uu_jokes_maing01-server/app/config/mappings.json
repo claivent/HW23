@@ -40,6 +40,11 @@
         "realization": "api/controllers/SlistController.get",
         "httpMethod": "GET",
         "type": "CMD"
+      },
+      "slist/list": {
+        "realization": "api/controllers/SlistController.list",
+        "httpMethod": "GET",
+        "type": "CMD"
       }
     }
   }

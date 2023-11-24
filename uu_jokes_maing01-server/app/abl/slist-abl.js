@@ -1,9 +1,12 @@
+
 "use strict";
 const { Validator } = require("uu_appg01_server").Validation;
 const { ValidationHelper } = require("uu_appg01_server").AppServer;
 
 const Errors = require("../api/errors/slist-error.js");
 const Warnings = require("../api/warnings/slist-warnings");
+const ShopList = require("../_mock/list.json");
+const ShopLists = require("../_mock/lists.json");
 
 class SlistAbl {
 
@@ -11,10 +14,25 @@ class SlistAbl {
     this.validator = Validator.load();
 
   }
-  cTime = new Date().toISOString();
 
-  create(awid, dtoIn, cTime=this.cTime) {
+  async get(awid, dtoIn) {
     let uuAppErrorMap = {};
+
+
+    // prepare and return dtoOut
+    const dtoOut = { ...dtoIn };
+    dtoOut.awid = awid;
+    dtoOut.uuAppErrorMap = uuAppErrorMap;
+    dtoOut.mockList = ShopList;
+
+    return dtoOut;
+
+  }
+
+
+  create(awid, dtoIn) {
+    let uuAppErrorMap = {};
+    let cTime = new Date().toISOString();
 
     // validation of dtoIn
     const validationResult = this.validator.validate("slistCreateDtoInType", dtoIn);
@@ -28,8 +46,8 @@ class SlistAbl {
 
     const addedValues = {
       sys: {
-        cts: this.cTime,
-        mts: this.cTime,
+        cts: cTime,
+        mts: cTime,
         rev: 0
       },
       owner_id: "100-55-44",

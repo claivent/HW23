@@ -35,6 +35,11 @@
         "realization": "api/controllers/SlistController.create",
         "httpMethod": "POST",
         "type": "CMD"
+      },
+      "slist/get": {
+        "realization": "api/controllers/SlistController.get",
+        "httpMethod": "GET",
+        "type": "CMD"
       }
     }
   }

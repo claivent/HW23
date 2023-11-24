@@ -14,6 +14,20 @@ const Create = {
 
 };
 
+const Get = {
+  UC_CODE: `${JokesMainUseCaseError.ERROR_PREFIX}slist/get/`,
+
+    slistDoesNotExist: class extends JokesMainUseCaseError {
+      constructor() {
+        super(...arguments);
+        this.code = `${Get.UC_CODE}jokesDoesNotExist`;
+        this.message = "UuObject jokes does not exist.";
+      }
+    },
+
+};
+
 module.exports = {
+  Get,
   Create,
 };

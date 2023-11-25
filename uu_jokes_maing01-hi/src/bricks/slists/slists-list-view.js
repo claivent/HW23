@@ -45,7 +45,7 @@ const SlistsListView = createVisualComponent({
     const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
     const[createOpen, setCreateOpen] = useState(false);
 
-   // console.log("SlistListVies", props.data);
+    console.log("SlistListVies", props);
 
     return  (
       <>

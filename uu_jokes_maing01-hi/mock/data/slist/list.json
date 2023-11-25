@@ -1,5 +1,5 @@
 [
-  {"id": "1800e2d8f84264cbb8e30473e7a6c413", "name": "Páteční nákup", "notes": "notes",  "archive": false, "childId":[156, 142, 186]},
-  {"id": "9377944d4bf4e4373b24f14f212edeff", "name": "úterní nákup",  "notes": "notes", "archive": false, "childId":[156, 142, 186]},
-  {"id": "a8b0dc7cd372d4f5c9b380bfa8f487ae", "name": "elektronika nákup", "notes": "notes", "archive": false, "childId":[156, 142, 186]}
+  {"id": "1800e2d8f84264cbb8e30473e7a6c413", "name": "Páteční nákup", "notes": "V pátek zajedu s dcerou do obchodu.",  "archive": false, "childId":[156, 142, 186]},
+  {"id": "9377944d4bf4e4373b24f14f212edeff", "name": "úterní nákup",  "notes": "Zavolat sestře jestli nechce něco koupit", "archive": false, "childId":[156, 142, 186]},
+  {"id": "a8b0dc7cd372d4f5c9b380bfa8f487ae", "name": "elektronika nákup", "notes": "Podívat se na ten nový vysavač. Snad bude mít ty funkce jak říkal Karel", "archive": false, "childId":[156, 142, 186]}
 ]

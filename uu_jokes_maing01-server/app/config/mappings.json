@@ -50,6 +50,11 @@
         "realization": "api/controllers/SlistController.delete",
         "httpMethod": "POST",
         "type": "CMD"
+      },
+      "slist/update": {
+        "realization": "api/controllers/SlistController.update",
+        "httpMethod": "POST",
+        "type": "CMD"
       }
     }
   }

@@ -65,7 +65,13 @@ const Delete = {
   },
 };
 
+const Update = {
+  UC_CODE: `${JokesMainUseCaseError.ERROR_PREFIX}slist/update/`,
+
+};
+
 module.exports = {
+  Update,
   Delete,
   List,
   Get,

@@ -8,6 +8,7 @@ const Warnings = require("../api/warnings/slist-warnings");
 const ShopList = require("../_mock/list.json");
 const ShopLists = require("../_mock/lists.json");
 const { Utils } = require("uu_appg01_server");
+const { Profiles, Schemas } = require("../abl/constants");
 
 
 class SlistAbl {
@@ -17,8 +18,56 @@ class SlistAbl {
 
   }
 
+  async update(awid, dtoIn, session, authorizationResult) {
+    let uuAppErrorMap = {};
+    const uuIdentity = session.getIdentity().getUuIdentity();
+    const uuIdentityName = session.getIdentity().getName();
+    const visibility = authorizationResult.getAuthorizedProfiles().includes(Profiles.EXECUTIVES);
+
+    // validation of dtoIn
+    const validationResult = this.validator.validate("slistUpdateDtoInType", dtoIn);
+    uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      uuAppErrorMap,
+      Warnings.Create.UnsupportedKeys.code,
+      Errors.Create.InvalidDtoIn
+    );
+
+    // prepare and return dtoOut
+    const dtoOut = { ...dtoIn };
+
+    dtoOut.uuAppErrorMap = uuAppErrorMap;
+    dtoOut.authorizationResult = authorizationResult;
+    dtoOut.session = session ;
+    dtoOut.jmeno = uuIdentityName;
+    dtoOut.userId = uuIdentity;
+    dtoOut.visibility= visibility;
+
+
+    return dtoOut;
+  }
+
   async delete(awid, dtoIn) {
-    
+    let uuAppErrorMap = {};
+    // validation of dtoIn
+    const validationResult = this.validator.validate("slistDeleteDtoInType", dtoIn);
+    uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      uuAppErrorMap,
+      Warnings.Create.UnsupportedKeys.code,
+      Errors.Create.InvalidDtoIn
+    );
+
+    // prepare and return dtoOut
+    const dtoOut = { ...dtoIn };
+
+    dtoOut.uuAppErrorMap = uuAppErrorMap;
+
+
+
+    return dtoOut;
   }
 
   async list(awid, dtoIn) {
@@ -68,7 +117,7 @@ class SlistAbl {
   }
 
 
-  create(awid, dtoIn) {
+  create(awid, dtoIn, session, authorizationResult) {
     let uuAppErrorMap = {};
     let cTime = new Date().toISOString();
 

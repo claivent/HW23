@@ -3,6 +3,10 @@ const SitemAbl = require("../../abl/sitem-abl.js");
 
 class SitemController {
 
+  sitemDelete(ucEnv) {
+    return SitemAbl.sitemDelete(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+  }
+
   sitemList(ucEnv) {
     return SitemAbl.sitemList(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
   }

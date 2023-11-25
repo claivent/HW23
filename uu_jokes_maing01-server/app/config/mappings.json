@@ -70,6 +70,11 @@
         "realization": "api/controllers/SitemController.sitemList",
         "httpMethod": "GET",
         "type": "CMD"
+      },
+      "sitem/delete": {
+        "realization": "api/controllers/SitemController.sitemDelete",
+        "httpMethod": "POST",
+        "type": "CMD"
       }
     }
   }

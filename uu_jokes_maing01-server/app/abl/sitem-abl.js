@@ -16,6 +16,10 @@ class SitemAbl {
     this.dao = DaoFactory.getDao("sitem");
   }
 
+  async sitemDelete(awid, dtoIn) {
+    
+  }
+
   async sitemList(awid, dtoIn) {
     
   }

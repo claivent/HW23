@@ -2,7 +2,7 @@
 "use strict";
 const { Validator } = require("uu_appg01_server").Validation;
 const { ValidationHelper } = require("uu_appg01_server").AppServer;
-const { DaoFactory } = require("uu_appg01_server").ObjectStore;
+const { DaoFactory, ObjectStoreError } = require("uu_appg01_server").ObjectStore;
 
 const Errors = require("../api/errors/slist-error.js");
 const Warnings = require("../api/warnings/slist-warnings");
@@ -22,31 +22,14 @@ class SlistAbl {
 
   async update(awid, dtoIn, session, authorizationResult) {
     let uuAppErrorMap = {};
-    const uuIdentity = session.getIdentity().getUuIdentity();
-    const uuIdentityName = session.getIdentity().getName();
-    const visibility = authorizationResult.getAuthorizedProfiles().includes(Profiles.EXECUTIVES);
-
     // validation of dtoIn
     const validationResult = this.validator.validate("slistUpdateDtoInType", dtoIn);
     uuAppErrorMap = ValidationHelper.processValidationResult(
-      dtoIn,
-      validationResult,
-      uuAppErrorMap,
-      Warnings.Create.UnsupportedKeys.code,
-      Errors.Create.InvalidDtoIn
+      dtoIn, validationResult, uuAppErrorMap, Warnings.Create.UnsupportedKeys.code, Errors.Create.InvalidDtoIn
     );
 
     // prepare and return dtoOut
-    const dtoOut = { ...dtoIn };
-
-    dtoOut.uuAppErrorMap = uuAppErrorMap;
-    dtoOut.authorizationResult = authorizationResult;
-    dtoOut.session = session ;
-    dtoOut.jmeno = uuIdentityName;
-    dtoOut.userId = uuIdentity;
-    dtoOut.visibility= visibility;
-
-
+    const dtoOut = { ...dtoIn,  uuAppErrorMap };
     return dtoOut;
   }
 
@@ -55,69 +38,41 @@ class SlistAbl {
     // validation of dtoIn
     const validationResult = this.validator.validate("slistDeleteDtoInType", dtoIn);
     uuAppErrorMap = ValidationHelper.processValidationResult(
-      dtoIn,
-      validationResult,
-      uuAppErrorMap,
-      Warnings.Create.UnsupportedKeys.code,
-      Errors.Create.InvalidDtoIn
+      dtoIn, validationResult, uuAppErrorMap, Warnings.Create.UnsupportedKeys.code, Errors.Create.InvalidDtoIn
     );
 
     // prepare and return dtoOut
-    const dtoOut = { ...dtoIn };
-
-    dtoOut.uuAppErrorMap = uuAppErrorMap;
-
-
-
+    const dtoOut = { ...dtoIn,  uuAppErrorMap };
     return dtoOut;
   }
 
   async list(awid, dtoIn) {
      let uuAppErrorMap = {};
     // validation of dtoIn
+    // validation of dtoIn
     const validationResult = this.validator.validate("slistListDtoInType", dtoIn);
     uuAppErrorMap = ValidationHelper.processValidationResult(
-      dtoIn,
-      validationResult,
-      uuAppErrorMap,
-      Warnings.Create.UnsupportedKeys.code,
-      Errors.Create.InvalidDtoIn
+      dtoIn, validationResult, uuAppErrorMap, Warnings.Create.UnsupportedKeys.code, Errors.Create.InvalidDtoIn
     );
 
     // prepare and return dtoOut
-    const dtoOut = { ...dtoIn };
-    dtoOut.awid = awid;
-    dtoOut.uuAppErrorMap = uuAppErrorMap;
-    dtoOut.itemList = ShopLists;
-
-
+    const dtoOut = { ...dtoIn,  uuAppErrorMap };
     return dtoOut;
-
-
   }
 
   async get(awid, dtoIn) {
     let uuAppErrorMap = {};
+
     // validation of dtoIn
     const validationResult = this.validator.validate("slistGetDtoInType", dtoIn);
     uuAppErrorMap = ValidationHelper.processValidationResult(
-      dtoIn,
-      validationResult,
-      uuAppErrorMap,
-      Warnings.Create.UnsupportedKeys.code,
-      Errors.Create.InvalidDtoIn
+      dtoIn, validationResult, uuAppErrorMap, Warnings.Create.UnsupportedKeys.code, Errors.Create.InvalidDtoIn
     );
 
     // prepare and return dtoOut
-    const dtoOut = { ...dtoIn };
-    dtoOut.awid = awid;
-    dtoOut.uuAppErrorMap = uuAppErrorMap;
-    dtoOut.mockList = ShopLists.find(lst=>lst.id === dtoIn.id)
-
+    const dtoOut = { ...dtoIn,  uuAppErrorMap };
     return dtoOut;
-
   }
-
 
   async create(awid, dtoIn, session, authorizationResult) {
     let uuAppErrorMap = {};
@@ -126,37 +81,33 @@ class SlistAbl {
     // validation of dtoIn
     const validationResult = this.validator.validate("slistCreateDtoInType", dtoIn);
     uuAppErrorMap = ValidationHelper.processValidationResult(
-      dtoIn,
-      validationResult,
-      uuAppErrorMap,
-      Warnings.Create.UnsupportedKeys.code,
-      Errors.Create.InvalidDtoIn
+      dtoIn, validationResult, uuAppErrorMap, Warnings.Create.UnsupportedKeys.code, Errors.Create.InvalidDtoIn
     );
 
+    const owner_id = session.getIdentity().getUuIdentity();
+    const owner_name = session.getIdentity().getName();
+    const added_values = {members: [], shoppingItems: [], isArchived: false};
 
-    // get uuIdentity information
-    const uuIdentity = session.getIdentity().getUuIdentity();
-    const uuIdentityName = session.getIdentity().getName();
-
-    // save joke to uuObjectStore
+    // save slist to uuObjectStore
     const uuObject = {
-      ...dtoIn,
-      awid,
-      uuIdentity,
-      uuIdentityName,
+      ...dtoIn, awid, owner_id, owner_name, ...added_values
     };
-    const slist = await this.dao.create(uuObject);
 
+    let slist;
+    try {
+      slist = await  this.dao.create(uuObject);
+    } catch (e) {
+      if (e instanceof ObjectStoreError) {
+        throw new Errors.Create.SlistDaoCreateFailed({ uuAppErrorMap }, e);
+      }
+      throw e;
+    }
 
     // prepare and return dtoOut
-    const dtoOut = { ...slist, uuAppErrorMap };
+    const dtoOut = { ...slist,  uuAppErrorMap };
     return dtoOut;
 
-
-
   }
-
-
 }
 
 module.exports = new SlistAbl();

@@ -12,6 +12,9 @@
         },
         "slist": {
           "realization": "dao/SlistMongo"
+        },
+        "sitem": {
+          "realization": "dao/SitemMongo"
         }
       }
     }

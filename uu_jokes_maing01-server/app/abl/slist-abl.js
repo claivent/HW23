@@ -2,6 +2,7 @@
 "use strict";
 const { Validator } = require("uu_appg01_server").Validation;
 const { ValidationHelper } = require("uu_appg01_server").AppServer;
+const { DaoFactory } = require("uu_appg01_server").ObjectStore;
 
 const Errors = require("../api/errors/slist-error.js");
 const Warnings = require("../api/warnings/slist-warnings");
@@ -15,6 +16,7 @@ class SlistAbl {
 
   constructor() {
     this.validator = Validator.load();
+    this.dao = DaoFactory.getDao("slist");
 
   }
 
@@ -117,7 +119,7 @@ class SlistAbl {
   }
 
 
-  create(awid, dtoIn, session, authorizationResult) {
+  async create(awid, dtoIn, session, authorizationResult) {
     let uuAppErrorMap = {};
     let cTime = new Date().toISOString();
 
@@ -131,27 +133,27 @@ class SlistAbl {
       Errors.Create.InvalidDtoIn
     );
 
-    const addedValues = {
-      sys: {
-        cts: cTime,
-        mts: cTime,
-        rev: 0
-      },
-      owner_id: "100-55-44",
-      members: [],
-      shoppingItems: [],
-      isArchived: false
-    }
+
+    // get uuIdentity information
+    const uuIdentity = session.getIdentity().getUuIdentity();
+    const uuIdentityName = session.getIdentity().getName();
+
+    // save joke to uuObjectStore
+    const uuObject = {
+      ...dtoIn,
+      awid,
+      uuIdentity,
+      uuIdentityName,
+    };
+    const slist = await this.dao.create(uuObject);
+
 
     // prepare and return dtoOut
-    const dtoOut = { ...dtoIn , addedValues};
-    dtoOut.id = "5f91a4c8e485b9a64c89d236";
-    dtoOut.awid = awid;
-    dtoOut.addedValues;
-    dtoOut.uuAppErrorMap = uuAppErrorMap;
-
-
+    const dtoOut = { ...slist, uuAppErrorMap };
     return dtoOut;
+
+
+
   }
 
 

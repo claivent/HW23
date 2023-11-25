@@ -13,7 +13,13 @@ const SitemGet = {
   
 };
 
+const SitemList = {
+  UC_CODE: `${SITEM_ERROR_PREFIX}sitemList/`,
+  
+};
+
 module.exports = {
+  SitemList,
   SitemGet,
   SitemCreate
 };

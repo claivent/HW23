@@ -60,6 +60,11 @@
         "realization": "api/controllers/SitemController.sitemCreate",
         "httpMethod": "POST",
         "type": "CMD"
+      },
+      "sitem/get": {
+        "realization": "api/controllers/SitemController.sitemGet",
+        "httpMethod": "GET",
+        "type": "CMD"
       }
     }
   }

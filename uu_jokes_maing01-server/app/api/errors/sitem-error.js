@@ -8,6 +8,12 @@ const SitemCreate = {
   
 };
 
+const SitemGet = {
+  UC_CODE: `${SITEM_ERROR_PREFIX}sitemGet/`,
+  
+};
+
 module.exports = {
+  SitemGet,
   SitemCreate
 };

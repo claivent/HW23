@@ -16,6 +16,10 @@ class SitemAbl {
     this.dao = DaoFactory.getDao("sitem");
   }
 
+  async sitemGet(awid, dtoIn) {
+    
+  }
+
   async sitemCreate(awid, dtoIn) {
     
   }

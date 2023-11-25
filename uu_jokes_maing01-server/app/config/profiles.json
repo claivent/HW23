@@ -52,6 +52,10 @@
       "sitem/create": {
         "sysStateList": ["active"],
         "profileList": []
+      },
+      "sitem/get": {
+        "sysStateList": ["active"],
+        "profileList": []
       }
     }
   }

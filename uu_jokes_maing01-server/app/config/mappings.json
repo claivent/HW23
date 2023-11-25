@@ -75,6 +75,11 @@
         "realization": "api/controllers/SitemController.sitemDelete",
         "httpMethod": "POST",
         "type": "CMD"
+      },
+      "sitem/update": {
+        "realization": "api/controllers/SitemController.sitemUpdate",
+        "httpMethod": "POST",
+        "type": "CMD"
       }
     }
   }

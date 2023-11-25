@@ -23,7 +23,13 @@ const SitemDelete = {
   
 };
 
+const SitemUpdate = {
+  UC_CODE: `${SITEM_ERROR_PREFIX}sitemUpdate/`,
+  
+};
+
 module.exports = {
+  SitemUpdate,
   SitemDelete,
   SitemList,
   SitemGet,

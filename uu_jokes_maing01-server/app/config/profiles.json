@@ -64,6 +64,10 @@
       "sitem/delete": {
         "sysStateList": ["active"],
         "profileList": []
+      },
+      "sitem/update": {
+        "sysStateList": ["active"],
+        "profileList": []
       }
     }
   }

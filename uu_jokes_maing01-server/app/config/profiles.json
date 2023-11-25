@@ -43,31 +43,31 @@
       },
       "slist/delete": {
         "sysStateList": ["active"],
-        "profileList": ["Authorities","Executives"]
+        "profileList": ["Executives"]
       },
       "slist/update": {
         "sysStateList": ["active"],
-        "profileList": ["Authorities","Executives","Readers"]
+        "profileList": ["Executives"]
       },
       "sitem/create": {
         "sysStateList": ["active"],
-        "profileList": []
+        "profileList": ["Authorities","Executives"]
       },
       "sitem/get": {
         "sysStateList": ["active"],
-        "profileList": []
+        "profileList": ["Authorities","Executives"]
       },
       "sitem/list": {
         "sysStateList": ["active"],
-        "profileList": []
+        "profileList": ["Authorities","Executives"]
       },
       "sitem/delete": {
         "sysStateList": ["active"],
-        "profileList": []
+        "profileList": ["Executives"]
       },
       "sitem/update": {
         "sysStateList": ["active"],
-        "profileList": []
+        "profileList": ["Authorities","Executives"]
       }
     }
   }

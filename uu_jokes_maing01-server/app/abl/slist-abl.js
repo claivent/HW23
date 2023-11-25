@@ -33,7 +33,7 @@ class SlistAbl {
     return dtoOut;
   }
 
-  async delete(awid, dtoIn) {
+  async delete(awid, dtoIn, session, authorizationResult) {
     let uuAppErrorMap = {};
     // validation of dtoIn
     const validationResult = this.validator.validate("slistDeleteDtoInType", dtoIn);
@@ -46,7 +46,7 @@ class SlistAbl {
     return dtoOut;
   }
 
-  async list(awid, dtoIn) {
+  async list(awid, dtoIn, session, authorizationResult) {
      let uuAppErrorMap = {};
     // validation of dtoIn
     // validation of dtoIn
@@ -60,7 +60,7 @@ class SlistAbl {
     return dtoOut;
   }
 
-  async get(awid, dtoIn) {
+  async get(awid, dtoIn, session, authorizationResult) {
     let uuAppErrorMap = {};
 
     // validation of dtoIn

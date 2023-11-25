@@ -57,27 +57,27 @@
         "type": "CMD"
       },
       "sitem/create": {
-        "realization": "api/controllers/SitemController.sitemCreate",
+        "realization": "api/controllers/SitemController.create",
         "httpMethod": "POST",
         "type": "CMD"
       },
       "sitem/get": {
-        "realization": "api/controllers/SitemController.sitemGet",
+        "realization": "api/controllers/SitemController.get",
         "httpMethod": "GET",
         "type": "CMD"
       },
       "sitem/list": {
-        "realization": "api/controllers/SitemController.sitemList",
+        "realization": "api/controllers/SitemController.list",
         "httpMethod": "GET",
         "type": "CMD"
       },
       "sitem/delete": {
-        "realization": "api/controllers/SitemController.sitemDelete",
+        "realization": "api/controllers/SitemController.delete",
         "httpMethod": "POST",
         "type": "CMD"
       },
       "sitem/update": {
-        "realization": "api/controllers/SitemController.sitemUpdate",
+        "realization": "api/controllers/SitemController.update",
         "httpMethod": "POST",
         "type": "CMD"
       }

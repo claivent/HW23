@@ -3,24 +3,49 @@ const SitemAbl = require("../../abl/sitem-abl.js");
 
 class SitemController {
 
-  sitemUpdate(ucEnv) {
-    return SitemAbl.sitemUpdate(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+  update(ucEnv) {
+    return SitemAbl.update(
+      ucEnv.getUri().getAwid(),
+      ucEnv.getDtoIn(),
+      ucEnv.getSession(),
+      ucEnv.getAuthorizationResult()
+    );
   }
 
-  sitemDelete(ucEnv) {
-    return SitemAbl.sitemDelete(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+  delete(ucEnv) {
+    return SitemAbl.delete(
+      ucEnv.getUri().getAwid(),
+      ucEnv.getDtoIn(),
+      ucEnv.getSession(),
+      ucEnv.getAuthorizationResult()
+    );
   }
 
-  sitemList(ucEnv) {
-    return SitemAbl.sitemList(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+  list(ucEnv) {
+    return SitemAbl.list(
+      ucEnv.getUri().getAwid(),
+      ucEnv.getDtoIn(),
+      ucEnv.getSession(),
+      ucEnv.getAuthorizationResult()
+    );
   }
 
-  sitemGet(ucEnv) {
-    return SitemAbl.sitemGet(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+  get(ucEnv) {
+    return SitemAbl.get(
+      ucEnv.getUri().getAwid(),
+      ucEnv.getDtoIn(),
+      ucEnv.getSession(),
+      ucEnv.getAuthorizationResult()
+    );
   }
 
-  sitemCreate(ucEnv) {
-    return SitemAbl.sitemCreate(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+  create(ucEnv) {
+    return SitemAbl.create(
+      ucEnv.getUri().getAwid(),
+      ucEnv.getDtoIn(),
+      ucEnv.getSession(),
+      ucEnv.getAuthorizationResult()
+    );
   }
 
 }

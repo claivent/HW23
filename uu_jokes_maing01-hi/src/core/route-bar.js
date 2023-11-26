@@ -1,9 +1,11 @@
 //@@viewOn:imports
-import { createVisualComponent, Lsi, useRoute } from "uu5g05";
+import { createVisualComponent, Lsi, useContext, useRoute } from "uu5g05";
 import Plus4U5App from "uu_plus4u5g02-app";
-
 import Config from "./config/config.js";
 import importLsi from "../lsi/import-lsi.js";
+import { useSubAppData } from "uu_plus4u5g02";
+import SlistsContext from "../bricks/slists/context";
+
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -31,6 +33,7 @@ const RouteBar = createVisualComponent({
   render(props) {
     //@@viewOn:private
     const [, setRoute] = useRoute();
+    const slistsDataObject = useContext(SlistsContext);
 
     const appActionList = [
       { children: <Lsi import={importLsi} path={["Menu", "home"]} />, onClick: () => setRoute("home") },
@@ -48,7 +51,13 @@ const RouteBar = createVisualComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
-    return <Plus4U5App.RouteBar appActionList={appActionList} {...props} />;
+    return (
+      <Plus4U5App.RouteBar appActionList={appActionList} {...props}>
+        <Plus4U5App.RouteHeader title={ slistsDataObject.data.data.name} />
+      </Plus4U5App.RouteBar>
+      )
+
+
     //@@viewOff:render
   },
 });

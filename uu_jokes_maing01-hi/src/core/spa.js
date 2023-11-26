@@ -1,8 +1,10 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils } from "uu5g05";
+import { createVisualComponent, Utils, useSession } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
 import Plus4U5 from "uu_plus4u5g02";
-import Plus4U5App from "uu_plus4u5g02-app";
+import Plus4U5App, { SpaPending, Error } from "uu_plus4u5g02-app";
+import { Unauthenticated } from "uu_plus4u5g02-elements";
+import SlistProvider from "../bricks/slists/provider"
 
 import Config from "./config/config.js";
 import Home from "../routes/home.js";
@@ -33,6 +35,19 @@ const ROUTE_MAP = {
 };
 //@@viewOff:constants
 
+function SessionResolver({ children }) {
+  const session = useSession();
+
+  switch (session.state) {
+    case "pending":
+      return <SpaPending />;
+    case "notAuthenticated":
+      return <Unauthenticated />;
+    case "authenticated":
+    default:
+      return children;
+  }
+}
 //@@viewOn:css
 //@@viewOff:css
 
@@ -61,11 +76,24 @@ const Spa = createVisualComponent({
 
     //@@viewOn:render
     return (
-      <Plus4U5.SpaProvider initialLanguageList={["en", "cs"]}>
-        <Uu5Elements.ModalBus>
-          <Plus4U5App.Spa routeMap={ROUTE_MAP} />
-        </Uu5Elements.ModalBus>
-      </Plus4U5.SpaProvider>
+
+
+    <Plus4U5.SpaProvider initialLanguageList={["en", "cs"]} skipAppWorkspaceProvider>
+      <SessionResolver>
+        <SlistProvider>
+          {(slistsDataObject) => (
+            <>
+              {slistsDataObject.state === "pendingNoData" && <SpaPending />}
+              {slistsDataObject.state === "errorNoData" && <Error error={slistsDataObject.errorData} />}
+              {["ready", "pending", "error"].includes(slistsDataObject.state) && (
+                <Plus4U5App.Spa routeMap={ROUTE_MAP} />
+              )}
+            </>
+          )}
+        </SlistProvider>
+      </SessionResolver>
+    </Plus4U5.SpaProvider>
+
     );
     //@@viewOff:render
   },

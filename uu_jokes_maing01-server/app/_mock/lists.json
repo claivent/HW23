@@ -8,7 +8,8 @@
       "revision": 1
     },
     "name": "Grocery List 1",
-    "owner_id": "150-456-120",
+    "notes": "Plánujeme nákup v pátek s mou dcerou.",
+    "owner_id",: "150-456-120",
     "owner_name": "John Doe",
     "members": ["1", "2"],
     "shoppingItems": [
@@ -30,6 +31,7 @@
       "revision": 2
     },
     "name": "Grocery List 2",
+    "notes": "Máme seznam potřebných věcí, abychom se lépe zorganizovali.",
     "owner_id": "151-456-121",
     "owner_name": "Alice Johnson",
     "members": ["5", "6"],
@@ -58,6 +60,7 @@
       "revision": 3
     },
     "name": "Shopping List 3",
+    "notes": "Chceme se zaměřit na základní potraviny, jako jsou ovoce, zelenina a mléčné produkty.",
     "owner_id": "152-456-122",
     "owner_name": "Bob Smith",
     "members": ["7", "8"],
@@ -86,6 +89,7 @@
       "revision": 4
     },
     "name": "Grocery List 4",
+    "notes": "Přemýšlíme o zkoumání nových receptů a nákupu ingrediencí podle nich.",
     "owner_id": "153-456-123",
     "owner_name": "Eva Nováková",
     "members": ["10", "11"],
@@ -114,6 +118,7 @@
       "revision": 5
     },
     "name": "Shopping List 5",
+    "notes": "Budeme dbát na to, abychom si vzali opakovaně použitelné tašky, abychom šetřili životní prostředí.",
     "owner_id": "154-456-124",
     "owner_name": "Martin Vlasák",
     "members": ["12", "13"],
@@ -142,6 +147,7 @@
       "revision": 6
     },
     "name": "Grocery List 6",
+    "notes": "Plánujeme nakoupit i nějaké základní domácí potřeby, jako je toaletní papír a čisticí prostředky.",
     "owner_id": "155-456-125",
     "owner_name": "Karolína Procházková",
     "members": ["14", "15"],
@@ -170,6 +176,7 @@
       "revision": 7
     },
     "name": "Shopping List 7",
+    "notes": "Můžeme zvážit výhody sezónních slev na některé produkty.",
     "owner_id": "156-456-126",
     "owner_name": "Pavel Malý",
     "members": ["16", "17"],
@@ -198,6 +205,7 @@
       "revision": 8
     },
     "name": "Grocery List 8",
+    "notes": "Chceme se vyhnout impulzivním nákupům a držet se našeho seznamu.",
     "owner_id": "157-456-127",
     "owner_name": "Jana Novotná",
     "members": ["18", "19"],
@@ -226,6 +234,7 @@
       "revision": 9
     },
     "name": "Shopping List 9",
+    "notes": "Je důležité si ověřit datum expirace potravin a vybrat ty s delší dobou trvanlivosti.",
     "owner_id": "158-456-128",
     "owner_name": "Miroslav Kovář",
     "members": ["20", "21"],
@@ -254,6 +263,7 @@
       "revision": 10
     },
     "name": "Grocery List 10",
+    "notes": "Plánujeme také prozkoumat možnosti nákupu online a porovnat ceny.",
     "owner_id": "159-456-129",
     "owner_name": "Elena Šimková",
     "members": ["22", "23"],

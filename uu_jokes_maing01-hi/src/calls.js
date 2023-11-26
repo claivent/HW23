@@ -36,6 +36,11 @@ const Calls = {
     return Calls.call("get", commandUri);
   },
 
+  loadMokSys(dtoIn){
+    const commandUri = Calls.getCommandUri("slist/mokSys");
+    return Calls.call("get", commandUri);
+  },
+
   loadIdentityProfiles() {
     const commandUri = Calls.getCommandUri("sys/uuAppWorkspace/initUve");
     return Calls.call("get", commandUri);
@@ -54,6 +59,13 @@ const Calls = {
   async initAndGetWorkspace(dtoInData) {
     await Calls.initWorkspace(dtoInData);
     return await Calls.getWorkspace();
+  },
+
+  Slists: {
+    load(dtoIn) {
+      const commandUri = Calls.getCommandUri("sys/uuAppWorkspace/load");
+      return Calls.call("get", commandUri, dtoIn);
+    },
   },
 
   getCommandUri(useCase, baseUri = Environment.appBaseUri) {

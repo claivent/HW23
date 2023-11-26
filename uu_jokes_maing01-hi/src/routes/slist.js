@@ -69,15 +69,7 @@ let Slist = createVisualComponent({
     const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
 
 
-    function ProductCategoryRow({ category }) {
-      return (
-        <tr>
-          <th colSpan="2">
-            {category}
-          </th>
-        </tr>
-      );
-    }
+
 
 
 

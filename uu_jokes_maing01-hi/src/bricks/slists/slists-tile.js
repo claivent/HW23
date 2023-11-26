@@ -11,6 +11,44 @@ import Uu5Elements from "uu5g05-elements";
 //@@viewOn:css
 const Css = {
   main: () => Config.Css.css({}),
+
+
+  header: () =>
+    Config.Css.css({
+
+    }),
+
+  layout: (padding, gap) => {
+    let styles = {};
+    if (padding) {
+      styles = {
+        paddingTop: padding.top,
+        paddingRight: padding.right,
+        paddingBottom: padding.bottom,
+        paddingLeft: padding.left,
+      };
+    }
+    return Config.Css.css({
+      ...styles,
+      display: "flex",
+      flexDirection: "column",
+      gap,
+    });
+  },
+  tile: () => Config.Css.css({ padding: "5px", margin: 5 }),
+
+  italic: () => Config.Css.css({ fontStyle: "italic" }),
+  margin: (side, size) => {
+    const style = side === "left" ? { marginLeft: size } : { marginRight: size };
+    return Config.Css.css(style);
+  },
+  image: (isModal) =>
+    Config.Css.css({
+      width: "100%",
+      height: isModal ? 400 : 120,
+      display: "block",
+      objectFit: "cover",
+    }),
 };
 //@@viewOff:css
 
@@ -42,6 +80,10 @@ const SlistsTile = createVisualComponent({
 
     //@@viewOn:render
     const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
+    const titleStyles = { category: "interface", segment: "title", type: "micro" };
+    const fixedC = Uu5Elements.UuGds.SpacingPalette.getValue(["fixed", "c"]);
+    const textStyles = (segment) => ({ category: "interface", segment, type: "medium" });
+
     props.data.handlerMap.delete;
 
 
@@ -49,11 +91,36 @@ const SlistsTile = createVisualComponent({
     return  (
       <>
 
-      <Uu5TilesElements.Tile
-        header={props.data.data.name}
+      <Uu5TilesElements.Tile  className={Css.tile()}
+                              header={
+
+                                <Uu5Elements.Header
+
+                                  className={Css.header()}
+                                  title={props.data.data.name}
+                                  icon="uugds-favorites"
+                                  // onIconClick={() => alert("click")}
+                                />  }
+
         actionList={[{icon: "uugds-close", children: "Smazat", onClick: () => setDeleteOpen(true) }]}
       >
-        {props.data.data.notes}
+        <div>
+        <Uu5Elements.Text {...titleStyles} >
+         <Uu5Elements.Icon icon="uugds-favorites" className={Css.margin("right", fixedC)} />
+          {props.data.data.notes}
+        </Uu5Elements.Text>
+        </div>
+        <div>
+        <Uu5Elements.Text {...titleStyles} >
+          <Uu5Elements.Icon icon="uugds-favorites" className={Css.margin("right", fixedC)} />
+          {"Vlastník: "}{props.data.data.owner_name}
+        </Uu5Elements.Text>
+      </div>
+        <div>
+        <Uu5Elements.Text {...textStyles("content")} className={Css.italic()}>
+          {"Členové: "}({props.data.data.members.join(", ")})
+        </Uu5Elements.Text>
+        </div>
       </Uu5TilesElements.Tile>
         <Uu5Elements.Dialog
           open={deleteOpen}

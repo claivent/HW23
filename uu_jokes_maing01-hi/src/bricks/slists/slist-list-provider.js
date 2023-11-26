@@ -1,5 +1,6 @@
 //@@viewOn:imports
-import { createComponent, useDataList } from "uu5g05";
+import { createComponent, useDataList, useDataObject } from "uu5g05";
+import { useSubAppData, useSystemData } from "uu_plus4u5g02";
 import Config from "./config/config.js";
 import SlistsListView from "./slists-list-view";
 import Uu5Elements from "uu5g05-elements";
@@ -33,6 +34,22 @@ const SlistsListProvider = createComponent({
 
     //@@viewOn:interface
     //@@viewOff:interface
+
+
+    /*let sysDataObject =  useDataObject({
+      handlerMap: {
+        load: Calls.loadMokSys,
+      },
+    });
+    let { state, data, errorData, pendingData, handlerMap } = sysDataObject;
+
+
+    console.log("dataObject", sysDataObject);
+    console.log("state", state);*/
+
+
+
+
     const dataList = useDataList({
       handlerMap: {
         load: Calls.loadSlistsList,
@@ -43,8 +60,6 @@ const SlistsListProvider = createComponent({
         delete: Calls.deleteSlist
       }
     });
-    console.log("dataList", dataList);
-
 
     //@@viewOn:render
     let result;
@@ -62,12 +77,13 @@ const SlistsListProvider = createComponent({
       default:
 
 
-        result = <SlistsListView data={dataList.data} onCreate = {dataList.handlerMap.create} />
+        result = <SlistsListView data={dataList.data}  onCreate = {dataList.handlerMap.create} />
         break;
     }
 
     return result;
-    //@@viewOff:render
+
+
   },
 });
 

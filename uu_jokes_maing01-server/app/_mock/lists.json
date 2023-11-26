@@ -9,7 +9,7 @@
     },
     "name": "Grocery List 1",
     "notes": "Plánujeme nákup v pátek s mou dcerou.",
-    "owner_id",: "150-456-120",
+    "owner_id": "150-456-120",
     "owner_name": "John Doe",
     "members": ["1", "2"],
     "shoppingItems": [

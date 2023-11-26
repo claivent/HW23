@@ -300,7 +300,9 @@
   },
   "sysData": {
     "profileData": {
-      "uuIdentityProfileList": ["Authorities", "Executives", "Readers"]
+      "uuIdentityProfileList": ["Authorities", "Executives", "Readers"],
+      "profileList": ["Authorities", "Executives", "Readers"],
+      "uuIdentity": ["123-123-123"]
     }
   }
 }

@@ -5,9 +5,33 @@ import Uu5TilesElements from "uu5tilesg02-elements";
 import Uu5Elements from "uu5g05-elements";
 import Uu5Forms from "uu5g05-forms";
 import SlistsTile from "./slists-tile";
+import Uu5Tiles from "uu5tilesg02";
+import Uu5TilesControls from "uu5tilesg02-controls";
+
+
 //@@viewOff:imports
 
+
+
 //@@viewOn:constants
+const FILTER_DEFINITION_LIST = [
+  {
+    key: "archive",
+    label: "Pouze Archivované",
+    filter: (item, value) => {
+      // console.log("Archiveitem",item,"value", value);
+      if (value) {
+        let itemValue = typeof item.data.archive === "object" ? Utils.Language.getItem(item.data.archive) : item.data.archive;
+        // console.log("archiveItemValue",itemValue);
+        return item.data.archive === true;
+      }
+      return true;
+    },
+    inputType: "bool",
+
+  },
+
+]
 //@@viewOff:constants
 
 //@@viewOn:css
@@ -97,6 +121,9 @@ const SlistsListView = createVisualComponent({
   render(props) {
     //@@viewOn:private
     const { children } = props;
+
+
+
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -105,11 +132,20 @@ const SlistsListView = createVisualComponent({
     //@@viewOn:render
     const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
     const[createOpen, setCreateOpen] = useState(false);
+    const [archiveFilterList, setArchiveFilterList] = useState([{key: "archive", value: false}]);
 
-    console.log("SlistListVies", props);
+
+
 
     return  (
       <>
+      <Uu5Tiles.ControllerProvider
+        data={props.data}
+        filterDefinitionList={FILTER_DEFINITION_LIST}
+        filterList={archiveFilterList}
+        onFilterChange={(e) => {setArchiveFilterList (e.data.filterList)}}
+      >
+
         <Uu5Elements.Block className={Css.main()}
                            header={
                              <Uu5Elements.Header
@@ -120,19 +156,25 @@ const SlistsListView = createVisualComponent({
                              />  }
 
           actionList={[
+            {component: <Uu5TilesControls.FilterButton type="bar"  /> },
             {icon: "uugdsstencil-uiaction-plus-circle-solid", children: "vytvořit", onClick: ()=> setCreateOpen(true)}
           ]}
         >
-          <Uu5TilesElements.Grid
-            data={props.data}
-            tileMinWidth = {300}
-            tileMaxWidth = {400}
-          >
 
-            <SlistsTile />
+          <Uu5TilesControls.FilterBar initialExpanded={true} displayManagerButton={false} displayClearButton={false}/>
+          <Uu5TilesControls.FilterManagerModal />
+              <Uu5TilesElements.Grid
+               /* data={props.data}*/
+                tileMinWidth = {300}
+                tileMaxWidth = {400}
+              >
+
+                    <SlistsTile />
 
 
-          </Uu5TilesElements.Grid>
+              </Uu5TilesElements.Grid>
+
+
           <Uu5Forms.Form.Provider key={createOpen} onSubmit={async (e) => {
             await props.onCreate({id: Utils.String.generateId(), ...e.data.value});
             setCreateOpen (false);
@@ -146,6 +188,7 @@ const SlistsListView = createVisualComponent({
             </Uu5Elements.Modal>
           </Uu5Forms.Form.Provider>
         </Uu5Elements.Block>
+      </Uu5Tiles.ControllerProvider>
 
       </>
     ) ;

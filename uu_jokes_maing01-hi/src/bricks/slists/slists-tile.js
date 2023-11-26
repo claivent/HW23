@@ -3,6 +3,9 @@ import { createVisualComponent, Utils, Content, useState } from "uu5g05";
 import Config from "./config/config.js";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Uu5Elements from "uu5g05-elements";
+import { useSlists} from "./context";
+
+
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -17,7 +20,10 @@ const Css = {
     Config.Css.css({
 
     }),
-
+  marginTop:() =>
+    Config.Css.css({
+        marginTop: 10
+    }),
   layout: (padding, gap) => {
     let styles = {};
     if (padding) {
@@ -37,23 +43,36 @@ const Css = {
   },
   tile: () => Config.Css.css({ padding: "5px", margin: 5 }),
 
-  italic: () => Config.Css.css({ fontStyle: "italic" }),
+  italic: () => Config.Css.css({ fontStyle: "italic", marginTop: 10 }),
   margin: (side, size) => {
     const style = side === "left" ? { marginLeft: size } : { marginRight: size };
     return Config.Css.css(style);
   },
-  image: (isModal) =>
-    Config.Css.css({
-      width: "100%",
-      height: isModal ? 400 : 120,
-      display: "block",
-      objectFit: "cover",
-    }),
+
 };
 //@@viewOff:css
 
 //@@viewOn:helpers
 //@@viewOff:helpers
+
+/*//testování autorizace
+const slistsDataObject = useSlists();
+const {sysData} = slistsDataObject.data;
+const profileList =  sysData.profileData.uuIdentityProfileList;
+const uuIdentity = sysData.profileData.uuIdentity;
+
+function hasManagePermission(owner_id, uuIdentity, profileList) {
+  const isAuthority = profileList.includes("Authorities");
+  const isExecutive = profileList.includes("Executives");
+  const isOwner = owner_id ===  uuIdentity;
+  return isAuthority || (isExecutive && isOwner);
+}
+
+function  handleCanDelete(owner_id){
+  const auth = hasManagePermission(owner_id, uuIdentity, profileList)
+  console.log(auth);
+  return auth;
+}*/
 
 const SlistsTile = createVisualComponent({
   //@@viewOn:statics
@@ -68,6 +87,8 @@ const SlistsTile = createVisualComponent({
   //@@viewOn:defaultProps
   defaultProps: {},
   //@@viewOff:defaultProps
+
+
 
   render(props) {
     //@@viewOn:private
@@ -86,7 +107,7 @@ const SlistsTile = createVisualComponent({
 
     props.data.handlerMap.delete;
 
-
+    //
 
     return  (
       <>
@@ -99,7 +120,7 @@ const SlistsTile = createVisualComponent({
                                   className={Css.header()}
                                   title={props.data.data.name}
                                   icon="uugds-favorites"
-                                  // onIconClick={() => alert("click")}
+
                                 />  }
 
         actionList={[{icon: "uugds-close", children: "Smazat", onClick: () => setDeleteOpen(true) }]}
@@ -108,16 +129,17 @@ const SlistsTile = createVisualComponent({
         <Uu5Elements.Text {...titleStyles} >
          <Uu5Elements.Icon icon="uugds-favorites" className={Css.margin("right", fixedC)} />
           {props.data.data.notes}
+          {/*{handleCanDelete(props.data.data.owner_id)}*/}
         </Uu5Elements.Text>
         </div>
-        <div>
-        <Uu5Elements.Text {...titleStyles} >
-          <Uu5Elements.Icon icon="uugds-favorites" className={Css.margin("right", fixedC)} />
+        <div className={Css.marginTop()}>
+        <Uu5Elements.Text >
+          <Uu5Elements.Icon icon="uugds-favorites"  />
           {"Vlastník: "}{props.data.data.owner_name}
         </Uu5Elements.Text>
       </div>
-        <div>
-        <Uu5Elements.Text {...textStyles("content")} className={Css.italic()}>
+        <div className={Css.italic()}>
+        <Uu5Elements.Text{...textStyles("content")}  >
           {"Členové: "}({props.data.data.members.join(", ")})
         </Uu5Elements.Text>
         </div>

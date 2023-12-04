@@ -17,6 +17,7 @@ const Create = {
       super(...arguments);
       this.code = `${Create.UC_CODE}SlistDaoCreateFailed`;
       this.message = "Create slist by slist DAO create failed.";
+      this.status = 400;
     }
   },
 

@@ -2,12 +2,12 @@
 import { createComponent, useDataObject } from "uu5g05";
 import Calls from "calls";
 import Config from "./config/config";
-import Context from "./context";
+import ContextPermission   from "./context-permission";
 //@@viewOff:imports
 
-export const Provider = createComponent({
+export const ProviderPermission = createComponent({
   //@@viewOn:statics
-  uu5Tag: Config.TAG + "Provider",
+  uu5Tag: Config.TAG + "ProviderPermission",
   //@@viewOff:statics
 
   //@@viewOn:propTypes
@@ -31,12 +31,12 @@ export const Provider = createComponent({
 
     //@@viewOn:render
     return (
-      <Context.Provider value={slistsDataObject}>
+      <ContextPermission.Provider value={slistsDataObject}>
         {typeof props.children === "function" ? props.children(slistsDataObject) : props.children}
-      </Context.Provider>
+      </ContextPermission.Provider>
     );
     //@@viewOff:render
   },
 });
 
-export default Provider;
+export default ProviderPermission;

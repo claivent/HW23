@@ -27,10 +27,12 @@ class SlistController {
     return SlistAbl.list(
       ucEnv.getUri().getAwid(),
       ucEnv.getDtoIn(),
+      ucEnv.parameters,
       ucEnv.getSession(),
       ucEnv.getAuthorizationResult()
     );
   }
+
 
   get(ucEnv) {
     return SlistAbl.get(

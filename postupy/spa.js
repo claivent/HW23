@@ -1,19 +1,12 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, useSession } from "uu5g05";
+import { createVisualComponent, Utils } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
 import Plus4U5 from "uu_plus4u5g02";
-import Plus4U5App, { SpaPending, Error } from "uu_plus4u5g02-app";
-import { Unauthenticated } from "uu_plus4u5g02-elements";
-
+import Plus4U5App from "uu_plus4u5g02-app";
+import Home from "../routes/home.js";
 import RouteBar from "./route-bar";
 
 import Config from "./config/config.js";
-import Home from "../routes/home.js";
-import Slist from "../routes/slist";
-import Slists from "../routes/slists";
-import ProviderPermission from "./provider-permission";
-
-
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -21,12 +14,9 @@ const About = Utils.Component.lazy(() => import("../routes/about.js"));
 const InitAppWorkspace = Utils.Component.lazy(() => import("../routes/init-app-workspace.js"));
 const ControlPanel = Utils.Component.lazy(() => import("../routes/control-panel.js"));
 
-
 const ROUTE_MAP = {
   "": { redirect: "home" },
   home: (props) => <Home {...props} />,
-  slist: (props) => <Slist {...props} />,
-  slists: (props) => <Slists {...props} />,
   about: (props) => <About {...props} />,
   "sys/uuAppWorkspace/initUve": (props) => <InitAppWorkspace {...props} />,
   controlPanel: (props) => <ControlPanel {...props} />,
@@ -38,19 +28,6 @@ const ROUTE_MAP = {
 };
 //@@viewOff:constants
 
-function SessionResolver({ children }) {
-  const session = useSession();
-
-  switch (session.state) {
-    case "pending":
-      return <SpaPending />;
-    case "notAuthenticated":
-      return <Unauthenticated />;
-    case "authenticated":
-    default:
-      return children;
-  }
-}
 //@@viewOn:css
 //@@viewOff:css
 
@@ -79,30 +56,14 @@ const Spa = createVisualComponent({
 
     //@@viewOn:render
     return (
-
-
-    <Plus4U5.SpaProvider initialLanguageList={["en", "cs"]} skipAppWorkspaceProvider>
-      <SessionResolver>
-        <ProviderPermission>
-          {(slistsDataObject) => (
-            <>
-              {slistsDataObject.state === "pendingNoData" && <SpaPending />}
-              {slistsDataObject.state === "errorNoData" && <Error error={slistsDataObject.errorData} />}
-              {["ready", "pending", "error"].includes(slistsDataObject.state) && (
-                <>
-                  <RouteBar />
-                  <Plus4U5App.Spa routeMap={ROUTE_MAP} />
-                </>
-
-              )}
-            </>
-          )}
-
-        </ProviderPermission>
-      </SessionResolver>
-
-    </Plus4U5.SpaProvider>
-
+      <Plus4U5.SpaProvider initialLanguageList={["en", "cs"]}>
+        <Uu5Elements.ModalBus>
+          <Plus4U5App.Spa>
+            <RouteBar />
+            <Plus4U5App.Router routeMap={ROUTE_MAP} />
+          </Plus4U5App.Spa>
+        </Uu5Elements.ModalBus>
+      </Plus4U5.SpaProvider>
     );
     //@@viewOff:render
   },

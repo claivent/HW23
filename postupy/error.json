@@ -1,0 +1,61 @@
+{
+  "stack": [
+    ""
+  ],
+  "uri": "http://localhost:50300/uu-jokes-maing01/11111111111111111111111111111111/slists",
+  "time": "2023-12-05T11:58:42.692Z",
+  "operation": "load",
+  "error": {
+    "_id": "4d48461917994413d9a92fa95c3c264c",
+    "_timestamp": "2023-12-05T11:58:42.651Z",
+    "_cause": null,
+    "_name": "ApplicationError",
+    "code": "uu-appg01/authorization/accessDenied",
+    "dtoOut": {
+      "uuIdentity": "9429-5525-6848-0000",
+      "authorizedProfileList": [],
+      "identityProfileList": [],
+      "uuAppErrorMap": {
+        "uu-appg01/authorization/accessDenied": {
+          "id": "4d48461917994413d9a92fa95c3c264c",
+          "timestamp": "2023-12-05T11:58:42.488Z",
+          "type": "error",
+          "message": "Logged user is not authorized to run use case.",
+          "trace": "AccessDenied: Logged user is not authorized to run use case.\n    at C:\\__Martin__Data\\Development\\homework\\uu_jokes_maing01-server\\node_modules\\uu_appg01_workspace\\src\\middleware\\authorization-middleware.js:77:19\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async sectionWrapper (C:\\__Martin__Data\\Development\\homework\\uu_jokes_maing01-server\\node_modules\\uu_appg01_core-perflog\\src\\perflog.js:60:22)\n    at async AuthorizationMiddleware.pre (C:\\__Martin__Data\\Development\\homework\\uu_jokes_maing01-server\\node_modules\\uu_appg01_workspace\\src\\middleware\\authorization-middleware.js:67:9)\n    at async C:\\__Martin__Data\\Development\\homework\\uu_jokes_maing01-server\\node_modules\\uu_appg01_core-appserver\\src\\runner\\middleware-loader.js:169:13"
+        }
+      }
+    },
+    "response": {
+      "status": 403,
+      "data": {
+        "uuIdentity": "9429-5525-6848-0000",
+        "authorizedProfileList": [],
+        "identityProfileList": [],
+        "uuAppErrorMap": {
+          "uu-appg01/authorization/accessDenied": {
+            "id": "4d48461917994413d9a92fa95c3c264c",
+            "timestamp": "2023-12-05T11:58:42.488Z",
+            "type": "error",
+            "message": "Logged user is not authorized to run use case.",
+            "trace": "AccessDenied: Logged user is not authorized to run use case.\n    at C:\\__Martin__Data\\Development\\homework\\uu_jokes_maing01-server\\node_modules\\uu_appg01_workspace\\src\\middleware\\authorization-middleware.js:77:19\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async sectionWrapper (C:\\__Martin__Data\\Development\\homework\\uu_jokes_maing01-server\\node_modules\\uu_appg01_core-perflog\\src\\perflog.js:60:22)\n    at async AuthorizationMiddleware.pre (C:\\__Martin__Data\\Development\\homework\\uu_jokes_maing01-server\\node_modules\\uu_appg01_workspace\\src\\middleware\\authorization-middleware.js:67:9)\n    at async C:\\__Martin__Data\\Development\\homework\\uu_jokes_maing01-server\\node_modules\\uu_appg01_core-appserver\\src\\runner\\middleware-loader.js:169:13"
+          }
+        }
+      }
+    },
+    "status": 403
+  },
+  "data": {
+    "uuIdentity": "9429-5525-6848-0000",
+    "authorizedProfileList": [],
+    "identityProfileList": [],
+    "uuAppErrorMap": {
+      "uu-appg01/authorization/accessDenied": {
+        "id": "4d48461917994413d9a92fa95c3c264c",
+        "timestamp": "2023-12-05T11:58:42.488Z",
+        "type": "error",
+        "message": "Logged user is not authorized to run use case.",
+        "trace": "AccessDenied: Logged user is not authorized to run use case.\n    at C:\\__Martin__Data\\Development\\homework\\uu_jokes_maing01-server\\node_modules\\uu_appg01_workspace\\src\\middleware\\authorization-middleware.js:77:19\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async sectionWrapper (C:\\__Martin__Data\\Development\\homework\\uu_jokes_maing01-server\\node_modules\\uu_appg01_core-perflog\\src\\perflog.js:60:22)\n    at async AuthorizationMiddleware.pre (C:\\__Martin__Data\\Development\\homework\\uu_jokes_maing01-server\\node_modules\\uu_appg01_workspace\\src\\middleware\\authorization-middleware.js:67:9)\n    at async C:\\__Martin__Data\\Development\\homework\\uu_jokes_maing01-server\\node_modules\\uu_appg01_core-appserver\\src\\runner\\middleware-loader.js:169:13"
+      }
+    }
+  }
+}

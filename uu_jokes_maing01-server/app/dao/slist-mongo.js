@@ -11,6 +11,16 @@ class SlistMongo extends UuObjectDao {
   async create(slist) {
     return await super.insertOne(slist);
   }
+
+  async list(awid, sortBy, order, pageInfo) {
+
+
+    const sort = {
+      [sortBy]: order === "asc" ? 1 : -1,
+    };
+    let lst = await super.find({ awid }, { sort, skip: pageInfo.pageIndex * pageInfo.pageSize, limit: pageInfo.pageSize });
+    return lst;
+  }
 }
 
 module.exports = SlistMongo;

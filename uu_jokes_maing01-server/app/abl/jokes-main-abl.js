@@ -19,6 +19,7 @@ const logger = LoggerFactory.get("JokesMainAbl");
 class JokesMainAbl {
   constructor() {
     this.validator = Validator.load();
+    this.dao = DaoFactory.getDao("jokesMain");
   }
 
   async init(uri, dtoIn, session) {
@@ -118,13 +119,13 @@ class JokesMainAbl {
     const dtoOut = await UuAppWorkspace.load(uri, session, uuAppErrorMap);
 
     // TODO Implement according to application needs...
-    // if (dtoOut.sysData.awidData.sysState !== UuAppWorkspace.SYS_STATES.CREATED &&
-    //    dtoOut.sysData.awidData.sysState !== UuAppWorkspace.SYS_STATES.ASSIGNED
-    // ) {
-    //   const awid = uri.getAwid();
-    //   const appData = await this.dao.get(awid);
-    //   dtoOut.data = { ...appData, relatedObjectsMap: {} };
-    // }
+    if (dtoOut.sysData.awidData.sysState !== UuAppWorkspace.SYS_STATES.CREATED &&
+       dtoOut.sysData.awidData.sysState !== UuAppWorkspace.SYS_STATES.ASSIGNED
+    ) {
+      const awid = uri.getAwid();
+      const appData = await this.dao.get(awid);
+      dtoOut.data = { ...appData, relatedObjectsMap: {} };
+    }
 
     // HDS 2
     return dtoOut;
@@ -135,14 +136,14 @@ class JokesMainAbl {
     const dtoOut = await UuAppWorkspace.loadBasicData(uri, session, uuAppErrorMap);
 
     // TODO Implement according to application needs...
-    // const awid = uri.getAwid();
-    // const workspace = await UuAppWorkspace.get(awid);
-    // if (workspace.sysState !== UuAppWorkspace.SYS_STATES.CREATED &&
-    //    workspace.sysState !== UuAppWorkspace.SYS_STATES.ASSIGNED
-    // ) {
-    //   const appData = await this.dao.get(awid);
-    //   dtoOut.data = { ...appData, relatedObjectsMap: {} };
-    // }
+    const awid = uri.getAwid();
+    const workspace = await UuAppWorkspace.get(awid);
+    if (workspace.sysState !== UuAppWorkspace.SYS_STATES.CREATED &&
+       workspace.sysState !== UuAppWorkspace.SYS_STATES.ASSIGNED
+    ) {
+      const appData = await this.dao.get(awid);
+      dtoOut.data = { ...appData, relatedObjectsMap: {} };
+    }
 
     // HDS 2
     return dtoOut;

@@ -1,0 +1,106 @@
+{
+  "itemList": [
+    {
+      "name": "AAA name Friday ",
+      "notes": "I must go with Nina.....",
+      "awid": "22222222222222222222222222222222",
+      "owner_id": "9429-5525-6848-0000",
+      "owner_name": "Martin Saska",
+      "members": [],
+      "shoppingItems": [],
+      "isArchived": false,
+      "sys": {
+        "cts": "2023-11-25T12:43:48.831Z",
+        "mts": "2023-11-25T12:43:48.831Z",
+        "rev": 0
+      },
+      "id": "6561ec0426aba71608d41c78"
+    },
+    {
+      "name": "bbbb list name Friday ",
+      "notes": "I must go with Nina.....",
+      "awid": "22222222222222222222222222222222",
+      "owner_id": "9429-5525-6848-0000",
+      "owner_name": "Martin Saska",
+      "members": [],
+      "shoppingItems": [],
+      "isArchived": false,
+      "sys": {
+        "cts": "2023-11-25T12:43:52.817Z",
+        "mts": "2023-11-25T12:43:52.817Z",
+        "rev": 0
+      },
+      "id": "6561ec0826aba71608d41c7b"
+    },
+    {
+      "name": "Shopping list Electroy ",
+      "notes": "I must go with Nina.....",
+      "awid": "22222222222222222222222222222222",
+      "owner_id": "9429-5525-6848-0000",
+      "owner_name": "Martin Saska",
+      "members": [],
+      "shoppingItems": [],
+      "isArchived": false,
+      "sys": {
+        "cts": "2023-11-25T12:44:11.456Z",
+        "mts": "2023-11-25T12:44:11.456Z",
+        "rev": 0
+      },
+      "id": "6561ec1b26aba71608d41c7e"
+    },
+    {
+      "name": "Shopping list Electroy ",
+      "notes": "I must go with Nina.....",
+      "awid": "22222222222222222222222222222222",
+      "owner_id": "9429-5525-6848-0000",
+      "owner_name": "Martin Saska",
+      "members": [],
+      "shoppingItems": [],
+      "isArchived": false,
+      "sys": {
+        "cts": "2023-11-26T20:05:10.798Z",
+        "mts": "2023-11-26T20:05:10.798Z",
+        "rev": 0
+      },
+      "id": "6563a4f7aaf1a627d8dfe7ab"
+    },
+    {
+      "name": "Shopping list Electroy ",
+      "notes": "I must go with Nina.....",
+      "awid": "22222222222222222222222222222222",
+      "owner_id": "9429-5525-6848-0000",
+      "owner_name": "Martin Saska",
+      "members": [],
+      "shoppingItems": [],
+      "isArchived": false,
+      "sys": {
+        "cts": "2023-12-04T15:12:18.476Z",
+        "mts": "2023-12-04T15:12:18.476Z",
+        "rev": 0
+      },
+      "id": "656dec5292b6351a404988fc"
+    },
+    {
+      "name": "Shopping list Electroy ",
+      "notes": "I must go with Nina.....",
+      "awid": "22222222222222222222222222222222",
+      "owner_id": "9429-5525-6848-0000",
+      "owner_name": "Martin Saska",
+      "members": [],
+      "shoppingItems": [],
+      "isArchived": false,
+      "sys": {
+        "cts": "2023-12-04T15:22:32.002Z",
+        "mts": "2023-12-04T15:22:32.002Z",
+        "rev": 0
+      },
+      "id": "656deeb8b73ed41b148ad2d5"
+    }
+  ],
+  "pageInfo": {
+    "pageIndex": 0,
+    "pageSize": 1000,
+    "total": 6
+  },
+  "uuAppErrorMap": {}
+}

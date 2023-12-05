@@ -1,0 +1,61 @@
+{
+  "sysData": {
+    "asidData": {
+      "name": "uuJokesMaing01",
+      "description": "...",
+      "sysState": "active",
+      "adviceNote": {
+        "message": "Migration ...",
+        "severity": "info",
+        "estimatedEndTime": "2020-04-21T10:15:30.000Z",
+        "uuIdentity": "9429-5525-6848-0000",
+        "startTime": "2023-11-21T12:14:32.175Z"
+      },
+      "version": "3.0",
+      "asid": "11111111111111111111111111111111",
+      "authorizationStrategy": "roleGroupInterface",
+      "baseRegistryUri": null,
+      "sys": {
+        "cts": "2023-11-21T12:14:32.176Z",
+        "mts": "2023-11-21T12:14:32.242Z",
+        "rev": 1
+      },
+      "id": "655c9f28e2f22606c05fcac3"
+    },
+    "awidData": {
+      "awid": "22222222222222222222222222222222",
+      "sysState": "active",
+      "version": "3.0",
+      "sys": {
+        "cts": "2023-11-21T12:14:54.045Z",
+        "mts": "2023-11-21T12:15:10.717Z",
+        "rev": 2
+      },
+      "awidInitiatorList": [
+        "9429-5525-6848-0000",
+        "9429-5525-6848-0000"
+      ],
+      "description": "Description of uuAppWorskapace",
+      "license": {
+        "type": "xs",
+        "size": 10
+      },
+      "name": "uuAppg01Server AppModel",
+      "adviceNote": {
+        "uuIdentity": null,
+        "startTime": "2023-11-21T12:15:10.717Z",
+        "severity": "info",
+        "message": null,
+        "estimatedEndTime": null
+      },
+      "id": "655c9f3ee2f22606c05fcacb",
+      "uuAppErrorMap": {}
+    },
+    "relatedObjectsMap": {},
+    "profileData": {
+      "uuIdentityProfileList": [],
+      "profileList": []
+    }
+  },
+  "uuAppErrorMap": {}
+}

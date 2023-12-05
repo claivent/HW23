@@ -3,7 +3,7 @@ import { createVisualComponent, Utils, Content, useState } from "uu5g05";
 import Config from "./config/config.js";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Uu5Elements from "uu5g05-elements";
-import { useSlists} from "./context";
+import { useSlists} from "../../core/context-permission";
 
 
 //@@viewOff:imports

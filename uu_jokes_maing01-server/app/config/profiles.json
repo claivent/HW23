@@ -1,21 +1,32 @@
 {
   "{asid}": {
-    "profileList": ["AsidAuthorities","AsidExecutives","AsidLicenseOwner","Public"],
+    "profileList": [
+      "AsidAuthorities",
+      "AsidExecutives",
+      "AsidLicenseOwner"
+      ],
     "useCaseMap": {}
   },
   "*": {
-    "profileList": ["Authorities","Executives","Readers","AwidLicenseOwner","Public","Authenticated","AwidInitiator"],
+    "profileList": [
+      "Authorities",
+      "Executives",
+      "Readers",
+      "AwidLicenseOwner",
+      "Public",
+      "Authenticated",
+      "AwidInitiator"],
     "useCaseMap": {
       "sys/uuAppWorkspace/init": {
-        "sysStateList": ["created","assigned"],
-        "profileList": ["AwidLicenseOwner","AwidInitiator"]
+        "sysStateList": ["created", "assigned"],
+        "profileList": ["Public"]
       },
       "sys/uuAppWorkspace/load": {
-        "sysStateList": ["active"],
-        "profileList": ["Authenticated"]
+        "sysStateList": ["created", "assigned", "active", "restricted", "readOnly", "closed", "suspended"],
+        "profileList": ["Public"]
       },
       "sys/uuAppWorkspace/loadBasicData": {
-        "sysStateList": ["active"],
+        "sysStateList": ["created", "assigned", "active", "restricted", "readOnly", "closed", "suspended"],
         "profileList": ["Public"]
       },
       "defaultUve": {
@@ -23,7 +34,7 @@
       },
       "sys/uuAppWorkspace/initUve": {
         "sysStateList": ["created"],
-        "profileList": ["Public","AwidLicenseOwner"]
+        "profileList": ["Public"]
       },
       "joke/create": {
         "sysStateList": ["active"],
@@ -31,23 +42,23 @@
       },
       "slist/create": {
         "sysStateList": ["active"],
-        "profileList": ["Authorities","Executives","Readers"]
+        "profileList": ["Authorities","Executives","Readers", "Public"]
       },
       "slist/get": {
         "sysStateList": ["active"],
-        "profileList": ["Authorities","Executives"]
+        "profileList": ["Authorities", "Executives", "Readers"]
       },
       "slist/list": {
         "sysStateList": ["active"],
-        "profileList": ["Authorities","Executives"]
+        "profileList": ["Public"]
       },
       "slist/delete": {
         "sysStateList": ["active"],
-        "profileList": ["Executives"]
+        "profileList": ["Authorities","Executives"]
       },
       "slist/update": {
         "sysStateList": ["active"],
-        "profileList": ["Executives"]
+        "profileList": ["Authorities","Executives"]
       },
       "sitem/create": {
         "sysStateList": ["active"],
@@ -55,15 +66,15 @@
       },
       "sitem/get": {
         "sysStateList": ["active"],
-        "profileList": ["Authorities","Executives"]
+        "profileList": ["Authorities","Executives", "Readers"]
       },
       "sitem/list": {
         "sysStateList": ["active"],
-        "profileList": ["Authorities","Executives"]
+        "profileList": ["Authorities","Executives", "Readers"]
       },
       "sitem/delete": {
         "sysStateList": ["active"],
-        "profileList": ["Executives"]
+        "profileList": ["Authorities","Executives"]
       },
       "sitem/update": {
         "sysStateList": ["active"],

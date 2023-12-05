@@ -48,6 +48,13 @@ class SlistAbl {
 
   async list(awid, dtoIn, session, authorizationResult) {
      let uuAppErrorMap = {};
+    const DEFAULTS = {
+      sortBy: "name",
+      order: "asc",
+      pageIndex: 0,
+      pageSize: 100,
+    };
+
     // validation of dtoIn
     // validation of dtoIn
     const validationResult = this.validator.validate("slistListDtoInType", dtoIn);
@@ -55,8 +62,21 @@ class SlistAbl {
       dtoIn, validationResult, uuAppErrorMap, Warnings.Create.UnsupportedKeys.code, Errors.Create.InvalidDtoIn
     );
 
+    // 1.4
+    if (!dtoIn.sortBy) dtoIn.sortBy = DEFAULTS.sortBy;
+    if (!dtoIn.order) dtoIn.order = DEFAULTS.order;
+    if (!dtoIn.pageInfo) dtoIn.pageInfo = {};
+    if (!dtoIn.pageInfo.pageSize) dtoIn.pageInfo.pageSize = DEFAULTS.pageSize;
+    if (!dtoIn.pageInfo.pageIndex) dtoIn.pageInfo.pageIndex = DEFAULTS.pageIndex;
+
+    let list;
+    if (dtoIn) {
+
+        list = await this.dao.list(awid, dtoIn.sortBy, dtoIn.order, dtoIn.pageInfo);
+    }
+
     // prepare and return dtoOut
-    const dtoOut = { ...dtoIn,  uuAppErrorMap };
+    const dtoOut = { ...list,  uuAppErrorMap };
     return dtoOut;
   }
 

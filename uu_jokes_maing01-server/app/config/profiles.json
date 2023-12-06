@@ -16,29 +16,34 @@
       "Public",
       "Authenticated",
       "AwidInitiator"],
+
     "useCaseMap": {
-      "sys/uuAppWorkspace/init": {
+      "defaultUve": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "sys/uuAppWorkspace/initUve": {
         "sysStateList": ["created", "assigned"],
         "profileList": ["Public"]
       },
+      "sys/uuAppWorkspace/init": {
+        "sysStateList": ["created", "assigned"],
+        "profileList": ["AwidLicenseOwner", "AwidInitiator"]
+      },
       "sys/uuAppWorkspace/load": {
         "sysStateList": ["created", "assigned", "active", "restricted", "readOnly", "closed", "suspended"],
-        "profileList": ["Public"]
+        "profileList": ["Authenticated", "AwidLicenseOwner"]
       },
       "sys/uuAppWorkspace/loadBasicData": {
         "sysStateList": ["created", "assigned", "active", "restricted", "readOnly", "closed", "suspended"],
         "profileList": ["Public"]
       },
-      "defaultUve": {
-        "profileList": ["Public"]
-      },
-      "sys/uuAppWorkspace/initUve": {
-        "sysStateList": ["created"],
-        "profileList": ["Public"]
-      },
+
+
+
       "joke/create": {
         "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "profileList": ["Authorities", "Authenticated"]
       },
       "slist/create": {
         "sysStateList": ["active"],
@@ -50,7 +55,7 @@
       },
       "slist/list": {
         "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "profileList": ["Authorities"]
       },
       "slist/delete": {
         "sysStateList": ["active"],

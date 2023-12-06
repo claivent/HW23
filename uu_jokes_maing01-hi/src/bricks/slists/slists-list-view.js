@@ -135,7 +135,14 @@ const SlistsListView = createVisualComponent({
     const [archiveFilterList, setArchiveFilterList] = useState([{key: "archive", value: false}]);
 
 
-
+    function handleCreateSitem(formData){
+      console.log("submit", formData);
+      return (
+      {
+        "name": formData.name,
+          "notes" : formData.notes
+      });
+    }
 
     return  (
       <>
@@ -175,15 +182,16 @@ const SlistsListView = createVisualComponent({
               </Uu5TilesElements.Grid>
 
 
+
           <Uu5Forms.Form.Provider key={createOpen} onSubmit={async (e) => {
-            await props.onCreate({id: Utils.String.generateId(), ...e.data.value});
+            await props.onCreate(handleCreateSitem({...e.data.value}));
             setCreateOpen (false);
             console.log("submit", e.data);
           }}>
             <Uu5Elements.Modal open={createOpen} onClose={() => {setCreateOpen(false)}} header={"Vytvořit seznam"} footer={<Uu5Forms.SubmitButton/>}>
               <Uu5Forms.Form.View gridLayout={{xs:"name, notes", s:"name notes"}}>
-                <Uu5Forms.FormText name={"name"} label = "Name" required/>
-                <Uu5Forms.FormText name={"notes"} label = "Notes" />
+                <Uu5Forms.FormText name={"name"} label = "Name" required minLength={3} maxLength={100}/>
+                <Uu5Forms.FormText name={"notes"} label = "Notes" minLength={3} maxLength={4000} />
               </Uu5Forms.Form.View>
             </Uu5Elements.Modal>
           </Uu5Forms.Form.Provider>

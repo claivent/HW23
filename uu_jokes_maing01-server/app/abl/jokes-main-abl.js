@@ -117,7 +117,7 @@ class JokesMainAbl {
   async load(uri, session, uuAppErrorMap = {}) {
     // HDS 1
     const dtoOut = await UuAppWorkspace.load(uri, session, uuAppErrorMap);
-    console.log("Load -- UuAppWorkspace", UuAppWorkspace)
+
     // TODO Implement according to application needs...
     if (dtoOut.sysData.awidData.sysState !== UuAppWorkspace.SYS_STATES.CREATED &&
        dtoOut.sysData.awidData.sysState !== UuAppWorkspace.SYS_STATES.ASSIGNED
@@ -125,7 +125,7 @@ class JokesMainAbl {
       const awid = uri.getAwid();
       const appData = await this.dao.get(awid);
       dtoOut.data = { ...appData, relatedObjectsMap: {} };
-      console.log("dtoOut.sysData",  dtoOut.sysData);
+
     }
 
     // HDS 2

@@ -22,7 +22,7 @@ const Calls = {
   deleteSlist(dtoIn){
     console.log("Calls delete", dtoIn);
     const commandUri = Calls.getCommandUri("slist/delete");
-    return Calls.call("post", commandUri);
+    return Calls.call("post", commandUri, dtoIn);
   },
 
   createSlist( dtoIn ){
@@ -33,12 +33,12 @@ const Calls = {
 
   loadSlistsList(dtoIn){
     const commandUri = Calls.getCommandUri("slist/list");
-    return Calls.call("get", commandUri);
+    return Calls.call("get", commandUri, dtoIn);
   },
 
   loadMokSys(dtoIn){
     const commandUri = Calls.getCommandUri("slist/mokSys");
-    return Calls.call("get", commandUri);
+    return Calls.call("get", commandUri), dtoIn;
   },
 
   loadIdentityProfiles() {

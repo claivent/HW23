@@ -105,9 +105,17 @@ const SlistsTile = createVisualComponent({
     const fixedC = Uu5Elements.UuGds.SpacingPalette.getValue(["fixed", "c"]);
     const textStyles = (segment) => ({ category: "interface", segment, type: "medium" });
 
-    props.data.handlerMap.delete;
+    //props.data.handlerMap.delete;
 
     //
+    async function handleDeleteTile(data) {
+
+      await props.data.handlerMap.delete().then(r => setDeleteOpen(false) );
+
+      // Update the state with the deleted data
+      const updatedData = { ...props.data.data, name: "", notes: "", owner_name: "" };
+      props.setData({ ...props.data, data: updatedData });
+    }
 
     return  (
       <>
@@ -140,7 +148,7 @@ const SlistsTile = createVisualComponent({
       </div>
         <div className={Css.italic()}>
         <Uu5Elements.Text{...textStyles("content")}  >
-          {"Členové: "}({props.data.data.members.join(", ")})
+          {"Členové: "}({/*props.data.data.members.join(", ")*/})
         </Uu5Elements.Text>
         </div>
       </Uu5TilesElements.Tile>
@@ -151,7 +159,7 @@ const SlistsTile = createVisualComponent({
           info = {props.data.data.name}
           icon ="uugds-delete"
           actionList={[
-            {children: "Smazat", colorScheme: "negative", significance: "highlighted",  onClick: () => props.data.handlerMap.delete()  },
+            {children: "Smazat", colorScheme: "negative", significance: "highlighted",  onClick: () => {handleDeleteTile(props.data.data)} },
             {children: "Zrušit", onClick: () => setDeleteOpen(false)  },
           ]}
         />

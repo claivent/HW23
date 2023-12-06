@@ -1,7 +1,7 @@
 //@@viewOn:constants
 const Constants = {
   Schemas: {
-    SLIST: "slist"
+    SLIST: "slist",
     MEMBERSLIST: "membersList"
   },
 

@@ -75,8 +75,8 @@ class SlistAbl {
 
 
 
-    const delSlist = await this.dao.get(awid, dtoIn.id);
-    if (!delSlist) {
+    const delSlist = await this.dao.delete(awid, dtoIn.id);
+    if (delSlist) { //TODO dořwšit návratovou hodnotu hází false hodně issue na internetu.
       throw new Errors.Delete.SlistDoesNotExist({ uuAppErrorMap }, { slistId: dtoIn.id });
     }
 

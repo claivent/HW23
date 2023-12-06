@@ -15,6 +15,9 @@
         },
         "sitem": {
           "realization": "dao/SitemMongo"
+        },
+        "users": {
+          "realization": "dao/UsersMongo"
         }
       }
     }

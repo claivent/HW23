@@ -1,61 +1,19 @@
 {
+  "message": "Cannot read properties of undefined (reading 'join')",
   "stack": [
-    ""
+    "TypeError: Cannot read properties of undefined (reading 'join')",
+    "    at render (webpack-internal:///./bricks/slists/slists-tile.js:157:164)",
+    "    at doRender (https://cdn.plus4u.net/uu-uu5g05/1.26.7/uu5g05.js:5933:16)",
+    "    at componentCfg.render (https://cdn.plus4u.net/uu-uu5g05/1.26.7/uu5g05.js:5939:85)",
+    "    at renderWithHooks (https://cdn.plus4u.net/libs/react-dom/16.14.0/react-dom.js:14938:20)",
+    "    at updateFunctionComponent (https://cdn.plus4u.net/libs/react-dom/16.14.0/react-dom.js:17169:22)",
+    "    at beginWork (https://cdn.plus4u.net/libs/react-dom/16.14.0/react-dom.js:18745:18)",
+    "    at HTMLUnknownElement.callCallback (https://cdn.plus4u.net/libs/react-dom/16.14.0/react-dom.js:182:16)",
+    "    at Object.invokeGuardedCallbackDev (https://cdn.plus4u.net/libs/react-dom/16.14.0/react-dom.js:231:18)",
+    "    at invokeGuardedCallback (https://cdn.plus4u.net/libs/react-dom/16.14.0/react-dom.js:286:33)",
+    "    at beginWork$1 (https://cdn.plus4u.net/libs/react-dom/16.14.0/react-dom.js:23338:9)"
   ],
   "uri": "http://localhost:50300/uu-jokes-maing01/11111111111111111111111111111111/slists",
-  "time": "2023-12-05T11:58:42.692Z",
-  "operation": "load",
-  "error": {
-    "_id": "4d48461917994413d9a92fa95c3c264c",
-    "_timestamp": "2023-12-05T11:58:42.651Z",
-    "_cause": null,
-    "_name": "ApplicationError",
-    "code": "uu-appg01/authorization/accessDenied",
-    "dtoOut": {
-      "uuIdentity": "9429-5525-6848-0000",
-      "authorizedProfileList": [],
-      "identityProfileList": [],
-      "uuAppErrorMap": {
-        "uu-appg01/authorization/accessDenied": {
-          "id": "4d48461917994413d9a92fa95c3c264c",
-          "timestamp": "2023-12-05T11:58:42.488Z",
-          "type": "error",
-          "message": "Logged user is not authorized to run use case.",
-          "trace": "AccessDenied: Logged user is not authorized to run use case.\n    at C:\\__Martin__Data\\Development\\homework\\uu_jokes_maing01-server\\node_modules\\uu_appg01_workspace\\src\\middleware\\authorization-middleware.js:77:19\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async sectionWrapper (C:\\__Martin__Data\\Development\\homework\\uu_jokes_maing01-server\\node_modules\\uu_appg01_core-perflog\\src\\perflog.js:60:22)\n    at async AuthorizationMiddleware.pre (C:\\__Martin__Data\\Development\\homework\\uu_jokes_maing01-server\\node_modules\\uu_appg01_workspace\\src\\middleware\\authorization-middleware.js:67:9)\n    at async C:\\__Martin__Data\\Development\\homework\\uu_jokes_maing01-server\\node_modules\\uu_appg01_core-appserver\\src\\runner\\middleware-loader.js:169:13"
-        }
-      }
-    },
-    "response": {
-      "status": 403,
-      "data": {
-        "uuIdentity": "9429-5525-6848-0000",
-        "authorizedProfileList": [],
-        "identityProfileList": [],
-        "uuAppErrorMap": {
-          "uu-appg01/authorization/accessDenied": {
-            "id": "4d48461917994413d9a92fa95c3c264c",
-            "timestamp": "2023-12-05T11:58:42.488Z",
-            "type": "error",
-            "message": "Logged user is not authorized to run use case.",
-            "trace": "AccessDenied: Logged user is not authorized to run use case.\n    at C:\\__Martin__Data\\Development\\homework\\uu_jokes_maing01-server\\node_modules\\uu_appg01_workspace\\src\\middleware\\authorization-middleware.js:77:19\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async sectionWrapper (C:\\__Martin__Data\\Development\\homework\\uu_jokes_maing01-server\\node_modules\\uu_appg01_core-perflog\\src\\perflog.js:60:22)\n    at async AuthorizationMiddleware.pre (C:\\__Martin__Data\\Development\\homework\\uu_jokes_maing01-server\\node_modules\\uu_appg01_workspace\\src\\middleware\\authorization-middleware.js:67:9)\n    at async C:\\__Martin__Data\\Development\\homework\\uu_jokes_maing01-server\\node_modules\\uu_appg01_core-appserver\\src\\runner\\middleware-loader.js:169:13"
-          }
-        }
-      }
-    },
-    "status": 403
-  },
-  "data": {
-    "uuIdentity": "9429-5525-6848-0000",
-    "authorizedProfileList": [],
-    "identityProfileList": [],
-    "uuAppErrorMap": {
-      "uu-appg01/authorization/accessDenied": {
-        "id": "4d48461917994413d9a92fa95c3c264c",
-        "timestamp": "2023-12-05T11:58:42.488Z",
-        "type": "error",
-        "message": "Logged user is not authorized to run use case.",
-        "trace": "AccessDenied: Logged user is not authorized to run use case.\n    at C:\\__Martin__Data\\Development\\homework\\uu_jokes_maing01-server\\node_modules\\uu_appg01_workspace\\src\\middleware\\authorization-middleware.js:77:19\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async sectionWrapper (C:\\__Martin__Data\\Development\\homework\\uu_jokes_maing01-server\\node_modules\\uu_appg01_core-perflog\\src\\perflog.js:60:22)\n    at async AuthorizationMiddleware.pre (C:\\__Martin__Data\\Development\\homework\\uu_jokes_maing01-server\\node_modules\\uu_appg01_workspace\\src\\middleware\\authorization-middleware.js:67:9)\n    at async C:\\__Martin__Data\\Development\\homework\\uu_jokes_maing01-server\\node_modules\\uu_appg01_core-appserver\\src\\runner\\middleware-loader.js:169:13"
-      }
-    }
-  }
+  "time": "2023-12-06T14:52:40.822Z",
+  "_suppressLogging": true
 }

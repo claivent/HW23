@@ -80,6 +80,11 @@
         "realization": "api/controllers/SitemController.update",
         "httpMethod": "POST",
         "type": "CMD"
+      },
+      "users/create": {
+        "realization": "api/controllers/UsersController.create",
+        "httpMethod": "POST",
+        "type": "CMD"
       }
     }
   }

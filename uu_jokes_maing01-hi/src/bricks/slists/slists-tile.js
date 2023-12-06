@@ -109,12 +109,17 @@ const SlistsTile = createVisualComponent({
 
     //
     async function handleDeleteTile(data) {
+      try {
+        await props.data.handlerMap.delete();
+        setDeleteOpen(false);
 
-      await props.data.handlerMap.delete().then(r => setDeleteOpen(false) );
-
-      // Update the state with the deleted data
-      const updatedData = { ...props.data.data, name: "", notes: "", owner_name: "" };
-      props.setData({ ...props.data, data: updatedData });
+        // Assuming you have a state variable to hold the list of tiles
+        const updatedTiles = tiles.filter((tile) => tile.id !== data.id);
+        setTiles(updatedTiles);
+      } catch (error) {
+        console.error("Error deleting tile:", error);
+        // Handle error, if needed
+      }
     }
 
     return  (

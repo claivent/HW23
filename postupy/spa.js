@@ -1,75 +1,48 @@
-//@@viewOn:imports
-import { createVisualComponent, Utils } from "uu5g05";
-import Uu5Elements from "uu5g05-elements";
-import Plus4U5 from "uu_plus4u5g02";
-import Plus4U5App from "uu_plus4u5g02-app";
-import Home from "../routes/home.js";
-import RouteBar from "./route-bar";
+// slists-list-view.js
 
-import Config from "./config/config.js";
-//@@viewOff:imports
+// ... (imports and other code)
 
-//@@viewOn:constants
-const About = Utils.Component.lazy(() => import("../routes/about.js"));
-const InitAppWorkspace = Utils.Component.lazy(() => import("../routes/init-app-workspace.js"));
-const ControlPanel = Utils.Component.lazy(() => import("../routes/control-panel.js"));
+const SlistsListView = createVisualComponent({
+  // ... (statics, propTypes, defaultProps, etc.)
 
-const ROUTE_MAP = {
-  "": { redirect: "home" },
-  home: (props) => <Home {...props} />,
-  about: (props) => <About {...props} />,
-  "sys/uuAppWorkspace/initUve": (props) => <InitAppWorkspace {...props} />,
-  controlPanel: (props) => <ControlPanel {...props} />,
-  "*": () => (
-    <Uu5Elements.Text category="story" segment="heading" type="h1">
-      Not Found
-    </Uu5Elements.Text>
-  ),
-};
-//@@viewOff:constants
+  render(props) {
+    const { data, onCreate } = props;
 
-//@@viewOn:css
-//@@viewOff:css
+    const [archiveFilterList, setArchiveFilterList] = useState([{ key: "archive", value: false }]);
 
-//@@viewOn:helpers
-//@@viewOff:helpers
+    async function handleCreateSitem(formData) {
+      console.log("submit", formData);
+      // Assuming you have a function to create a new tile, implement it accordingly
+      await onCreate(formData);
+    }
 
-const Spa = createVisualComponent({
-  //@@viewOn:statics
-  uu5Tag: Config.TAG + "Spa",
-  //@@viewOff:statics
+    async function handleDeleteTile(data) {
+      // Assuming you have a function to delete a tile, implement it accordingly
+      await props.data.handlerMap.delete();
+      // Force re-fetching of data or update data in another way
+    }
 
-  //@@viewOn:propTypes
-  propTypes: {},
-  //@@viewOff:propTypes
-
-  //@@viewOn:defaultProps
-  defaultProps: {},
-  //@@viewOff:defaultProps
-
-  render() {
-    //@@viewOn:private
-    //@@viewOff:private
-
-    //@@viewOn:interface
-    //@@viewOff:interface
-
-    //@@viewOn:render
     return (
-      <Plus4U5.SpaProvider initialLanguageList={["en", "cs"]}>
-        <Uu5Elements.ModalBus>
-          <Plus4U5App.Spa>
-            <RouteBar />
-            <Plus4U5App.Router routeMap={ROUTE_MAP} />
-          </Plus4U5App.Spa>
-        </Uu5Elements.ModalBus>
-      </Plus4U5.SpaProvider>
+      <>
+        <Uu5Tiles.ControllerProvider
+          data={data}
+          filterDefinitionList={FILTER_DEFINITION_LIST}
+          filterList={archiveFilterList}
+          onFilterChange={(e) => setArchiveFilterList(e.data.filterList)}
+        >
+          <Uu5Elements.Block className={Css.main()} header={/* ... */} actionList={/* ... */}>
+            {/* ... */}
+            <Uu5TilesElements.Grid>
+              {data.map((item) => (
+                <SlistsTile key={item.id} data={item} setData={/* ... */} onDelete={handleDeleteTile} />
+              ))}
+            </Uu5TilesElements.Grid>
+            {/* ... */}
+          </Uu5Elements.Block>
+        </Uu5Tiles.ControllerProvider>
+      </>
     );
-    //@@viewOff:render
   },
 });
 
-//@@viewOn:exports
-export { Spa };
-export default Spa;
-//@@viewOff:exports
+// ... (exports)

@@ -1,8 +1,9 @@
 //@@viewOn:constants
 const Constants = {
   Schemas: {
+    JOKES_MAIN: "jokesMain",
     SLIST: "slist",
-    MEMBERSLIST: "membersList"
+
   },
 
   Profiles: {

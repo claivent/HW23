@@ -28,7 +28,9 @@ const Calls = {
   createSlist( dtoIn ){
     console.log("Calls create", dtoIn);
     const commandUri = Calls.getCommandUri("slist/create");
-    return Calls.call("post", commandUri, dtoIn);
+    const result = Calls.call("post", commandUri, dtoIn);
+    console.log("Calls create RESULT", dtoIn);
+    return result;
   },
 
   loadSlistsList(dtoIn){

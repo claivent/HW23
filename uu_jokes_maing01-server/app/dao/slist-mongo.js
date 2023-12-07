@@ -23,10 +23,7 @@ class SlistMongo extends UuObjectDao {
   }
 
   async delete(awid, id) {
-
-
-    const result =  await super.deleteOne({ awid, id }); //TODO velký problém s návratovou hodnotou dořeším na konci.
-    return result;
+    return await super.deleteOne({ awid, id });
   }
 
 

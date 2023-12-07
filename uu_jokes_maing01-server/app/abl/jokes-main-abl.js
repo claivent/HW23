@@ -7,6 +7,7 @@ const { UriBuilder } = require("uu_appg01_server").Uri;
 const { LoggerFactory } = require("uu_appg01_server").Logging;
 const { AppClient } = require("uu_appg01_server");
 const Errors = require("../api/errors/jokes-main-error.js");
+const { Schemas, Jokes } = require("./constants");
 
 const WARNINGS = {
   initUnsupportedKeys: {
@@ -14,25 +15,30 @@ const WARNINGS = {
   },
 };
 
+const DEFAULT_NAME = "sList";
+
 const logger = LoggerFactory.get("JokesMainAbl");
 
 class JokesMainAbl {
   constructor() {
     this.validator = Validator.load();
-    this.dao = DaoFactory.getDao("jokesMain");
+    this.dao = DaoFactory.getDao(Schemas.JOKES_MAIN);
   }
 
   async init(uri, dtoIn, session) {
     const awid = uri.getAwid();
+    let uuAppErrorMap = {};
     // HDS 1
     let validationResult = this.validator.validate("initDtoInType", dtoIn);
     // A1, A2
-    let uuAppErrorMap = ValidationHelper.processValidationResult(
+    uuAppErrorMap = ValidationHelper.processValidationResult(
       dtoIn,
       validationResult,
       WARNINGS.initUnsupportedKeys.code,
       Errors.Init.InvalidDtoIn
     );
+
+    dtoIn.name = dtoIn.name || DEFAULT_NAME;
 
     // HDS 2
     const schemas = ["jokesMain"];

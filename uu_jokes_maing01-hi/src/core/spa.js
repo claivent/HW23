@@ -13,14 +13,12 @@ import Slist from "../routes/slist";
 import Slists from "../routes/slists";
 import ProviderPermission from "./provider-permission";
 
-
 //@@viewOff:imports
 
 //@@viewOn:constants
 const About = Utils.Component.lazy(() => import("../routes/about.js"));
 const InitAppWorkspace = Utils.Component.lazy(() => import("../routes/init-app-workspace.js"));
 const ControlPanel = Utils.Component.lazy(() => import("../routes/control-panel.js"));
-
 
 const ROUTE_MAP = {
   "": { redirect: "home" },
@@ -36,6 +34,7 @@ const ROUTE_MAP = {
     </Uu5Elements.Text>
   ),
 };
+
 //@@viewOff:constants
 
 function SessionResolver({ children }) {
@@ -43,14 +42,15 @@ function SessionResolver({ children }) {
 
   switch (session.state) {
     case "pending":
-      return <SpaPending />;
+      return <SpaPending/>;
     case "notAuthenticated":
-      return <Unauthenticated />;
+      return <Unauthenticated/>;
     case "authenticated":
     default:
       return children;
   }
 }
+
 //@@viewOn:css
 //@@viewOff:css
 
@@ -80,28 +80,34 @@ const Spa = createVisualComponent({
     //@@viewOn:render
     return (
 
+      <Plus4U5.SpaProvider initialLanguageList={["en", "cs"]} skipAppWorkspaceProvider>
+        <Uu5Elements.ModalBus>
 
-    <Plus4U5.SpaProvider initialLanguageList={["en", "cs"]} skipAppWorkspaceProvider>
-      <SessionResolver>
-        <ProviderPermission>
-          {(slistsDataObject) => (
-            <>
-              {slistsDataObject.state === "pendingNoData" && <SpaPending />}
-              {slistsDataObject.state === "errorNoData" && <Error error={slistsDataObject.errorData} />}
-              {["ready", "pending", "error"].includes(slistsDataObject.state) && (
-                <>
-                  <RouteBar />
-                  <Plus4U5App.Spa routeMap={ROUTE_MAP} />
-                </>
+          <Plus4U5App.Spa>
 
-              )}
-            </>
-          )}
+              <SessionResolver>
+                <ProviderPermission>
+                  {(slistsDataObject) => (
+                    <>
+                      {slistsDataObject.state === "pendingNoData" && <SpaPending/>}
+                      {slistsDataObject.state === "errorNoData" && <Error error={slistsDataObject.errorData}/>}
+                      {["ready", "pending", "error"].includes(slistsDataObject.state) && (
+                        <>
+                          <RouteBar/>
+                          <Plus4U5App.Spa routeMap={ROUTE_MAP}/>
+                        </>
 
-        </ProviderPermission>
-      </SessionResolver>
+                      )}
+                    </>
+                  )}
 
-    </Plus4U5.SpaProvider>
+                </ProviderPermission>
+              </SessionResolver>
+
+          </Plus4U5App.Spa>
+
+        </Uu5Elements.ModalBus>
+      </Plus4U5.SpaProvider>
 
     );
     //@@viewOff:render

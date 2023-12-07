@@ -1,10 +1,8 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, Content, useState } from "uu5g05";
+import { createVisualComponent, useContext, useDataList, useState, Utils } from "uu5g05";
 import Config from "./config/config.js";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Uu5Elements from "uu5g05-elements";
-import { useSlists} from "../../core/context-permission";
-
 
 //@@viewOff:imports
 
@@ -91,10 +89,11 @@ const SlistsTile = createVisualComponent({
 
 
   render(props) {
+
+
+    console.log("SLISTS-TILE", props);
     //@@viewOn:private
     const { children } = props;
-    const { data, onDelete } = props;
-    console.log( "slists-tile",props) ;
     const[deleteOpen, setDeleteOpen] = useState(false);
     //@@viewOff:private
 
@@ -107,23 +106,24 @@ const SlistsTile = createVisualComponent({
     const fixedC = Uu5Elements.UuGds.SpacingPalette.getValue(["fixed", "c"]);
     const textStyles = (segment) => ({ category: "interface", segment, type: "medium" });
 
-    //props.data.handlerMap.delete;
+    props.data.handlerMap.delete;
 
     //
-    async function handleDeleteTile() {
+    function handleDeleteTile(sItem) {
       setDeleteOpen(false);
-      // Call the onDelete function passed as a prop
-      await onDelete(data);
-    }
+      props.onDelete(sItem);
 
+    }
     return  (
       <>
 
       <Uu5TilesElements.Tile  className={Css.tile()}
                               header={
+
                                 <Uu5Elements.Header
+
                                   className={Css.header()}
-                                  title={data.data.name}
+                                  title={props.data.data.name}
                                   icon="uugds-favorites"
 
                                 />  }
@@ -133,19 +133,19 @@ const SlistsTile = createVisualComponent({
         <div>
         <Uu5Elements.Text {...titleStyles} >
          <Uu5Elements.Icon icon="uugds-favorites" className={Css.margin("right", fixedC)} />
-          {data.data.notes}
-          {/*{handleCanDelete(.data.data.owner_id)}*/}
+          {props.data.data.notes}
+          {/*{handleCanDelete(props.data.data.owner_id)}*/}
         </Uu5Elements.Text>
         </div>
         <div className={Css.marginTop()}>
         <Uu5Elements.Text >
           <Uu5Elements.Icon icon="uugds-favorites"  />
-          {"Vlastník: "}{data.data.owner_name}
+          {"Vlastník: "}{props.data.data.owner_name}
         </Uu5Elements.Text>
       </div>
         <div className={Css.italic()}>
         <Uu5Elements.Text{...textStyles("content")}  >
-          {"Členové: "}({/*data.data.members.join(", ")*/})
+          {"Členové: "}({/*props.data.data.members.join(", ")*/})
         </Uu5Elements.Text>
         </div>
       </Uu5TilesElements.Tile>
@@ -153,10 +153,10 @@ const SlistsTile = createVisualComponent({
           open={deleteOpen}
           onCLose = {() => setDeleteOpen(false)}
           header  = "chcete smazat položku?"
-          info = {data.data.name}
+          info = {props.data.data.name}
           icon ="uugds-delete"
           actionList={[
-            {children: "Smazat", colorScheme: "negative", significance: "highlighted",  onClick: handleDeleteTile },
+            {children: "Smazat", colorScheme: "negative", significance: "highlighted",  onClick:  () => {handleDeleteTile(props.data)} },
             {children: "Zrušit", onClick: () => setDeleteOpen(false)  },
           ]}
         />

@@ -98,7 +98,7 @@ const Delete = {
     }
   },
 
-SlistDoesNotExist: class extends JokesMainUseCaseError {     //TODO 4. domácí úkol plná implementace
+  SlistDoesNotExist: class extends JokesMainUseCaseError {     //TODO 4. domácí úkol plná implementace
   constructor() {
     super(...arguments);
     this.code = `${Create.UC_CODE}SlistDoesNotExist`;

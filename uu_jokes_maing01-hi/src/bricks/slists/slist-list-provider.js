@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createComponent, useDataList, useDataObject, useEffect, useState } from "uu5g05";
+import { createComponent, useDataList, useDataObject, useState } from "uu5g05";
 import { useSubAppData, useSystemData } from "uu_plus4u5g02";
 import Config from "./config/config.js";
 import SlistsListView from "./slists-list-view";
@@ -28,85 +28,73 @@ const SlistsListProvider = createComponent({
   //@@viewOff:defaultProps
 
   render(props) {
+    console.log("SLISTS-PROVIDER", props);
     //@@viewOn:private
     const { children } = props;
-
-
-    const [dataList, setDataList] = useState({
-      state: "pendingNoData",
-      data: [],
-      errorData: null,
-      pendingData: null,
-      handlerMap: {
-        load: Calls.loadSlistsList,
-        create: Calls.createSlist,
-        // Add other handlers as needed
-      },
-      itemHandlerMap: {
-        delete: Calls.deleteSlist
-      }
-
-
-    });
-    console.log("Slists-provider-view-data", dataList) ;
+    const[createOpen, setCreateOpen] = useState(false);
     //@@viewOff:private
 
     //@@viewOn:interface
     //@@viewOff:interface
 
 
-    const dataListHook = useDataList({
-      handlerMap: dataList.handlerMap,
-      itemHandlerMap: dataList.itemHandlerMap,
-      // Add other parameters as needed
+    /*let sysDataObject =  useDataObject({
+      handlerMap: {
+        load: Calls.loadMokSys,
+      },
+    });
+    let { state, data, errorData, pendingData, handlerMap } = sysDataObject;
+
+
+    console.log("dataObject", sysDataObject);
+    console.log("state", state);*/
+
+    async function handleDelete(data, datalist){
+      console.log(data);
+      await data.handlerMap.delete;
+
+
+
+    }
+
+
+    const dataList = useDataList({
+      handlerMap: {
+        load: Calls.loadSlistsList,
+        create: Calls.createSlist,
+
+      },
+      itemHandlerMap: {
+        delete: Calls.deleteSlist
+      }
     });
 
 
-    useEffect(() => {
-      // Set the initial data when dataList changes
-      dataListHook.setData(dataList.data);
-    }, [dataList.data]);
 
-
-
-
+      console.log("datalistSetData", dataList.setData);
     //@@viewOn:render
     let result;
-    switch (dataListHook.state) {
+    switch (dataList.state){
       case "pendingNoData":
-        result = <Uu5Elements.Pending size={"max"} />;
+        result = <Uu5Elements.Pending size={"max"}/>
         break;
 
       case "errorNoData":
-        result = <Uu5Elements.Alert header={"Cannot create library."} priority={"error"} />;
+        result = <Uu5Elements.Alert header={ "Cannot create library."} priority={"error"}/>
         break;
-
       case "error":
-        result = (
-          <Uu5Elements.Alert header={"Data about libraries cannot be loaded."} priority={"error"} />
-        );
+        result = <Uu5Elements.Alert header={ "Data about libraries cannot be loaded."} priority={"error"}/>
         break;
-
       default:
-        result = (
-          <>
-            {typeof children === "function" &&
-              children({
-                dataList: dataListHook,
-                setDataList,
-              })}
 
-            {dataListHook.state === "ready" && (
-              <SlistsListView data={dataListHook.data} onCreate={dataListHook.handlerMap.create} />
-            )}
-          </>
-        );
+
+        result = <SlistsListView data={dataList.data} setData={dataList.setData}  onCreate = {dataList.handlerMap.create}  onDelete = {handleDelete} />
+        console.log("READYFUNCTION", dataList.data);
+
+
+        break;
     }
 
-    const childProps = {
-      dataList: dataListHook,
-      setDataList,
-    };
 
     return result;
 

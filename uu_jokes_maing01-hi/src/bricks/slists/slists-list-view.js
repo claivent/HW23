@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, useState, useEffect } from "uu5g05";
+import { createVisualComponent, Utils, useState } from "uu5g05";
 import Config from "./config/config.js";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Uu5Elements from "uu5g05-elements";
@@ -119,23 +119,12 @@ const SlistsListView = createVisualComponent({
   //@@viewOff:defaultProps
 
   render(props) {
+    console.log("SLISTS-VIEW", props);
     //@@viewOn:private
-    //const { children } = props;
-    const { dataList } = props;
-
-
-    const {data, onCreate} = props;
-    const[createOpen, setCreateOpen] = useState(false);
-    const [archiveFilterList, setArchiveFilterList] = useState([{key: "archive", value: false}]);
-    console.log("Slists-list-view-data", dataList) ;
+    const { children } = props;
 
 
 
-    useEffect(() => {
-      // Optionally, you can perform additional logic when dataList changes.
-      // For example, if you want to log the state:
-      console.log("dataList state view:", dataList.state);
-    }, [dataList]);
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -143,26 +132,27 @@ const SlistsListView = createVisualComponent({
 
     //@@viewOn:render
     const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
+    const[createOpen, setCreateOpen] = useState(false);
+    const [archiveFilterList, setArchiveFilterList] = useState([{key: "archive", value: false}]);
 
 
-
-    async function handleCreateSitem(formData) {
+    function handleCreateSitem(formData){
       console.log("submit", formData);
-      // Assuming you have a function to create a new tile, implement it accordingly
-      await onCreate(formData);
+      return (
+      {
+        "name": formData.name,
+          "notes" : formData.notes
+      });
     }
 
-    async function handleDeleteTile(data) {
-      // Assuming you have a function to delete a tile, implement it accordingly
-      console.log("Slists-list-view-data-ID", data)
-      await data.handlerMap.delete();
-      // Force re-fetching of data or update data in another way
+    async function handleOnDelete(data) {
+      console.log("deleteview", data);
+      await props.data.handlerMap.delete();
     }
-
     return  (
       <>
       <Uu5Tiles.ControllerProvider
-        data={data}
+        data={props.data}
         filterDefinitionList={FILTER_DEFINITION_LIST}
         filterList={archiveFilterList}
         onFilterChange={(e) => {setArchiveFilterList (e.data.filterList)}}
@@ -184,14 +174,14 @@ const SlistsListView = createVisualComponent({
         >
 
           <Uu5TilesControls.FilterBar initialExpanded={true} displayManagerButton={false} displayClearButton={false}/>
-            <Uu5TilesControls.FilterManagerModal />
+          <Uu5TilesControls.FilterManagerModal />
               <Uu5TilesElements.Grid
                /* data={props.data}*/
                 tileMinWidth = {300}
                 tileMaxWidth = {400}
               >
 
-                    <SlistsTile dataItem={data}  onDelete={handleDeleteTile}  />
+                    <SlistsTile  onDelete={props.onDelete} />
 
 
               </Uu5TilesElements.Grid>

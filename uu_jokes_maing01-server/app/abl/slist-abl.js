@@ -16,7 +16,7 @@ class SlistAbl {
 
   constructor() {
     this.validator = Validator.load();
-    this.dao = DaoFactory.getDao("slist");
+    this.dao = DaoFactory.getDao(Schemas.SLIST);
 
   }
   async create(awid, dtoIn, session, authorizationResult) {
@@ -73,12 +73,15 @@ class SlistAbl {
       dtoIn, validationResult, uuAppErrorMap, Warnings.Create.UnsupportedKeys.code, Errors.Create.InvalidDtoIn
     );
 
+    const slist = await this.dao.delete(awid, dtoIn.id);
+    console.log("dtoIn.id", dtoIn.id);
+   /* if (!slist) {
+      // 3.1
+      throw new Errors.Delete.SlistDoesNotExist({ uuAppErrorMap }, { slistID: dtoIn.id });
+    }*/
 
+    await this.dao.delete(awid, dtoIn.id);
 
-    const delSlist = await this.dao.delete(awid, dtoIn.id);
-    if (delSlist) { //TODO dořwšit návratovou hodnotu hází false hodně issue na internetu.
-      throw new Errors.Delete.SlistDoesNotExist({ uuAppErrorMap }, { slistId: dtoIn.id });
-    }
 
 
     // prepare and return dtoOut

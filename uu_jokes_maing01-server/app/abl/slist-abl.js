@@ -3,7 +3,6 @@
 const { Validator } = require("uu_appg01_server").Validation;
 const { ValidationHelper } = require("uu_appg01_server").AppServer;
 const { DaoFactory, ObjectStoreError } = require("uu_appg01_server").ObjectStore;
-
 const Errors = require("../api/errors/slist-error.js");
 const Warnings = require("../api/warnings/slist-warnings");
 const ShopList = require("../_mock/list.json");
@@ -12,11 +11,16 @@ const { Utils } = require("uu_appg01_server");
 const { Profiles, Schemas } = require("../abl/constants");
 
 
+let UsersAbl = require("./users-abl.js");
+
 class SlistAbl {
 
   constructor() {
     this.validator = Validator.load();
     this.dao = DaoFactory.getDao(Schemas.SLIST);
+    this.dao2 = DaoFactory.getDao(Schemas.USERS);
+
+
 
   }
   async create(awid, dtoIn, session, authorizationResult) {
@@ -33,19 +37,31 @@ class SlistAbl {
     const added_values = {members: [], shoppingItems: [], isArchived: false};
 
     // save slist to uuObjectStore
-    const uuObject = {
-      ...dtoIn, awid, owner_id, owner_name, ...added_values
-    };
+    const uuObject = {      ...dtoIn, awid, owner_id, owner_name, ...added_values    };
 
+    // create shopping list
     let slist;
     try {
-      slist = await  this.dao.create(uuObject);
+      slist = await this.dao.create(uuObject);
     } catch (e) {
       if (e instanceof ObjectStoreError) {
         throw new Errors.Create.SlistDaoCreateFailed({ uuAppErrorMap }, e);
       }
       throw e;
     }
+    //check if user exists in db. if so update his/her information otherwise create new user it can be used as members
+    let user;
+    try {
+      user = await  this.dao2.get(awid, owner_id);
+      console.log(user, "user");
+    } catch (e) {
+      if (e instanceof ObjectStoreError) {
+        throw new Errors.Create.SlistDaoCreateFailed({ uuAppErrorMap }, e);
+      }
+      throw e;
+    }
+
+    user ? await this.dao2.update(session.getIdentity()) : await this.dao2.create(session.getIdentity());
 
     // prepare and return dtoOut
     const dtoOut = { ...slist,  uuAppErrorMap };
@@ -112,14 +128,13 @@ class SlistAbl {
     if (!dtoIn.pageInfo.pageSize) dtoIn.pageInfo.pageSize = DEFAULTS.pageSize;
     if (!dtoIn.pageInfo.pageIndex) dtoIn.pageInfo.pageIndex = DEFAULTS.pageIndex;
 
-    let list;
+    let daoResult;
     if (dtoIn) {
-
-        list = await this.dao.list(awid, dtoIn.sortBy, dtoIn.order, dtoIn.pageInfo);
+      daoResult = await this.dao.list(awid, dtoIn.sortBy, dtoIn.order, dtoIn.pageInfo);
     }
 
     // prepare and return dtoOut
-    const dtoOut = { ...list,  uuAppErrorMap };
+    const dtoOut = { ...daoResult,  uuAppErrorMap };
     return dtoOut;
   }
 
@@ -129,8 +144,14 @@ class SlistAbl {
     // validation of dtoIn
     const validationResult = this.validator.validate("slistGetDtoInType", dtoIn);
     uuAppErrorMap = ValidationHelper.processValidationResult(
-      dtoIn, validationResult, uuAppErrorMap, Warnings.Create.UnsupportedKeys.code, Errors.Create.InvalidDtoIn
+      dtoIn, validationResult, uuAppErrorMap, Warnings.Get.UnsupportedKeys.code, Errors.Get.InvalidDtoIn
     );
+
+    let daoResult;
+    if (dtoIn) {
+      daoResult = await this.dao.get(awid, dtoIn.id);
+    }
+
 
     // prepare and return dtoOut
     const dtoOut = { ...dtoIn,  uuAppErrorMap };

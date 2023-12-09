@@ -91,7 +91,7 @@ const SlistsTile = createVisualComponent({
   render(props) {
 
 
-    console.log("SLISTS-TILE", props);
+    //console.log("SLISTS-TILE", props);
     //@@viewOn:private
     const { children } = props;
     const[deleteOpen, setDeleteOpen] = useState(false);
@@ -110,8 +110,9 @@ const SlistsTile = createVisualComponent({
 
     //
     function handleDeleteTile(sItem) {
+      console.log("handleDeleteTile",sItem);
       setDeleteOpen(false);
-      props.onDelete(sItem);
+      return({ "id": sItem.data.id });
 
     }
     return  (
@@ -156,7 +157,10 @@ const SlistsTile = createVisualComponent({
           info = {props.data.data.name}
           icon ="uugds-delete"
           actionList={[
-            {children: "Smazat", colorScheme: "negative", significance: "highlighted",  onClick:  () => {handleDeleteTile(props.data)} },
+            {children: "Smazat", colorScheme: "negative", significance: "highlighted",  onClick: async () => {
+              await props.onDelete(handleDeleteTile({...props.data}));
+
+            } },
             {children: "Zrušit", onClick: () => setDeleteOpen(false)  },
           ]}
         />

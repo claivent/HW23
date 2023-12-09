@@ -19,7 +19,7 @@ class InstanceChecker {
    */
   async ensureInstanceAndState(awid, allowedStateRules, authorizationResult, errors, uuAppErrorMap = {}) {
     // HDS 1
-    const slist = await this.ensureInstance(awid, errors, uuAppErrorMap);
+    const result = await this.ensureInstance(awid, errors, uuAppErrorMap);
 
     // HDS 2
     const authorizedProfiles = authorizationResult.getAuthorizedProfiles();
@@ -27,7 +27,7 @@ class InstanceChecker {
     const allowedStates = allowedStateRules[authorizedProfiles[0]];
 
 
-    return slist;
+    return result;
   }
 
   /**

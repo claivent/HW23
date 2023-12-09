@@ -12,14 +12,11 @@ class SlistMongo extends UuObjectDao {
     return await super.insertOne(slist);
   }
 
-  async list(awid, sortBy, order, pageInfo) {
-
-
-    const sort = {
-      [sortBy]: order === "asc" ? 1 : -1,
-    };
-    let lst = await super.find({ awid }, { sort, skip: pageInfo.pageIndex * pageInfo.pageSize, limit: pageInfo.pageSize });
-    return lst;
+  async list(awid, sortBy, order, page) {
+    const pageInfo = page;
+    const sort = { [sortBy]: order === "asc" ? 1 : -1, };
+    const filter = {};
+    return await super.find(filter, pageInfo, sort);
   }
 
   async delete(awid, id) {

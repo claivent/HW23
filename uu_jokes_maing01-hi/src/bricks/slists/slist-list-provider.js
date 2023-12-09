@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createComponent, useDataList, useDataObject, useState } from "uu5g05";
+import { createComponent, useDataList, useDataObject, useEffect, useState } from "uu5g05";
 import { useSubAppData, useSystemData } from "uu_plus4u5g02";
 import Config from "./config/config.js";
 import SlistsListView from "./slists-list-view";
@@ -32,6 +32,10 @@ const SlistsListProvider = createComponent({
     //@@viewOn:private
     const { children } = props;
     const[createOpen, setCreateOpen] = useState(false);
+    const[deleted, setDeleted] = useState(false);
+    const[datalistState, setDatalistState] = useState("");
+    console.log("100deleted",deleted);
+    console.log("110datalistState",datalistState);
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -49,31 +53,45 @@ const SlistsListProvider = createComponent({
     console.log("dataObject", sysDataObject);
     console.log("state", state);*/
 
-    async function handleDelete(data, datalist){
-      console.log(data);
-      await data.handlerMap.delete;
 
-
-
-    }
 
 
     const dataList = useDataList({
       handlerMap: {
-        load: Calls.loadSlistsList,
-        create: Calls.createSlist,
+        load: handleDataListLoad,
+        create: handleDataListCreate,
 
       },
       itemHandlerMap: {
-        delete: Calls.deleteSlist
+        delete: handleDataListDelete
       }
     });
+      console.log("320datalist", dataList);
+     function handleDataListLoad() {
+       console.log("340datalist");
+      return  Calls.loadSlistsList();
+
+    }
+    function handleDataListCreate(data) {
+      console.log("340datalist");
+      return  Calls.createSlist(data);
+
+    }
+    async function handleDataListDelete(data) {
+      console.log("handleDataListDelete",data);
+
+      let result = await Calls.deleteSlist(data);
+      console.log(result)
+      dataList.handlerMap.load();
+      return result;
+
+    }
 
 
 
-      console.log("datalistSetData", dataList.setData);
     //@@viewOn:render
     let result;
+
     switch (dataList.state){
       case "pendingNoData":
         result = <Uu5Elements.Pending size={"max"}/>
@@ -88,8 +106,8 @@ const SlistsListProvider = createComponent({
       default:
 
 
-        result = <SlistsListView data={dataList.data} setData={dataList.setData}  onCreate = {dataList.handlerMap.create}  onDelete = {handleDelete} />
-        console.log("READYFUNCTION", dataList.data);
+        result = <SlistsListView data={dataList.data}  setData={deleted}  onCreate = {dataList.handlerMap.create}  onDelete = {handleDataListDelete} />
+        console.log("400READYFUNCTION", dataList.data);
 
 
         break;

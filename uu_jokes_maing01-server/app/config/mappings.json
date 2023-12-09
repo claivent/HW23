@@ -81,6 +81,31 @@
         "httpMethod": "POST",
         "type": "CMD"
       },
+      "users/createUsersInitData": {
+        "realization": "api/controllers/UsersController.createUsersInitData",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "users/list": {
+        "realization": "api/controllers/UsersController.list",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "users/get": {
+        "realization": "api/controllers/UsersController.get",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "users/update": {
+        "realization": "api/controllers/UsersController.update",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "users/delete": {
+        "realization": "api/controllers/UsersController.delete",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
       "users/create": {
         "realization": "api/controllers/UsersController.create",
         "httpMethod": "POST",

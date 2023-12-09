@@ -70,6 +70,26 @@
         "sysStateList": ["active"],
         "profileList": ["Authorities","Executives"]
       },
+      "users/createUsersInitData": {
+        "sysStateList": ["active"],
+        "profileList": ["Authorities","Executives"]
+      },
+      "users/list": {
+        "sysStateList": ["active"],
+        "profileList": ["Authorities","Executives"]
+      },
+      "users/get": {
+        "sysStateList": ["active"],
+        "profileList": ["Authorities","Executives"]
+      },
+      "users/update": {
+        "sysStateList": ["active"],
+        "profileList": ["Authorities","Executives"]
+      },
+      "users/delete": {
+        "sysStateList": ["active"],
+        "profileList": ["Authorities","Executives"]
+      },
       "users/create": {
         "sysStateList": ["active"],
         "profileList": ["Authorities","Executives"]

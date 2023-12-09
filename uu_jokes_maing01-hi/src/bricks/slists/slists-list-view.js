@@ -8,10 +8,7 @@ import SlistsTile from "./slists-tile";
 import Uu5Tiles from "uu5tilesg02";
 import Uu5TilesControls from "uu5tilesg02-controls";
 
-
 //@@viewOff:imports
-
-
 
 //@@viewOn:constants
 const FILTER_DEFINITION_LIST = [
@@ -64,7 +61,7 @@ const Css = {
       overflow: "hidden",
     }),
 
-  grid: ()=>
+  grid: () =>
     Config.Css.css({
       marginLeft: 3,
       marginRight: 3,
@@ -123,8 +120,6 @@ const SlistsListView = createVisualComponent({
     //@@viewOn:private
     const { children } = props;
 
-
-
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -132,79 +127,82 @@ const SlistsListView = createVisualComponent({
 
     //@@viewOn:render
     const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
-    const[createOpen, setCreateOpen] = useState(false);
-    const [archiveFilterList, setArchiveFilterList] = useState([{key: "archive", value: false}]);
+    const [createOpen, setCreateOpen] = useState(false);
+    const [archiveFilterList, setArchiveFilterList] = useState([{ key: "archive", value: false }]);
 
-
-    function handleCreateSitem(formData){
+    function handleCreateSitem(formData) {
       console.log("submit", formData);
       return (
-      {
-        "name": formData.name,
-          "notes" : formData.notes
-      });
+        {
+          "name": formData.name,
+          "notes": formData.notes
+        });
     }
 
     async function handleOnDelete(data) {
       console.log("deleteview", data);
       await props.data.handlerMap.delete();
     }
-    return  (
+
+    return (
       <>
-      <Uu5Tiles.ControllerProvider
-        data={props.data}
-        filterDefinitionList={FILTER_DEFINITION_LIST}
-        filterList={archiveFilterList}
-        onFilterChange={(e) => {setArchiveFilterList (e.data.filterList)}}
-      >
-
-        <Uu5Elements.Block className={Css.main()}
-                           header={
-                             <Uu5Elements.Header
-                               title="Nákupní seznamy"
-                               subtitle="Pro vás"
-                               icon="uugds-favorites"
-                               // onIconClick={() => alert("click")}
-                             />  }
-
-          actionList={[
-            {component: <Uu5TilesControls.FilterButton type="bar"  /> },
-            {icon: "uugdsstencil-uiaction-plus-circle-solid", children: "vytvořit", onClick: ()=> setCreateOpen(true)}
-          ]}
+        <Uu5Tiles.ControllerProvider
+          data={props.data}
+          filterDefinitionList={FILTER_DEFINITION_LIST}
+          filterList={archiveFilterList}
+          onFilterChange={(e) => {
+            setArchiveFilterList(e.data.filterList)
+          }}
         >
 
-          <Uu5TilesControls.FilterBar initialExpanded={true} displayManagerButton={false} displayClearButton={false}/>
-          <Uu5TilesControls.FilterManagerModal />
-              <Uu5TilesElements.Grid
-               /* data={props.data}*/
-                tileMinWidth = {300}
-                tileMaxWidth = {400}
-              >
+          <Uu5Elements.Block className={Css.main()}
+                             header={
+                               <Uu5Elements.Header
+                                 title="Nákupní seznamy"
+                                 subtitle="Pro vás"
+                                 icon="uugds-favorites"
+                                 // onIconClick={() => alert("click")}
+                               />}
 
-                    <SlistsTile  onDelete={props.onDelete} />
+                             actionList={[
+                               { component: <Uu5TilesControls.FilterButton type="bar"/> },
+                               { icon: "uugdsstencil-uiaction-plus-circle-solid", children: "vytvořit", onClick: () => setCreateOpen(true) }
+                             ]}
+          >
+
+            <Uu5TilesControls.FilterBar initialExpanded={true} displayManagerButton={false} displayClearButton={false}/>
+            <Uu5TilesControls.FilterManagerModal/>
+            <Uu5TilesElements.Grid
+              /* data={props.data}*/
+              tileMinWidth={300}
+              tileMaxWidth={400}
+            >
+
+              <SlistsTile onDelete={props.onDelete}/>
 
 
-              </Uu5TilesElements.Grid>
+            </Uu5TilesElements.Grid>
 
 
-
-          <Uu5Forms.Form.Provider key={createOpen} onSubmit={async (e) => {
-            await props.onCreate(handleCreateSitem({...e.data.value}));
-            setCreateOpen (false);
-            console.log("submit", e.data);
-          }}>
-            <Uu5Elements.Modal open={createOpen} onClose={() => {setCreateOpen(false)}} header={"Vytvořit seznam"} footer={<Uu5Forms.SubmitButton/>}>
-              <Uu5Forms.Form.View gridLayout={{xs:"name, notes", s:"name notes"}}>
-                <Uu5Forms.FormText name={"name"} label = "Name" required minLength={3} maxLength={100}/>
-                <Uu5Forms.FormText name={"notes"} label = "Notes" minLength={3} maxLength={4000} />
-              </Uu5Forms.Form.View>
-            </Uu5Elements.Modal>
-          </Uu5Forms.Form.Provider>
-        </Uu5Elements.Block>
-      </Uu5Tiles.ControllerProvider>
+            <Uu5Forms.Form.Provider key={createOpen} onSubmit={async (e) => {
+              await props.onCreate(handleCreateSitem({ ...e.data.value }));
+              setCreateOpen(false);
+              console.log("submit", e.data);
+            }}>
+              <Uu5Elements.Modal open={createOpen} onClose={() => {
+                setCreateOpen(false)
+              }} header={"Vytvořit seznam"} footer={<Uu5Forms.SubmitButton/>}>
+                <Uu5Forms.Form.View gridLayout={{ xs: "name, notes", s: "name notes" }}>
+                  <Uu5Forms.FormText name={"name"} label="Name" required minLength={3} maxLength={100}/>
+                  <Uu5Forms.FormText name={"notes"} label="Notes" minLength={3} maxLength={4000}/>
+                </Uu5Forms.Form.View>
+              </Uu5Elements.Modal>
+            </Uu5Forms.Form.Provider>
+          </Uu5Elements.Block>
+        </Uu5Tiles.ControllerProvider>
 
       </>
-    ) ;
+    );
     //@@viewOff:render
   },
 });

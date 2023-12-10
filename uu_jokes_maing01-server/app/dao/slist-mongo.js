@@ -33,6 +33,7 @@ class SlistMongo extends UuObjectDao {
 
   async delete(awid, id) {
     return await super.deleteOne({awid, id});
+
   }
 
   async update(uuObject, id) {

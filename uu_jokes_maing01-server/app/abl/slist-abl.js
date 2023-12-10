@@ -81,6 +81,27 @@ class SlistAbl {
     // check if document exist and  user can modify document
 
 
+    let userResult = await this.dao.get(awid, dtoIn.id);
+    if(!userResult) {
+      throw new Errors.Update.DocumentNotExist(uuAppErrorMap, { Document_Id: dtoIn.id });
+    }
+
+    const sesId = authorizationResult
+    const userId = sesId['_uuIdentity'];
+
+    const owner = userResult.owner_id === userId;
+    const member = userResult.members.includes(userId);
+    const privateAttributes = ["owner_id", "isArchived"];  //members not allow change this attribut
+
+    if(!owner && !member){
+      throw new Errors.Update.UserNotAuthorizedEdit(uuAppErrorMap, { user_Id: userId });
+    }
+    for (const attribute of privateAttributes) {
+      if (attribute in privateAttributes && !owner) {
+        throw new Errors.Update.NotEditPrivateAttributes(uuAppErrorMap, {user_Id: userId});
+      }
+    }
+
     // prepare and return dtoOut
     let daoResult;
     const uuObject = {...dtoIn};
@@ -109,21 +130,35 @@ class SlistAbl {
       dtoIn, validationResult, uuAppErrorMap, Warnings.Create.UnsupportedKeys.code, Errors.Create.InvalidDtoIn
     );
 
-    const slist = await this.dao.delete(awid, dtoIn.id);
-    console.log("dtoIn.id", dtoIn.id);
-    if (!slist) {
-      throw new Errors.Delete.SlistDoesNotExist({ uuAppErrorMap }, { slistID: dtoIn.id });
+
+      let userResult = await this.dao.get(awid, dtoIn.id);
+      if(!userResult) {
+        throw new Errors.Delete.DocumentNotExist(uuAppErrorMap, { Document_Id: dtoIn.id });
+      }
+
+      const sesId = authorizationResult
+      const userId = sesId['_uuIdentity'];
+
+      const owner = userResult.owner_id === userId;
+
+      if(!owner ){
+        throw new Errors.Delete.UserNotAuthorizedEdit(uuAppErrorMap, { user_Id: userId });
+      }
 
 
-    await this.dao.delete(awid, dtoIn.id);
 
 
+      let daoResult;
+      if (dtoIn) {
+        daoResult = await this.dao.delete(awid, dtoIn.id);
+      }
 
-    // prepare and return dtoOut
-    const dtoOut = { ...dtoIn,  uuAppErrorMap };
-    return dtoOut;
+
+      // prepare and return dtoOut
+      const dtoOut = { ...daoResult,  uuAppErrorMap };
+      return dtoOut;
   }
-  }
+
 
 
 
@@ -168,6 +203,9 @@ class SlistAbl {
     if (dtoIn) {
       daoResult = await this.dao.list(awid, filter, dtoIn.sortBy, dtoIn.order, dtoIn.pageInfo);
     }
+    if(!daoResult) {
+      throw new Errors.List.DocumentNotExist(uuAppErrorMap, { Document_Id: dtoIn.id });
+    }
 
     // prepare and return dtoOut
     const dtoOut = { ...daoResult,  uuAppErrorMap };
@@ -189,6 +227,9 @@ class SlistAbl {
     let daoResult;
     if (dtoIn) {
       daoResult = await this.dao.get(awid, dtoIn.id);
+    }
+    if(!daoResult) {
+      throw new Errors.Get.DocumentNotExist(uuAppErrorMap, { Document_Id: dtoIn.id });
     }
 
 

@@ -29,27 +29,28 @@ const Create = {
 const Get = {
   UC_CODE: `${JokesMainUseCaseError.ERROR_PREFIX}slist/get/`,
 
-  SlistDoesNotExist: class extends JokesMainUseCaseError {     //TODO 4. domácí úkol plná implementace
-    constructor() {
-      super(...arguments);
-      this.code = `${Create.UC_CODE}SlistDoesNotExist`;
-      this.message = "UuObject slist does not exist.";
-    }
-  },
+
   InvalidDtoIn: class extends JokesMainUseCaseError {
     constructor() {
       super(...arguments);
       this.code = `${Create.UC_CODE}invalidDtoIn`;
       this.message = "DtoIn is not valid.";
     }
-  }
+  },
+
+  DocumentNotExist: class extends JokesMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Create.UC_CODE}documentNotExist`;
+      this.message = "Document is no more in Database";
+    }
+  },
 
 
 };
 
 const List = {
   UC_CODE: `${JokesMainUseCaseError.ERROR_PREFIX}slist/list/`,
-
   InvalidDtoIn: class extends JokesMainUseCaseError {
     constructor() {
       super(...arguments);
@@ -58,11 +59,12 @@ const List = {
     }
   },
 
-  SlistDoesNotExist: class extends JokesMainUseCaseError {     //TODO 4. domácí úkol plná implementace
+
+  DocumentNotExist: class extends JokesMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Create.UC_CODE}SlistDoesNotExist`;
-      this.message = "UuObject slist does not exist.";
+      this.code = `${Create.UC_CODE}documentNotExist`;
+      this.message = "Document is no more in Database";
     }
   },
 
@@ -86,13 +88,22 @@ const Delete = {
     }
   },
 
-  SlistDoesNotExist: class extends JokesMainUseCaseError {
-  constructor() {
-    super(...arguments);
-    this.code = `${Create.UC_CODE}SlistDoesNotExist`;
-    this.message = "UuObject slist does not exist.";
-  }
-}
+  DocumentNotExist: class extends JokesMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Create.UC_CODE}documentNotExist`;
+      this.message = "Document is no more in Database";
+    }
+  },
+
+
+  UserNotAuthorizedEdit: class extends JokesMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Create.UC_CODE}userNotAuthorizedEdit`;
+      this.message = "You are not member or owner of this document";
+    }
+  },
 };
 
 const Update = {
@@ -105,21 +116,41 @@ const Update = {
       this.message = "DtoIn is not valid.";
     }
   },
-  UserNotAuthorized: class extends JokesMainUseCaseError {
+
+  SlistDaoCreateFailed: class extends JokesMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Delete.UC_CODE}userNotAuthorized`;
-      this.message = "User not authorized.";
+      this.code = `${Create.UC_CODE}SlistDaoCreateFailed`;
+      this.message = "Create slist by slist DAO create failed.";
+      this.status = 400;
     }
   },
 
-  SlistDoesNotExist: class extends JokesMainUseCaseError {     //TODO 4. domácí úkol plná implementace
+  DocumentNotExist: class extends JokesMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Create.UC_CODE}SlistDoesNotExist`;
-      this.message = "UuObject slist does not exist.";
+      this.code = `${Create.UC_CODE}documentNotExist`;
+      this.message = "Document is no more in Database";
     }
-  }
+  },
+
+
+  UserNotAuthorizedEdit: class extends JokesMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Create.UC_CODE}userNotAuthorizedEdit`;
+      this.message = "You are not member or owner of this document";
+    }
+  },
+
+  NotEditPrivateAttributes: class extends JokesMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Create.UC_CODE}notEditPrivateAttributes`;
+      this.message = "You can not edit private attributes";
+    }
+  },
+
 
 };
 

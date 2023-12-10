@@ -1,8 +1,9 @@
 //@@viewOn:imports
-import { createVisualComponent, useContext, useDataList, useState, Utils } from "uu5g05";
+import {createVisualComponent, Lsi, useContext, useDataList, useRoute, useState, Utils} from "uu5g05";
 import Config from "./config/config.js";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Uu5Elements from "uu5g05-elements";
+import importLsi from "../../lsi/import-lsi";
 
 //@@viewOff:imports
 
@@ -12,7 +13,6 @@ import Uu5Elements from "uu5g05-elements";
 //@@viewOn:css
 const Css = {
   main: () => Config.Css.css({}),
-
 
   header: () =>
     Config.Css.css({
@@ -47,30 +47,18 @@ const Css = {
     return Config.Css.css(style);
   },
 
+  display: (display) =>{
+    const style = display === false ? {display: "none"}: {display: "block"}
+    return Config.Css.css(style);
+  },
+
 };
 //@@viewOff:css
 
 //@@viewOn:helpers
 //@@viewOff:helpers
 
-/*//testování autorizace
-const slistsDataObject = useSlists();
-const {sysData} = slistsDataObject.data;
-const profileList =  sysData.profileData.uuIdentityProfileList;
-const uuIdentity = sysData.profileData.uuIdentity;
 
-function hasManagePermission(owner_id, uuIdentity, profileList) {
-  const isAuthority = profileList.includes("Authorities");
-  const isExecutive = profileList.includes("Executives");
-  const isOwner = owner_id ===  uuIdentity;
-  return isAuthority || (isExecutive && isOwner);
-}
-
-function  handleCanDelete(owner_id){
-  const auth = hasManagePermission(owner_id, uuIdentity, profileList)
-  console.log(auth);
-  return auth;
-}*/
 
 const SlistsTile = createVisualComponent({
   //@@viewOn:statics
@@ -91,10 +79,13 @@ const SlistsTile = createVisualComponent({
   render(props) {
 
 
-    //console.log("SLISTS-TILE", props);
+    console.log("SLISTS-TILE", props);
+    console.log("archive", props.data.data.isArchived);
     //@@viewOn:private
     const { children } = props;
     const[deleteOpen, setDeleteOpen] = useState(false);
+
+    const [, setRoute] = useRoute();
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -113,8 +104,14 @@ const SlistsTile = createVisualComponent({
       console.log("handleDeleteTile",sItem);
       setDeleteOpen(false);
       return({ "id": sItem.data.id });
-
     }
+    function handleIsArchived(sItem) {
+      console.log("handleIsArchived",sItem);
+
+      return({ "id": sItem.data.id, isArchived: !props.data.data.isArchived });
+    }
+
+
     return  (
       <>
 
@@ -129,7 +126,17 @@ const SlistsTile = createVisualComponent({
 
                                 />  }
 
-        actionList={[{icon: "uugds-close", children: "Smazat", onClick: () => setDeleteOpen(true) }]}
+        actionList={[
+          { icon: "uugds-pencil", children: <Lsi import={importLsi} path={["Menu", "slist"]} />, onClick: () => setRoute("slist", { listName: props.data.data.id }) },
+          {
+          icon: "uugds-close", children: "Smazat", onClick: () => setDeleteOpen(true) },
+          {icon: "uugdsstencil-uiaction-archive", children: "Archivovat", onClick: async () => {
+            await props.onUpdates(handleIsArchived({...props.data}));}
+          }
+
+
+        ]}
+
       >
         <div>
         <Uu5Elements.Text {...titleStyles} >
@@ -145,10 +152,15 @@ const SlistsTile = createVisualComponent({
         </Uu5Elements.Text>
       </div>
         <div className={Css.italic()}>
-        <Uu5Elements.Text{...textStyles("content")}  >
-          {"Členové: "}({/*props.data.data.members.join(", ")*/})
-        </Uu5Elements.Text>
+          <Uu5Elements.Text{...textStyles("content")}  >
+            {"Členové: "}({props.data.data.members.join(", ")})
+          </Uu5Elements.Text>
         </div>
+          <div >
+            <Uu5Elements.Text className={Css.display(props.data.data.isArchived)}  >
+              {"Archived "}{props.data.data.isArchived}
+            </Uu5Elements.Text>
+          </div>
       </Uu5TilesElements.Tile>
         <Uu5Elements.Dialog
           open={deleteOpen}

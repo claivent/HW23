@@ -2,9 +2,11 @@
 import { createComponent, useDataList, useDataObject, useEffect, useState } from "uu5g05";
 import { useSubAppData, useSystemData } from "uu_plus4u5g02";
 import Config from "./config/config.js";
-import SlistsListView from "./slists-list-view";
+
+
 import Uu5Elements from "uu5g05-elements";
 import Calls from "calls";
+import MainBox from "./main-box";
 
 //@@viewOff:imports
 
@@ -14,9 +16,9 @@ import Calls from "calls";
 //@@viewOn:helpers
 //@@viewOff:helpers
 
-const SlistsListProvider = createComponent({
+const SItemListProvider = createComponent({
   //@@viewOn:statics
-  uu5Tag: Config.TAG + "SlistsListProvider",
+  uu5Tag: Config.TAG + "SItemListProvider",
   //@@viewOff:statics
 
   //@@viewOn:propTypes
@@ -28,7 +30,7 @@ const SlistsListProvider = createComponent({
   //@@viewOff:defaultProps
 
   render(props) {
-    console.log("SLISTS-PROVIDER", props);
+    console.log("SITEMS-PROVIDER", props);
     //@@viewOn:private
     const { children } = props;
     const[createOpen, setCreateOpen] = useState(false);
@@ -66,15 +68,15 @@ const SlistsListProvider = createComponent({
         delete: handleDataListDelete,
         isArchive: handleUpdate
       }
-
     });
-    console.log("datalist", dataList);
-
+      console.log("320datalist", dataList);
      function handleDataListLoad() {
        console.log("340datalist");
       return  Calls.loadSlistsList();
 
     }
+
+    console.log("datalist", dataList);
     function handleDataListCreate(data) {
       console.log("340datalist");
       return  Calls.createSlist(data);
@@ -118,7 +120,7 @@ const SlistsListProvider = createComponent({
       default:
 
 
-        result = <SlistsListView
+        result = <MainBox
           data={dataList.data}
           setData={deleted}
           onCreate = {dataList.handlerMap.create}
@@ -139,6 +141,6 @@ const SlistsListProvider = createComponent({
 });
 
 //@@viewOn:exports
-export { SlistsListProvider };
-export default SlistsListProvider;
+export { SItemListProvider };
+export default SItemListProvider;
 //@@viewOff:exports

@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, useState, useSession , useScreenSize} from "uu5g05";
+import {createVisualComponent, Utils, useState, useSession, useScreenSize, useDataList, useRoute} from "uu5g05";
 import { RouteController } from "uu_plus4u5g02-app";
 import Uu5Elements from "uu5g05-elements";
 import Config from "./config/config.js";
@@ -8,6 +8,8 @@ import SItems from "./s-items";
 import Footbar from "./footbar";
 import Uu5Forms from "uu5g05-forms";
 import {useSubAppData, useSystemData} from "uu_plus4u5g02";
+import SlistsListProvider from "../slists/slist-list-provider";
+
 
 
 
@@ -63,15 +65,36 @@ const MainBox = createVisualComponent({
   //@@viewOff:defaultProps
 
   render(props) {
+
+
+
     //@@viewOn:private
     const { children } = props;
     const [checked, setChecked] = useState(false);
-    const [products, setProducts] = useState(props.initialProducts);
-    const [list, setList] = useState(props.initialList)
+    const [products, setProducts] = useState();
+    const [list, setList] = useState()
     const[modalOpen, setModalOpen] = useState([false, 0]);
 
+    if (!list) {
 
-    //@@viewOff:private
+      const [route, setRoute] = useRoute();
+      const {listName} = route.params;
+      console.log("listName", listName)
+      console.log("props", props);
+      //@@viewOff:private
+
+      let i = 0;
+      let oneList = 0;
+      props.data.map((data) => {
+        if (listName === data.data.id) oneList = i;
+          i++;     });
+
+      oneList = props.data[oneList].data;
+      console.log("oneList", oneList);
+      setList(oneList);
+      setProducts(oneList.shoppingItems);
+    }
+
 
 
     function  handleSubmit(e){
@@ -113,9 +136,10 @@ const MainBox = createVisualComponent({
     const [screenSize] = useScreenSize();
     return  (
       <div  className={Css2.container(screenSize)}>
+
       <Uu5Elements.Block
 
-        header={list.name}
+        header={"list.name"} //TODO
         headerType="title"
         actionList={[{icon: "uugds-pencil", onClick: ()=> setModalOpen([true, 0])   }]} //TODO modal
       >
@@ -176,7 +200,7 @@ const MainBox = createVisualComponent({
                 </div>
               }
             >
-              <Uu5Forms.FormText initialValue={list.name} name="name" label = "Změn jméno"/>
+              <Uu5Forms.FormText initialValue={"list.name"} name="name" label = "Změn jméno"/>
 
             </Uu5Elements.Modal>
             </Uu5Forms.Form.Provider>
@@ -190,6 +214,7 @@ const MainBox = createVisualComponent({
         </Uu5Elements.Block>
 
   </Uu5Elements.Block>
+
       </div>
     )
     //@@viewOff:render

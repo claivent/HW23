@@ -38,6 +38,12 @@ const Calls = {
     return Calls.call("get", commandUri, dtoIn);
   },
 
+  updateSlist(dtoIn){
+    console.log("Calls update", dtoIn);
+    const commandUri = Calls.getCommandUri("slist/update");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
   loadMokSys(dtoIn){
     const commandUri = Calls.getCommandUri("slist/mokSys");
     return Calls.call("get", commandUri), dtoIn;

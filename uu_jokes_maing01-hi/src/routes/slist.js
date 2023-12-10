@@ -6,6 +6,7 @@ import Tree from "../bricks/help/tree";
 import RouteBar from "../core/route-bar.js";
 import MainBox from "../bricks/slist/main-box";
 import importLsi from "../lsi/import-lsi.js";
+import SItemListProvider from "../bricks/slist/sItem-list-provider";
 
 
 
@@ -79,7 +80,11 @@ let Slist = createVisualComponent({
       <div {...attrs}>
 
           <RouteBar />
-          <MainBox initialProducts={PRODUCTS} initialList={SHOPPING_LISTS[0]} />;
+          <SItemListProvider>
+
+            <MainBox initialProducts={PRODUCTS} initialList={SHOPPING_LISTS[0]} />;
+          </SItemListProvider>
+
 
 
 

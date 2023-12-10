@@ -16,11 +16,11 @@ const FILTER_DEFINITION_LIST = [
     key: "archive",
     label: "Pouze Archivované",
     filter: (item, value) => {
-      // console.log("Archiveitem",item,"value", value);
+      console.log("Archiveitem",item,"value", value);
       if (value) {
-        let itemValue = typeof item.data.archive === "object" ? Utils.Language.getItem(item.data.archive) : item.data.archive;
-        // console.log("archiveItemValue",itemValue);
-        return item.data.archive === true;
+        let itemValue = typeof item.data.isArchived === "object" ? Utils.Language.getItem(item.data.isArchived) : item.data.isArchived;
+         console.log("archiveItemValue",itemValue);
+        return item.data.isArchived === true;
       }
       return true;
     },
@@ -178,7 +178,10 @@ const SlistsListView = createVisualComponent({
               tileMaxWidth={400}
             >
 
-              <SlistsTile onDelete={props.onDelete}/>
+              <SlistsTile
+                onDelete={props.onDelete}
+                onUpdates={props.onUpdates}
+              />
 
 
             </Uu5TilesElements.Grid>

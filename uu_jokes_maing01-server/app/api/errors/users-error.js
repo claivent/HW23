@@ -22,7 +22,7 @@ const CreateUsersInitData = {
       this.status = 400;
     }
   },
-  UsersListDoesNotExist: class extends JokesMainUseCaseError {     //TODO 4. domácí úkol plná implementace
+  UsersListDoesNotExist: class extends JokesMainUseCaseError {
     constructor() {
       super(...arguments);
       this.code = `${CreateUsersInitData.UC_CODE}UsersDoesNotExist`;
@@ -47,7 +47,7 @@ const List = {
   UsersDoesNotExist: class extends JokesMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Create.UC_CODE}UsersDoesNotExist`;
+      this.code = `${List.UC_CODE}UsersDoesNotExist`;
       this.message = "UuObject Users does not exist.";
     }
   },
@@ -56,6 +56,21 @@ const List = {
 const Get = {
   UC_CODE: `${USERS_ERROR_PREFIX}get/`,
 
+  InvalidDtoIn: class extends JokesMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}invalidDtoIn`;
+      this.message = "DtoIn is not valid.";
+    }
+  },
+
+  UserDoesNotExist: class extends JokesMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}UsersDoesNotExist`;
+      this.message = "UuObject Users does not exist.";
+    }
+  }
 };
 
 const Update = {
@@ -70,6 +85,21 @@ const Delete = {
 
 const Create = {
   UC_CODE: `${USERS_ERROR_PREFIX}create/`,
+  InvalidDtoIn: class extends JokesMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Create.UC_CODE}invalidDtoIn`;
+      this.message = "DtoIn is not valid.";
+    }
+  },
+  UsersDaoCreateFailed: class extends JokesMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Create.UC_CODE}UsersDaoCreateFailed`;
+      this.message = "Create users by users DAO create failed.";
+      this.status = 400;
+    }
+  },
 
 };
 

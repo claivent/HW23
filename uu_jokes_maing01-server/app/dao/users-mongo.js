@@ -16,24 +16,7 @@ class UsersMongo extends UuObjectDao {
     return await super.insertOne(uuObject);
   }
 
- /* async get(awid, _uuIdentity) {
-    let result = {};
-    let filter = {
 
-      _uuIdentity: _uuIdentity,
-    };
-    result = await super.findOne(filter, (err, documents, output) => {
-      if (err) return ((output) => (output('Error getting user:')));
-      if (documents.length === 0) return 'User not found'; else return 'User found';
-
-    });
-    return result;
-  }*/
-
-
-  async get(awid, id) {
-    return await super.findOne({ id, awid });
-  }
 
   async update(uuObject) {
     let result;
@@ -41,20 +24,24 @@ class UsersMongo extends UuObjectDao {
 
       _uuIdentity: uuObject._uuIdentity,
     };
-    result = await super.findOneAndUpdate(filter, uuObject, (err, output) => {
-      if (err) return ((output) => (output('Error updating user:')));
-
-    });
+    result = await super.findOneAndUpdate(filter, uuObject );
+    /*(err, output) => {      if (err) return ((output) => (output('Error updating user:')    });*/
     return result;
 
   }
 
   async list(awid,sortBy, order, page) {
-    const pageInfo = page;
-    const sort = { [sortBy]: order === "asc" ? 1 : -1, };
     const filter = {};
-    return await super.find(filter, pageInfo, sort);
+    const pageInfo = {...page }     ;
+    const sort = { [sortBy]: order === "asc" ? 1 : -1, };
+    const projection ={};
+    return await super.find(filter, pageInfo, sort, projection);
   }
+
+  async get(awid, _uuIdentity) {
+    return await super.findOne({ _uuIdentity, awid });
+  }
+
 }
 
 module.exports = UsersMongo;

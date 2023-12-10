@@ -1,10 +1,9 @@
 "use strict";
 const Path = require("path");
 const { Validator } = require("uu_appg01_server").Validation;
-const { DaoFactory } = require("uu_appg01_server").ObjectStore;
+const { DaoFactory, ObjectStoreError } = require("uu_appg01_server").ObjectStore;
 const { ValidationHelper } = require("uu_appg01_server").AppServer;
 const Errors = require("../api/errors/users-error.js");
-const InstanceChecker = require("../component/instance-checker");
 const Warnings = require("../api/warnings/users-warnings");
 const { Profiles, Schemas, Slists } = require("./constants");
 
@@ -41,7 +40,7 @@ class UsersAbl {
     return dtoOut;
   }
 
-  async get(awid, dtoIn, session, authorizationResult) {
+  async get(awid, dtoIn,  session, authorizationResult) {
     let uuAppErrorMap = {};
 
     // validation of dtoIn
@@ -52,7 +51,11 @@ class UsersAbl {
 
     let daoResult;
     if (dtoIn) {
-      daoResult = await this.dao.get(awid, dtoIn.id);
+      daoResult = await this.dao.get(awid, dtoIn._uuIdentity);
+      if(!daoResult) {
+        const dtoOut = { daoResult };
+        return dtoOut;
+      }
     }
 
     // prepare and return dtoOut
@@ -61,16 +64,78 @@ class UsersAbl {
   }
 
 
+  async create(awid, dtoIn, session, authorizationResult) {
+      let uuAppErrorMap = {};
 
-  async create(awid, dtoIn) {
+      // validation of dtoIn
+      const validationResult = this.validator.validate("usersCreateDtoInType", dtoIn);
+      uuAppErrorMap = ValidationHelper.processValidationResult(
+        dtoIn, validationResult, uuAppErrorMap, Warnings.Create.UnsupportedKeys.code, Errors.Create.InvalidDtoIn
+      );
+
+      const owner_id = session.getIdentity().getUuIdentity();
+
+      //check if user exists in db. if so update his/her information otherwise create new user it can be used as members
+      let user;
+      try {
+        user =  await this.get( awid, {_uuIdentity: owner_id},  session, authorizationResult);
+        console.log("result",user);
+      } catch (e) {
+        if (e instanceof ObjectStoreError) {
+          const dtoOut = { user };
+          return dtoOut;
+        }
+        throw e;
+      }
+
+      if(user.daoResult !== null) { await this.dao.update(session.getIdentity()); }
+      else
+      {await this.dao.create(session.getIdentity())}
+
+      // prepare and return dtoOut
+      const dtoOut = { ...user,  uuAppErrorMap };
+         console.log("result",dtoOut);
+      return dtoOut;
+
+    }
+
+
+  async update(awid, dtoIn, session, authorizationResult) {
+    let uuAppErrorMap = {};
+
+    // validation of dtoIn
+    const validationResult = this.validator.validate("usersupdateDtoInType", dtoIn);
+    uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn, validationResult, uuAppErrorMap, Warnings.update.UnsupportedKeys.code, Errors.update.InvalidDtoIn
+    );
+
+    const owner_id = session.getIdentity().getUuIdentity();
+
+    //check if user exists in db. if so update his/her information otherwise update new user it can be used as members
+    let user;
+    try {
+      user =  await this.get( awid, {_uuIdentity: owner_id},  session, authorizationResult);
+      console.log("result",user);
+    } catch (e) {
+      if (e instanceof ObjectStoreError) {
+        const dtoOut = { user };
+        return dtoOut;
+      }
+      throw e;
+    }
+
+    if(user.daoResult !== null) { await this.dao.update(session.getIdentity()); }
+    else
+    {await this.dao.update(session.getIdentity())}
+
+    // prepare and return dtoOut
+    const dtoOut = { ...user,  uuAppErrorMap };
+    console.log("result",dtoOut);
+    return dtoOut;
 
   }
 
-  async update(awid, dtoIn) {
-
-  }
-
-  async delete(awid, dtoIn) {
+  async delete(awid, dtoIn, session, authorizationResult) {
 
   }
 

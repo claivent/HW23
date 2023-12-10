@@ -2,7 +2,14 @@
 
 const usersInitDtoInType = shape({});
 const usersListDtoInType = shape({});
-const usersGetDtoInType = shape({ id: id().isRequired() });
-const usersCreateDtoInType = shape({});
-const usersUpdateDtoInType = shape({});
+const usersGetDtoInType = shape({
+  _uuIdentity: uuIdentity()
+});
+const usersCreateDtoInType = shape({
+  _uuIdentity: uuIdentity(),
+});
+const usersUpdateDtoInType = shape({
+  _uuIdentity: uuIdentity(),
+});
+
 const usersDeleteDtoInType = shape({});

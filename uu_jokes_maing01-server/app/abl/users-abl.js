@@ -53,13 +53,15 @@ class UsersAbl {
     if (dtoIn) {
       daoResult = await this.dao.get(awid, dtoIn._uuIdentity);
       if(!daoResult) {
-        const dtoOut = { daoResult };
+        /*throw new Errors.Get.UserDoesNotExist(uuAppErrorMap, { userID: dtoIn._uuIdentity });*/
+        uuAppErrorMap = { Warnings: "User  is not in db"};
+        const dtoOut = { daoResult, uuAppErrorMap };
         return dtoOut;
       }
     }
 
     // prepare and return dtoOut
-    const dtoOut = { ...daoResult,  uuAppErrorMap };
+    const dtoOut = { daoResult,  uuAppErrorMap };
     return dtoOut;
   }
 
@@ -87,13 +89,18 @@ class UsersAbl {
         }
         throw e;
       }
-
-      if(user.daoResult !== null) { await this.dao.update(session.getIdentity()); }
+      let result={ message:"",output:""}
+      if(user.daoResult !== null) {
+        result.message = "User is in Db. User is updated" ;
+        result.output =  await this.dao.update(session.getIdentity()); }
       else
-      {await this.dao.create(session.getIdentity())}
+      {
+        result.message = "User is not in Db. User is created" ;
+        result.output = await this.dao.create(session.getIdentity())
+      }
 
       // prepare and return dtoOut
-      const dtoOut = { ...user,  uuAppErrorMap };
+      const dtoOut = { ...user, ...result,  uuAppErrorMap };
          console.log("result",dtoOut);
       return dtoOut;
 
@@ -104,9 +111,9 @@ class UsersAbl {
     let uuAppErrorMap = {};
 
     // validation of dtoIn
-    const validationResult = this.validator.validate("usersupdateDtoInType", dtoIn);
+    const validationResult = this.validator.validate("usersUpdateDtoInType", dtoIn);
     uuAppErrorMap = ValidationHelper.processValidationResult(
-      dtoIn, validationResult, uuAppErrorMap, Warnings.update.UnsupportedKeys.code, Errors.update.InvalidDtoIn
+      dtoIn, validationResult, uuAppErrorMap, Warnings.Update.UnsupportedKeys.code, Errors.Update.InvalidDtoIn
     );
 
     const owner_id = session.getIdentity().getUuIdentity();

@@ -21,11 +21,12 @@ class UsersMongo extends UuObjectDao {
   async update(uuObject) {
     let result;
     let filter = {
-
       _uuIdentity: uuObject._uuIdentity,
     };
-    result = await super.findOneAndUpdate(filter, uuObject );
+    let revisionStrategy = "REVISION";
+    result = await super.findOneAndUpdate(filter, uuObject, "NONE" );
     /*(err, output) => {      if (err) return ((output) => (output('Error updating user:')    });*/
+
     return result;
 
   }
@@ -39,7 +40,12 @@ class UsersMongo extends UuObjectDao {
   }
 
   async get(awid, _uuIdentity) {
-    return await super.findOne({ _uuIdentity, awid });
+    let filter={_uuIdentity:_uuIdentity}
+    let projection = {};
+    let sort = {};
+    let result;
+    result = await super.findOne(filter, projection, sort );
+    return result;
   }
 
 }

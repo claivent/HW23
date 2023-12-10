@@ -9,7 +9,7 @@ const usersCreateDtoInType = shape({
   _uuIdentity: uuIdentity(),
 });
 const usersUpdateDtoInType = shape({
-  _uuIdentity: uuIdentity(),
+  _uuIdentity: uuIdentity()
 });
 
 const usersDeleteDtoInType = shape({});

@@ -8,6 +8,18 @@ const Warnings = {
     UnsupportedKeys: { code: `${Errors.Get.UC_CODE}unsupportedKeys`, },
   },
 
+  List: {
+    UnsupportedKeys: { code: `${Errors.Get.UC_CODE}unsupportedKeys`, },
+  },
+
+  Delete: {
+    UnsupportedKeys: { code: `${Errors.Get.UC_CODE}unsupportedKeys`, },
+  },
+
+  Update: {
+    UnsupportedKeys: { code: `${Errors.Get.UC_CODE}unsupportedKeys`, },
+  },
+
 
 };
 

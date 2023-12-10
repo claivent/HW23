@@ -9,6 +9,7 @@ const Warnings = {
   },
   Get: {
     UnsupportedKeys: { code: `${Errors.Get.UC_CODE}unsupportedKeys`, },
+    UserIsNotInDb: { code: `${Errors.Get.UC_CODE}userisnotindb`, },
   },
   Create: {
     UnsupportedKeys: { code: `${Errors.Create.UC_CODE}unsupportedKeys`, },

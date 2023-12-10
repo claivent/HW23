@@ -13,14 +13,13 @@ const { Profiles, Schemas } = require("../abl/constants");
 
 let UsersAbl = require("./users-abl.js");
 
+
 class SlistAbl {
 
   constructor() {
     this.validator = Validator.load();
     this.dao = DaoFactory.getDao(Schemas.SLIST);
     this.dao2 = DaoFactory.getDao(Schemas.USERS);
-
-
 
   }
   async create(awid, dtoIn, session, authorizationResult) {
@@ -68,18 +67,39 @@ class SlistAbl {
     return dtoOut;
 
   }
+
+
+
   async update(awid, dtoIn, session, authorizationResult) {
     let uuAppErrorMap = {};
     // validation of dtoIn
     const validationResult = this.validator.validate("slistUpdateDtoInType", dtoIn);
     uuAppErrorMap = ValidationHelper.processValidationResult(
-      dtoIn, validationResult, uuAppErrorMap, Warnings.Create.UnsupportedKeys.code, Errors.Create.InvalidDtoIn
+      dtoIn, validationResult, uuAppErrorMap,  Warnings.Update.UnsupportedKeys.code, Errors.Update.InvalidDtoIn
     );
 
+    // check if document exist and  user can modify document
+
+
     // prepare and return dtoOut
-    const dtoOut = { ...dtoIn,  uuAppErrorMap };
+    let daoResult;
+    const uuObject = {...dtoIn};
+    const id = uuObject.id;
+    delete uuObject.id;
+    /*Try change is archived*/
+    /*uuObject.isArchived = false;*/
+    if (dtoIn) {
+      daoResult = await this.dao.update(uuObject, id);
+    }
+
+    // prepare and return dtoOut
+    const dtoOut = { ...daoResult,  uuAppErrorMap };
     return dtoOut;
   }
+
+
+
+
 
   async delete(awid, dtoIn, session, authorizationResult) {
     let uuAppErrorMap = {};
@@ -91,10 +111,9 @@ class SlistAbl {
 
     const slist = await this.dao.delete(awid, dtoIn.id);
     console.log("dtoIn.id", dtoIn.id);
-   /* if (!slist) {
-      // 3.1
+    if (!slist) {
       throw new Errors.Delete.SlistDoesNotExist({ uuAppErrorMap }, { slistID: dtoIn.id });
-    }*/
+
 
     await this.dao.delete(awid, dtoIn.id);
 
@@ -104,6 +123,10 @@ class SlistAbl {
     const dtoOut = { ...dtoIn,  uuAppErrorMap };
     return dtoOut;
   }
+  }
+
+
+
 
   async list(awid, dtoIn, session, authorizationResult) {
      let uuAppErrorMap = {};
@@ -128,15 +151,31 @@ class SlistAbl {
     if (!dtoIn.pageInfo.pageSize) dtoIn.pageInfo.pageSize = DEFAULTS.pageSize;
     if (!dtoIn.pageInfo.pageIndex) dtoIn.pageInfo.pageIndex = DEFAULTS.pageIndex;
 
+    const sesId = authorizationResult
+    const userId = sesId['_identity']['_uuIdentity'];
+
+    const filter = {
+      "$or": [
+        {"owner_id": userId},
+        {"members": new RegExp(`.*${userId}.*`, "i")}
+      ]
+    };
+
+
+
+
     let daoResult;
     if (dtoIn) {
-      daoResult = await this.dao.list(awid, dtoIn.sortBy, dtoIn.order, dtoIn.pageInfo);
+      daoResult = await this.dao.list(awid, filter, dtoIn.sortBy, dtoIn.order, dtoIn.pageInfo);
     }
 
     // prepare and return dtoOut
     const dtoOut = { ...daoResult,  uuAppErrorMap };
     return dtoOut;
   }
+
+
+
 
   async get(awid, dtoIn, session, authorizationResult) {
     let uuAppErrorMap = {};
@@ -154,7 +193,7 @@ class SlistAbl {
 
 
     // prepare and return dtoOut
-    const dtoOut = { ...dtoIn,  uuAppErrorMap };
+    const dtoOut = { ...daoResult,  uuAppErrorMap };
     return dtoOut;
   }
 

@@ -7,28 +7,13 @@ import Uu5Forms from "uu5g05-forms";
 import SlistsTile from "./slists-tile";
 import Uu5Tiles from "uu5tilesg02";
 import Uu5TilesControls from "uu5tilesg02-controls";
+import SlistsFilterBar from "./slists-filter-bar";
+import {useDataListContext} from "../../core/providers/data-list-context";
 
 //@@viewOff:imports
 
 //@@viewOn:constants
-const FILTER_DEFINITION_LIST = [
-  {
-    key: "archive",
-    label: "Pouze Archivované",
-    filter: (item, value) => {
-      console.log("Archiveitem",item,"value", value);
-      if (value) {
-        let itemValue = typeof item.data.isArchived === "object" ? Utils.Language.getItem(item.data.isArchived) : item.data.isArchived;
-         console.log("archiveItemValue",itemValue);
-        return item.data.isArchived === true;
-      }
-      return true;
-    },
-    inputType: "bool",
 
-  },
-
-]
 //@@viewOff:constants
 
 //@@viewOn:css
@@ -116,7 +101,11 @@ const SlistsListView = createVisualComponent({
   //@@viewOff:defaultProps
 
   render(props) {
-    console.log("SLISTS-VIEW", props);
+
+
+
+    const datalist =  useDataListContext();
+    console.log("SLISTS-VIEW-datalist", datalist);
     //@@viewOn:private
     const { children } = props;
 
@@ -138,16 +127,38 @@ const SlistsListView = createVisualComponent({
           "notes": formData.notes
         });
     }
-
-    async function handleOnDelete(data) {
-      console.log("deleteview", data);
-      await props.data.handlerMap.delete();
+    function handlerMapCreate(data){
+      return datalist.handlerMap.create(data);
+    }
+    function handelMapDelete(data){
+      return datalist.handlerMap.delete(data);
     }
 
+
+    const FILTER_DEFINITION_LIST = [
+      {
+        key: "archive",
+        label: "Pouze Archivované",
+        filter: (item, value) => {
+          console.log("Archiveitem",item,"value", value);
+          if (value) {
+            let itemValue = typeof item.data.isArchived === "object" ? Utils.Language.getItem(item.data.isArchived) : item.data.isArchived;
+            console.log("archiveItemValue",itemValue);
+            return item.data.isArchived === true;
+          }
+          return true;
+        },
+        inputType: "bool",
+
+      },
+
+    ]
+    console.log("ssssssssssssss",datalist.data)
     return (
       <>
         <Uu5Tiles.ControllerProvider
-          data={props.data}
+          data={datalist.data}
+
           filterDefinitionList={FILTER_DEFINITION_LIST}
           filterList={archiveFilterList}
           onFilterChange={(e) => {
@@ -170,16 +181,11 @@ const SlistsListView = createVisualComponent({
                              ]}
           >
 
-            <Uu5TilesControls.FilterBar initialExpanded={true} displayManagerButton={false} displayClearButton={false}/>
-            <Uu5TilesControls.FilterManagerModal/>
-            <Uu5TilesElements.Grid
-              /* data={props.data}*/
-              tileMinWidth={300}
-              tileMaxWidth={400}
-            >
+           <SlistsFilterBar/>
+            <Uu5TilesElements.Grid  tileMinWidth={300}  tileMaxWidth={400} >
 
-              <SlistsTile
-                onDelete={props.onDelete}
+              <SlistsTile key={datalist.data.id}
+
                 onUpdates={props.onUpdates}
               />
 
@@ -187,8 +193,8 @@ const SlistsListView = createVisualComponent({
             </Uu5TilesElements.Grid>
 
 
-            <Uu5Forms.Form.Provider key={createOpen} onSubmit={async (e) => {
-              await props.onCreate(handleCreateSitem({ ...e.data.value }));
+            <Uu5Forms.Form.Provider key={createOpen} handlerMap={datalist.handlerMap} onSubmit={async (e) => {
+              await handlerMapCreate(handleCreateSitem({ ...e.data.value }));
               setCreateOpen(false);
               console.log("submit", e.data);
             }}>

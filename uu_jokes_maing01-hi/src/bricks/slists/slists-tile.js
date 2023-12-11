@@ -5,6 +5,7 @@ import Uu5TilesElements from "uu5tilesg02-elements";
 import Uu5Elements from "uu5g05-elements";
 import importLsi from "../../lsi/import-lsi";
 
+
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -79,7 +80,8 @@ const SlistsTile = createVisualComponent({
   render(props) {
 
 
-    console.log("SLISTS-TILE", props);
+
+
     console.log("archive", props.data.data.isArchived);
     //@@viewOn:private
     const { children } = props;
@@ -101,14 +103,11 @@ const SlistsTile = createVisualComponent({
 
     //
     function handleDeleteTile(sItem) {
-      console.log("handleDeleteTile",sItem);
       setDeleteOpen(false);
-      return({ "id": sItem.data.id });
+      return(sItem.handlerMap.delete({ "id": sItem.data.id }));
     }
     function handleIsArchived(sItem) {
-      console.log("handleIsArchived",sItem);
-
-      return({ "id": sItem.data.id, isArchived: !props.data.data.isArchived });
+      return(sItem.handlerMap.isArchive({ "id": sItem.data.id, isArchived: !props.data.data.isArchived }));
     }
 
 
@@ -127,11 +126,12 @@ const SlistsTile = createVisualComponent({
                                 />  }
 
         actionList={[
-          { icon: "uugds-pencil", children: <Lsi import={importLsi} path={["Menu", "slist"]} />, onClick: () => setRoute("slist", { listName: props.data.data.id }) },
+          { icon: "uugds-pencil", children: <Lsi import={importLsi} path={["Menu", "slist"]} />,
+            onClick: () => setRoute("slist", { listName: props.data.data.id }) },
           {
           icon: "uugds-close", children: "Smazat", onClick: () => setDeleteOpen(true) },
           {icon: "uugdsstencil-uiaction-archive", children: "Archivovat", onClick: async () => {
-            await props.onUpdates(handleIsArchived({...props.data}));}
+            handleIsArchived({...props.data});}
           }
 
 
@@ -142,7 +142,6 @@ const SlistsTile = createVisualComponent({
         <Uu5Elements.Text {...titleStyles} >
          <Uu5Elements.Icon icon="uugds-favorites" className={Css.margin("right", fixedC)} />
           {props.data.data.notes}
-          {/*{handleCanDelete(props.data.data.owner_id)}*/}
         </Uu5Elements.Text>
         </div>
         <div className={Css.marginTop()}>
@@ -170,8 +169,7 @@ const SlistsTile = createVisualComponent({
           icon ="uugds-delete"
           actionList={[
             {children: "Smazat", colorScheme: "negative", significance: "highlighted",  onClick: async () => {
-              await props.onDelete(handleDeleteTile({...props.data}));
-
+              await handleDeleteTile({...props.data});
             } },
             {children: "Zrušit", onClick: () => setDeleteOpen(false)  },
           ]}

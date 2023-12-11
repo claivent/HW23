@@ -3,8 +3,9 @@ import { createComponent, useDataList, useDataObject, useEffect, useState } from
 import { useSubAppData, useSystemData } from "uu_plus4u5g02";
 import Config from "./config/config.js";
 import SlistsListView from "./slists-list-view";
-import Uu5Elements from "uu5g05-elements";
-import Calls from "calls";
+
+import DataListProvider from "../../core/providers/data-list-provider";
+
 
 //@@viewOff:imports
 
@@ -31,108 +32,15 @@ const SlistsListProvider = createComponent({
     console.log("SLISTS-PROVIDER", props);
     //@@viewOn:private
     const { children } = props;
-    const[createOpen, setCreateOpen] = useState(false);
-    const[deleted, setDeleted] = useState(false);
-    const[datalistState, setDatalistState] = useState("");
-    console.log("100deleted",deleted);
-    console.log("110datalistState",datalistState);
-    //@@viewOff:private
-
-    //@@viewOn:interface
-    //@@viewOff:interface
-
-
-    /*let sysDataObject =  useDataObject({
-      handlerMap: {
-        load: Calls.loadMokSys,
-      },
-    });
-    let { state, data, errorData, pendingData, handlerMap } = sysDataObject;
-
-
-    console.log("dataObject", sysDataObject);
-    console.log("state", state);*/
 
 
 
+    return(
+      <DataListProvider>
+        <SlistsListView/>
+      </DataListProvider>
 
-    const dataList = useDataList({
-      handlerMap: {
-        load: handleDataListLoad,
-        create: handleDataListCreate,
-
-      },
-      itemHandlerMap: {
-        delete: handleDataListDelete,
-        isArchive: handleUpdate
-      }
-
-    });
-    console.log("datalist", dataList);
-
-     function handleDataListLoad() {
-       console.log("340datalist");
-      return  Calls.loadSlistsList();
-
-    }
-    function handleDataListCreate(data) {
-      console.log("340datalist");
-      return  Calls.createSlist(data);
-
-    }
-    async function handleDataListDelete(data) {
-      console.log("handleDataListDelete",data);
-      let result = await Calls.deleteSlist(data);
-      console.log(result)
-      dataList.handlerMap.load();
-      return result;
-    }
-
-    async function handleUpdate(data) {
-      console.log("handleSsArchive",data);
-      let result = await Calls.updateSlist(data);
-      console.log(result);
-      dataList.handlerMap.load();
-      return result;
-
-    }
-
-
-
-
-
-    //@@viewOn:render
-    let result;
-
-    switch (dataList.state){
-      case "pendingNoData":
-        result = <Uu5Elements.Pending size={"max"}/>
-        break;
-
-      case "errorNoData":
-        result = <Uu5Elements.Alert header={ "Cannot create library."} priority={"error"}/>
-        break;
-      case "error":
-        result = <Uu5Elements.Alert header={ "Data about libraries cannot be loaded."} priority={"error"}/>
-        break;
-      default:
-
-
-        result = <SlistsListView
-          data={dataList.data}
-          setData={deleted}
-          onCreate = {dataList.handlerMap.create}
-          onDelete = {handleDataListDelete}
-          onUpdates ={handleUpdate} />
-
-        console.log("400READYFUNCTION", dataList.data);
-
-
-        break;
-    }
-
-
-    return result;
+    );
 
 
   },

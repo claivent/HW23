@@ -6,7 +6,7 @@ import Tree from "../bricks/help/tree";
 import RouteBar from "../core/route-bar.js";
 import MainBox from "../bricks/slist/main-box";
 import importLsi from "../lsi/import-lsi.js";
-import SItemListProvider from "../bricks/slist/sItem-list-provider";
+import SItemListProvider from "../bricks/s-items/s-items-list-provider";
 
 
 
@@ -79,31 +79,15 @@ let Slist = createVisualComponent({
     return(
       <div {...attrs}>
 
-          <RouteBar />
-          <SItemListProvider>
 
-            <MainBox initialProducts={PRODUCTS} initialList={SHOPPING_LISTS[0]} />;
-          </SItemListProvider>
-
-
-
+          <SItemListProvider/>
 
       </div>
     ) ;
     //@@viewOff:render
   },
 });
-const SHOPPING_LISTS = [
-  {id: Utils.String.generateId(), name: "Páteční nákup",  archive: false, childId:[156, 142, 186]}
-];
-const PRODUCTS = [
-  {id: Utils.String.generateId(), name: "Apple", amount: 5, unit: "Kg", active: false},
-  {id: Utils.String.generateId(), name: "Car",  amount: 4, unit: "pieces", active: false},
-  {id: Utils.String.generateId(), name: "Knife",  amount: 5, unit: "pieces", active: false },
-  {id: Utils.String.generateId(), name: "Orange",  amount: 10, unit: "Stock", active: true },
-  {id: Utils.String.generateId(), name: "Pumpkin",  amount: 4, unit: "Stock", active: false },
-  {id: Utils.String.generateId(), name: "Peas",  amount: 5, unit: "Kg", active: true }
-];
+
 
 Slist = withRoute(Slist, { authenticated: false }); //TODO return back to true
 

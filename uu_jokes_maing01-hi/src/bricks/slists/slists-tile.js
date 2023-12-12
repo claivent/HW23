@@ -127,7 +127,7 @@ const SlistsTile = createVisualComponent({
 
         actionList={[
           { icon: "uugds-pencil", children: <Lsi import={importLsi} path={["Menu", "slist"]} />,
-            onClick: () => setRoute("slist", { listName: props.data.data.id }) },
+            onClick: () => setRoute("slist", { listId: props.data.data.id }) },
           {
           icon: "uugds-close", children: "Smazat", onClick: () => setDeleteOpen(true) },
           {icon: "uugdsstencil-uiaction-archive", children: "Archivovat", onClick: async () => {

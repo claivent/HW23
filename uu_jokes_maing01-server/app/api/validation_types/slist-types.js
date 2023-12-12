@@ -8,7 +8,14 @@ const slistUpdateDtoInType = shape({
   owner_id: string(),
   owner_name: string(500),
   members: array(string(0,32)),
-  shoppingItems: array(string(0,32)),
+  shoppingItems: array(shape({
+    id: hexa32Code(),
+    name: string(3, 100),
+    amount: number(),
+    unit: string(0,100),
+    active: boolean(),
+    color: string()
+  })),
   isArchived: boolean()
 
 

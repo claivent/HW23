@@ -42,6 +42,7 @@ const DataListProvider = createComponent({
       handlerMap: {
         load: handleDataListLoad,
         create: handleDataListCreate,
+        update:handleUpdate,
       },
       itemHandlerMap: {
         delete: handleDataListDelete,

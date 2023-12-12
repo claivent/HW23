@@ -8,6 +8,7 @@
   "spec": "uu5-app; uu_appg01_devkit@5.17.0",
   "dependencies": {
     "@emotion/styled": "^11.11.0",
+    "react-router-dom": "^6.20.1",
     "uu_plus4u5g02": "^1.22.2",
     "uu_plus4u5g02-app": "^1.22.2",
     "uu_plus4u5g02-elements": "^1.22.2",

@@ -1,9 +1,7 @@
 //@@viewOn:imports
 import { createComponent, useDataList, useDataObject, useEffect, useState } from "uu5g05";
-import { useSubAppData, useSystemData } from "uu_plus4u5g02";
 import Config from "./config/config.js";
 import SlistsListView from "./slists-list-view";
-
 import DataListProvider from "../../core/providers/data-list-provider";
 
 

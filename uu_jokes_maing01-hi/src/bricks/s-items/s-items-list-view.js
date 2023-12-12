@@ -149,6 +149,7 @@ const SItemsListView = createVisualComponent({
     const [confirmRemove, setConfirmRemove] = useState({open: false, id: undefined});
     const [data, setData] = useState(DATA.map((it) => ({ ...it, color: it.active === false ? undefined : "green",      id: Utils.String.generateId() })));
     const [itemsFilterList, setItemsFilterList] = useState([{key: "koupeno", value: false}]);
+    const [rowId, setRowId] = useState();
     const[modalOpen, setModalOpen] = useState([false, 0]);
     const dataRef = useRef(data);
 
@@ -212,7 +213,10 @@ const SItemsListView = createVisualComponent({
       return [
         {
           icon: "uugds-pencil",
-          onClick: () => setModalOpen([true, 0]),
+          onClick: (e) => {
+            setModalOpen([true, 0]);
+            setRowId(data.id);
+          },
           collapsed: false,
         },
         {
@@ -274,7 +278,9 @@ const SItemsListView = createVisualComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
-
+    console.log("DATA",DATA.filter((id)=> id.id === rowId));
+    console.log("FORM-PROPS",props);
+    console.log("ROWID",rowId);
     return (
       <div>
         <Uu5Tiles.ControllerProvider
@@ -288,22 +294,16 @@ const SItemsListView = createVisualComponent({
         >
           <Uu5Elements.Block className={Css.main()}
                              header={<Uu5Elements.Header title="Editace položek"/>}
-
-                             actionList={[
-                               {component: <Uu5TilesControls.FilterButton type="bar"/>},
-                               {
-                                 icon: "uugdsstencil-uiaction-plus-circle-solid",
-                                 children: "vytvořit",
-                                 onClick: () => setCreateOpen(true)
-                               }
-                             ]}
+                             actionList={[     ]}
           >
 
             {/*@@viewOn:example*/}
             <Uu5Tiles.ViewProvider viewList={VIEW_LIST} value={view} onChange={(e) => setView(e.data.value)}>
               <Uu5Elements.Block {...blockProps}
-                                 actionList={[{component: <Uu5TilesControls.ViewButton/>},
-                                 {icon: "uugds-plus", onClick: ()=> setModalOpen([true, 1])  }]}
+                     actionList={[{component: <Uu5TilesControls.ViewButton/>},
+                       {component: <Uu5TilesControls.FilterButton type="bar"/>},
+                    { icon: "uugdsstencil-uiaction-plus-circle-solid", children: "vytvořit", onClick: ()=> setModalOpen([true, 1])   }
+                     ]}
               >
                 <Uu5TilesControls.FilterBar initialExpanded={true} displayManagerButton={false} displayClearButton={false}/>
                 <Uu5TilesControls.FilterManagerModal/>
@@ -362,20 +362,20 @@ const SItemsListView = createVisualComponent({
             />
           </Uu5Elements.Block>
 
-          <Uu5Forms.Form.Provider key={modalOpen[1]} onSubmit = {handleSubmit}>
+         {/* <Uu5Forms.Form.Provider key={modalOpen[1]} onSubmit = {handleSubmit}>
             <Modals
               open={ modalOpen[1] === 1 ? modalOpen[0]: false  }
               close={ ()=> setModalOpen(false, 0)}
               onClick={()=> setModalOpen(false, 0)}
               setData={data}
             />
-          </Uu5Forms.Form.Provider>
+          </Uu5Forms.Form.Provider>*/}
           <Uu5Forms.Form.Provider key={modalOpen[0]} onSubmit = {handleSubmit}>
             <Modals
-              open={ modalOpen[1] === 1 ? modalOpen[0]: false  }
+              open={ modalOpen[1] === 0 ? modalOpen[0]: false  }
               close={ ()=> setModalOpen(false, 0)}
               onClick={()=> setModalOpen(false, 0)}
-              setData={data}
+              dataRow={DATA.filter((id)=> id.id === rowId)}
             />
           </Uu5Forms.Form.Provider>
 

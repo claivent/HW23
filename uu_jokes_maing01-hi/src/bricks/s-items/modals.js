@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, Content } from "uu5g05";
+import {createVisualComponent, Utils, Content, useState} from "uu5g05";
 import Config from "./config/config.js";
 import Uu5Forms from "uu5g05-forms";
 import Uu5Elements from "uu5g05-elements";
@@ -34,21 +34,30 @@ const Modals = createVisualComponent({
   render(props) {
     //@@viewOn:private
     const { children } = props;
+
+
+    const[row, setRow] = useState(props.dataRow);
     //@@viewOff:private
+    if(!row){
+      setRow(props.dataRow);
+    }
+
+    console.log("state", row);
 
     //@@viewOn:interface
     //@@viewOff:interface
 
     //@@viewOn:render
     const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
-
-console.log("Modals", props);
+      const formData = props.dataRow;
+console.log("ModalsTile", props);
     return (
       <div {...attrs}>
 
         <Uu5Elements.Modal
           open={props.open}
           onClose={props.close}
+
           header="Create Shop Item"
           footer={
             <div>
@@ -57,9 +66,9 @@ console.log("Modals", props);
             </div>
           }
         >
-          <Uu5Forms.FormText name="name" label = "Name"/>
-          <Uu5Forms.FormText name="amount"   label = "Amount"/>
-          <Uu5Forms.FormText name="unit"   label = "Unit"/>
+          <Uu5Forms.Text name="name" value={props.dataRow.name} placeholder="Vlož jméno Produktu" label = "Name"/>
+          <Uu5Forms.FormText name="amount" initialValue={"list.name"}   placeholder="Vlož množství produktu"    label = "Amount"/>
+          <Uu5Forms.FormText name="unit" initialValue={"list.name"}    placeholder="Vlož jednotku (kg, bal, ks)"  label = "Unit"/>
         </Uu5Elements.Modal>
 
 
@@ -68,6 +77,7 @@ console.log("Modals", props);
 
       </div>
     )
+    console.log("dddddddddddd",row);
     //@@viewOff:render
   },
 });

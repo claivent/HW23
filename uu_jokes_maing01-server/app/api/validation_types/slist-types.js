@@ -9,7 +9,7 @@ const slistUpdateDtoInType = shape({
   owner_name: string(500),
   members: array(string(0,32)),
   shoppingItems: array(shape({
-    id: hexa32Code(),
+    id: string(),
     name: string(3, 100),
     amount: number(),
     unit: string(0,100),

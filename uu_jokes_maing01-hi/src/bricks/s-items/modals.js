@@ -34,23 +34,25 @@ const Modals = createVisualComponent({
   render(props) {
     //@@viewOn:private
     const { children } = props;
+    const[name, setName] = useState(props.dataRow ? props.dataRow.name:null);
+    const[amount, setAmount] = useState(props.dataRow ? props.dataRow.amount:null);
+    const[unit, setUnit] = useState(props.dataRow ? props.dataRow.unit:null);
 
 
-    const[row, setRow] = useState(props.dataRow);
+
+
     //@@viewOff:private
-    if(!row){
-      setRow(props.dataRow);
-    }
 
-    console.log("state", row);
+
+
 
     //@@viewOn:interface
     //@@viewOff:interface
 
     //@@viewOn:render
     const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
-      const formData = props.dataRow;
-console.log("ModalsTile", props);
+
+// console.log("ModalsTile", props);
     return (
       <div {...attrs}>
 
@@ -66,9 +68,18 @@ console.log("ModalsTile", props);
             </div>
           }
         >
-          <Uu5Forms.Text name="name" value={props.dataRow.name} placeholder="Vlož jméno Produktu" label = "Name"/>
-          <Uu5Forms.FormText name="amount" initialValue={"list.name"}   placeholder="Vlož množství produktu"    label = "Amount"/>
-          <Uu5Forms.FormText name="unit" initialValue={"list.name"}    placeholder="Vlož jednotku (kg, bal, ks)"  label = "Unit"/>
+          <Uu5Forms.FormText name="id"
+                             initialValue={props.dataRow ? props.dataRow.id:null}   placeholder="Vlož jméno Produktu" label = "Name" disabled={true}/>
+          <Uu5Forms.FormText name="color"
+                             initialValue={props.dataRow ? props.dataRow.color:null}  placeholder="Neaktivní" label = "Name" disabled={true}/>
+
+          <Uu5Forms.FormText name="name"
+                         initialValue={name} onChange={(e)=> setName(e.data.value)}  placeholder="Vlož jméno Produktu" label = "Name"/>
+          <Uu5Forms.FormText name="amount"
+                             initialValue={amount}  onChange={(e)=> setAmount(e.data.value)}   placeholder="Vlož množství produktu"    label = "Amount"/>
+          <Uu5Forms.FormText name="unit"
+                             initialValue={unit} onChange={(e)=> setUnit(e.data.value)}     placeholder="Vlož jednotku (kg, bal, ks)"  label = "Unit"/>
+
         </Uu5Elements.Modal>
 
 
@@ -77,7 +88,7 @@ console.log("ModalsTile", props);
 
       </div>
     )
-    console.log("dddddddddddd",row);
+
     //@@viewOff:render
   },
 });

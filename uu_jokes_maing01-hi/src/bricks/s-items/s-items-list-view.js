@@ -145,15 +145,17 @@ const SItemsListView = createVisualComponent({
 
     const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
 
-    const [view, setView] = useState("table");
+    const [view, setView] = useState("grid");
     const [confirmRemove, setConfirmRemove] = useState({open: false, id: undefined});
-    const [data, setData] = useState(DATA.map((it) => ({ ...it, color: it.active === false ? undefined : "green",      id: Utils.String.generateId() })));
+    const [data, setData] = useState(DATA.map((it) => ({ ...it,
+      color: it.active === false ? undefined : "green" })));
     const [itemsFilterList, setItemsFilterList] = useState([{key: "koupeno", value: false}]);
-    const [rowId, setRowId] = useState();
-    const[modalOpen, setModalOpen] = useState([false, 0]);
+    const [modalRow, setModalRow] = useState();
+    const [modalOpen, setModalOpen] = useState([false, 0]);
     const dataRef = useRef(data);
-
-
+     console.log("DATA-STATE-DATA", data);
+     console.log("DATA-SERVERU", DATA);
+    // console.log("DATA-STATE-DATA", data);
     function handlerMapUpdate(data) {
       return datalist.handlerMap.update(data);
     }
@@ -175,12 +177,29 @@ const SItemsListView = createVisualComponent({
     }
     function addItem(data){
       //save data
+      delete data.id;
       setData(([...actualItemList])=>{
-
-        actualItemList.push({id: Utils.String.generateId(),  ...data, active: true, });
-        console.log ("dddddddddddddd",actualItemList);
+        // console.log("beforeACTUALDATA", data) ;
+        // console.log("beforeACTUAL", actualItemList) ;
+        const addId =Utils.String.generateId(32);
+        actualItemList.push({id: addId ,  ...data, active: true, });
+        // console.log("ACTUAL", actualItemList) ;
+        // console.log("addID", addId);
         return actualItemList;
       })
+    }
+    function handleEditSubmit(e){
+      const data =e.data.value;
+      console.log("AAAAAAAAAAAAAAA",e.data.value);
+      setData(([...actualItemList])=>{
+        console.log("in",actualItemList.length);
+        let actualItemListnew = actualItemList.filter(it => it.id !== data.id);
+        console.log("out",actualItemListnew.length);
+        actualItemListnew.push({id: data.id,  ...data, active: true, });
+        setModalOpen(false, 1);
+        return actualItemListnew;
+      })
+      return null;
     }
 
 
@@ -215,7 +234,8 @@ const SItemsListView = createVisualComponent({
           icon: "uugds-pencil",
           onClick: (e) => {
             setModalOpen([true, 0]);
-            setRowId(data.id);
+            setModalRow(data);
+            console.log("DATA-Z-FORMULARE",data);
           },
           collapsed: false,
         },
@@ -278,9 +298,9 @@ const SItemsListView = createVisualComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
-    console.log("DATA",DATA.filter((id)=> id.id === rowId));
-    console.log("FORM-PROPS",props);
-    console.log("ROWID",rowId);
+    // console.log("DATA",DATA.filter((id)=> id.id === rowId));
+    // console.log("FORM-PROPS",props);
+    // console.log("ROWID",rowId);
     return (
       <div>
         <Uu5Tiles.ControllerProvider
@@ -309,7 +329,7 @@ const SItemsListView = createVisualComponent({
                 <Uu5TilesControls.FilterManagerModal/>
                 <Uu5TilesElements.List
                  // data={data}
-                  columnList={ view == "table" ? COLUMN_LIST.map((column) => ({ ...column,      cellComponent: (props) => {    let significance, colorScheme;      const {color} = props.data;
+                  columnList={ view == "grid" ? COLUMN_LIST.map((column) => ({ ...column,      cellComponent: (props) => {    let significance, colorScheme;      const {color} = props.data;
                           if (color) {  colorScheme = color;  significance = "highlighted";     }
 
                           return (
@@ -362,20 +382,21 @@ const SItemsListView = createVisualComponent({
             />
           </Uu5Elements.Block>
 
-         {/* <Uu5Forms.Form.Provider key={modalOpen[1]} onSubmit = {handleSubmit}>
+          <Uu5Forms.Form.Provider key={modalOpen[1]} onSubmit = {handleSubmit}>
             <Modals
               open={ modalOpen[1] === 1 ? modalOpen[0]: false  }
               close={ ()=> setModalOpen(false, 0)}
               onClick={()=> setModalOpen(false, 0)}
               setData={data}
             />
-          </Uu5Forms.Form.Provider>*/}
-          <Uu5Forms.Form.Provider key={modalOpen[0]} onSubmit = {handleSubmit}>
+          </Uu5Forms.Form.Provider>
+
+          <Uu5Forms.Form.Provider key={modalOpen[0]} onSubmit = {handleEditSubmit}>
             <Modals
               open={ modalOpen[1] === 0 ? modalOpen[0]: false  }
               close={ ()=> setModalOpen(false, 0)}
               onClick={()=> setModalOpen(false, 0)}
-              dataRow={DATA.filter((id)=> id.id === rowId)}
+              dataRow={modalRow}
             />
           </Uu5Forms.Form.Provider>
 

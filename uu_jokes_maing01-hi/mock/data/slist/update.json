@@ -1,0 +1,120 @@
+[
+  {
+    "id" : "6578ab61ef8e501b1480ecac",
+    "name" : "1.Nákup",
+    "notes" : "aaaaaaaaaaaaaaaaaaa",
+    "awid" : "22222222222222222222222222222222",
+    "owner_id" : "9429-5525-6848-0000",
+    "owner_name" : "Martin Saska",
+    "members" : [
+
+    ],
+    "shoppingItems" : [
+      {
+        "id" : "e1280e78d5bc347279302adbc58ec366",
+        "name" : "Rajče",
+        "amount" : 5,
+        "unit" : "kg",
+        "active" : true,
+        "color" : "green"
+      },
+      {
+        "id" : "2b3a73546ba8043a8845345ced70cc96",
+        "name" : "Pomeranče",
+        "amount" : 3,
+        "unit" : "kg",
+        "active" : false
+      },
+      {
+        "id" : "0d4dd7d206ae54ba7a8fafab3c2292be",
+        "name" : "Jablka",
+        "amount" : 10,
+        "unit" : "kg",
+        "active" : true,
+        "color" : "green"
+      },
+      {
+        "id" : "35eeff6a738d44bb7882beadbd48c198",
+        "name" : "Brokolice",
+        "amount" : 8,
+        "unit" : "kusů",
+        "active" : true,
+        "color" : "green"
+      },
+      {
+        "id" : "013b69d2e10e841febec8673008c7120",
+        "name" : "Mrkev",
+        "amount" : 20,
+        "unit" : "balení",
+        "active" : false
+      },
+      {
+        "id" : "df00215f4ad834f2f92e7f656a38f394",
+        "name" : "Hrušky",
+        "amount" : 15,
+        "unit" : "kg",
+        "active" : false
+      },
+      {
+        "id" : "021f91a8c15134cb0936063d6f2ef77c",
+        "name" : "Cibule",
+        "amount" : 7,
+        "unit" : "kusů",
+        "active" : true,
+        "color" : "green"
+      },
+      {
+        "id" : "6eed529b710bd4ced828fd12a168ad46",
+        "name" : "Špenát",
+        "amount" : 12,
+        "unit" : "balení",
+        "active" : true,
+        "color" : "green"
+      },
+      {
+        "id" : "1a1a3a1bcf305430e95d7ce1830e12fe",
+        "name" : "Meruňky",
+        "amount" : 25,
+        "unit" : "kg",
+        "active" : false
+      },
+      {
+        "id" : "dd9d1716256d5464cb83957d17a007f7",
+        "name" : "Paprika",
+        "amount" : 6,
+        "unit" : "kusů",
+        "active" : false
+      },
+      {
+        "id" : "30438bdab59ea4219b6b5991d5c8fda3",
+        "name" : "Kiwi",
+        "amount" : 30,
+        "unit" : "kg",
+        "active" : true,
+        "color" : "green"
+      },
+      {
+        "id" : "062fce0f41ac14b2ca90b5c1d4fe0c53",
+        "name" : "Růžičková kapusta",
+        "amount" : 18,
+        "unit" : "balení",
+        "active" : true,
+        "color" : "green"
+      },
+      {
+        "id" : "6844176d6551545f7a9240294708ba17",
+        "color" : "green",
+        "name" : "Mago",
+        "amount" : 5,
+        "unit" : "kusů",
+        "active" : true
+      }
+    ],
+    "isArchived" : false,
+    "sys" : {
+      "cts" : "2023-12-12T18:50:09.477+0000",
+      "mts" : "2023-12-12T19:44:34.367+0000",
+      "rev" : 109
+    }
+  }
+]

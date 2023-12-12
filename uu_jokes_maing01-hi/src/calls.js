@@ -49,6 +49,16 @@ const Calls = {
     return Calls.call("get", commandUri), dtoIn;
   },
 
+  loadSitemList(dtoIn){
+    const commandUri = Calls.getCommandUri("sitem/list");
+    return Calls.call("get", commandUri, dtoIn);
+  },
+
+  loadSitemDelete(dtoIn){
+    const commandUri = Calls.getCommandUri("sitem/delete");
+    return Calls.call("get", commandUri, dtoIn);
+  },
+
   loadIdentityProfiles() {
     const commandUri = Calls.getCommandUri("sys/uuAppWorkspace/initUve");
     return Calls.call("get", commandUri);

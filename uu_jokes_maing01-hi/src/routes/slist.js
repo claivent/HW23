@@ -60,7 +60,6 @@ let Slist = createVisualComponent({
   //@@viewOff:defaultProps
 
   render(props) {
-    console.log("SLISTS-ROUTE", props);
     //@@viewOn:private
     const { identity } = useSession();
     //@@viewOff:private

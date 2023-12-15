@@ -85,7 +85,7 @@ const Spa = createVisualComponent({
 
           <Plus4U5App.Spa>
 
-              <SessionResolver>  //TODO task1 opravit bzobrazující se BAR
+              <SessionResolver>
                 <ProviderPermission>
                   {(slistsDataObject) => (
                     <>

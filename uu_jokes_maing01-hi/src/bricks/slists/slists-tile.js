@@ -81,8 +81,8 @@ const SlistsTile = createVisualComponent({
 
 
 
-
-    console.log("archive", props.data.data.isArchived);
+    console.log("TILEPROPS", props);
+    //console.log("archive", props.data.data.isArchived);
     //@@viewOn:private
     const { children } = props;
     const[deleteOpen, setDeleteOpen] = useState(false);
@@ -152,7 +152,7 @@ const SlistsTile = createVisualComponent({
       </div>
         <div className={Css.italic()}>
           <Uu5Elements.Text{...textStyles("content")}  >
-            {"Členové: "}({props.data.data.members.join(", ")})
+            {"Členové: "}({props.data.data.members ? props.data.data.members.join(", "): "Not members"})
           </Uu5Elements.Text>
         </div>
           <div >

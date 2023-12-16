@@ -154,7 +154,53 @@ const Update = {
 
 };
 
+const Archive = {
+  UC_CODE: `${JokesMainUseCaseError.ERROR_PREFIX}slist/archive/`,
 
+  InvalidDtoIn: class extends JokesMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${List.UC_CODE}invalidDtoIn`;
+      this.message = "DtoIn is not valid.";
+    }
+  },
+
+  SlistDaoCreateFailed: class extends JokesMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Create.UC_CODE}SlistDaoCreateFailed`;
+      this.message = "Create slist by slist DAO create failed.";
+      this.status = 400;
+    }
+  },
+
+  DocumentNotExist: class extends JokesMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Create.UC_CODE}documentNotExist`;
+      this.message = "Document is no more in Database";
+    }
+  },
+
+
+  UserNotAuthorizedEdit: class extends JokesMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Create.UC_CODE}userNotAuthorizedEdit`;
+      this.message = "You are not member or owner of this document";
+    }
+  },
+
+  NotEditPrivateAttributes: class extends JokesMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Create.UC_CODE}notEditPrivateAttributes`;
+      this.message = "You can not edit private attributes";
+    }
+  },
+
+
+};
 
 module.exports = {
   Update,

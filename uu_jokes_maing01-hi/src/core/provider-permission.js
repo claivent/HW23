@@ -3,6 +3,8 @@ import { createComponent, useDataObject } from "uu5g05";
 import Calls from "calls";
 import Config from "./config/config";
 import ContextPermission   from "./context-permission";
+import Uu5Elements from "uu5g05-elements";
+import ContextDataList from "./providers/data-list-context";
 //@@viewOff:imports
 
 export const ProviderPermission = createComponent({
@@ -22,19 +24,33 @@ export const ProviderPermission = createComponent({
     //@@viewOn:private
     const slistsDataObject = useDataObject({
       handlerMap: {
-        load: Calls.Slists.load,
+        load: Calls.Slist.load,
+
       },
     });
+  console.log("PROVIDER-PERMISION",slistsDataObject)
+    const providedData = slistsDataObject;
+    let result;
+
+    switch (slistsDataObject.state) {
+      case "pendingNoData":
+        result = <Uu5Elements.Pending size={"max"}/>
+        break;
+      case "errorNoData":
+        result = <Uu5Elements.Alert header={"Cannot create library."} priority={"error"}/>
+        break;
+      case "error":
+        result = <Uu5Elements.Alert header={"Data about libraries cannot be loaded."} priority={"error"}/>
+        break;
+      default:
+        result = null;
+
+        break;
+    }
+    return result;
 
 
-    //@@viewOff:private
 
-    //@@viewOn:render
-    return (
-      <ContextPermission.Provider value={slistsDataObject}>
-        {typeof props.children === "function" ? props.children(slistsDataObject) : props.children}
-      </ContextPermission.Provider>
-    );
     //@@viewOff:render
   },
 });

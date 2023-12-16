@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import {createComponent, useDataList} from "uu5g05";
+import {createComponent, useDataList, useDataObject} from "uu5g05";
 import Config from "./config/config.js";
 import Calls from "calls";
 import ContextDataList from "./data-list-context";
@@ -36,7 +36,12 @@ const DataListProvider = createComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
+    const slistsDataObject = useDataObject({
+      handlerMap: {
+        load: Calls.Slist.load,
 
+      },
+    });
 
     const slistDataList = useDataList({
       handlerMap: {
@@ -46,9 +51,10 @@ const DataListProvider = createComponent({
       },
       itemHandlerMap: {
         delete: handleDataListDelete,
-        isArchive: handleUpdate
+        isArchive: handleArchive
       }
     });
+
 
     function handleDataListLoad() {
       return Calls.loadSlistsList();
@@ -64,6 +70,9 @@ const DataListProvider = createComponent({
 
     async function handleUpdate(data) {
       return await Calls.updateSlist(data);
+    }
+    async function handleArchive(data) {
+      return await Calls.archiveSlist(data);
     }
 
 
@@ -81,10 +90,25 @@ const DataListProvider = createComponent({
         result = <Uu5Elements.Alert header={"Data about libraries cannot be loaded."} priority={"error"}/>
         break;
       default:
-        result =
-          <ContextDataList.Provider value={slistDataList}>
-            {typeof props.children === "function" ? props.children(slistDataList) : props.children}
-          </ContextDataList.Provider>
+        switch (slistsDataObject.state) {
+          case "pendingNoData":
+            result = <Uu5Elements.Pending size={"max"}/>
+            break;
+          case "errorNoData":
+            result = <Uu5Elements.Alert header={"Cannot create library."} priority={"error"}/>
+            break;
+          case "error":
+            result = <Uu5Elements.Alert header={"Data about libraries cannot be loaded."} priority={"error"}/>
+            break;
+          default:
+
+            result =
+              <ContextDataList.Provider value={{DATA:slistDataList, PDATA: slistsDataObject}}>
+                {typeof props.children === "function" ? props.children({DATA:slistDataList, PDATA: slistsDataObject}) : props.children}
+              </ContextDataList.Provider>
+            break;
+        }
+
         break;
     }
     return result;

@@ -43,4 +43,10 @@ const slistDeleteDtoInType = shape({
   id: id().isRequired()
 });
 
+const slistArchiveDtoInType = shape({
+  id: id().isRequired(),
+  isArchived: boolean().isRequired()
+});
+
+
 

@@ -105,7 +105,7 @@ const SlistsListView = createVisualComponent({
 
 
     const datalist =  useDataListContext();
-    console.log("SLISTS-VIEW-datalist", datalist);
+    //console.log("SLISTS-VIEW-datalist", datalist);
     //@@viewOn:private
     const { children } = props;
 
@@ -140,10 +140,10 @@ const SlistsListView = createVisualComponent({
         key: "archive",
         label: "Pouze Archivované",
         filter: (item, value) => {
-          console.log("Archiveitem",item,"value", value);
+         // console.log("Archiveitem",item,"value", value);
           if (value) {
             let itemValue = typeof item.data.isArchived === "object" ? Utils.Language.getItem(item.data.isArchived) : item.data.isArchived;
-            console.log("archiveItemValue",itemValue);
+            //console.log("archiveItemValue",itemValue);
             return item.data.isArchived === true;
           }
           return true;
@@ -153,7 +153,8 @@ const SlistsListView = createVisualComponent({
       },
 
     ]
-    console.log("ssssssssssssss",datalist.data)
+    //console.log("ssssssssssssss",datalist.data)
+    console.log("LISTWIEWPROPS",props)
     return (
       <>
         <Uu5Tiles.ControllerProvider

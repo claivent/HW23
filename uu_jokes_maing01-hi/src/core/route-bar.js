@@ -5,6 +5,7 @@ import Config from "./config/config.js";
 import importLsi from "../lsi/import-lsi.js";
 import { useSubAppData } from "uu_plus4u5g02";
 import ContextPermission from "./context-permission";
+import ContextDataList from "./providers/data-list-context";
 
 //@@viewOff:imports
 
@@ -33,7 +34,8 @@ const RouteBar = createVisualComponent({
   render(props) {
     //@@viewOn:private
     const [, setRoute] = useRoute();
-    const slistsDataObject = useContext(ContextPermission);
+
+    const slistDatalist = useContext(ContextDataList);
 
     const appActionList = [
       { children: <Lsi import={importLsi} path={["Menu", "home"]} />, onClick: () => setRoute("home") },
@@ -49,11 +51,12 @@ const RouteBar = createVisualComponent({
 
     //@@viewOn:interface
     //@@viewOff:interface
+console.log("SLISTDATALIST",slistDatalist);
 
     //@@viewOn:render
     return (
       <Plus4U5App.RouteBar appActionList={appActionList} {...props}>
-        <Plus4U5App.RouteHeader title={ slistsDataObject.data.data.name} />
+        <Plus4U5App.RouteHeader title={ slistDatalist.PDATA.data.data.name} />
       </Plus4U5App.RouteBar>
       )
 

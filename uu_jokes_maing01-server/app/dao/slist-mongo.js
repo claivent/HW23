@@ -47,6 +47,17 @@ class SlistMongo extends UuObjectDao {
 
   }
 
+  async archive(uuObject, id) {
+    let result;
+    let filter = {_id: id};
+    let revisionStrategy = "REVISION";
+    result = await super.findOneAndUpdate(filter, uuObject, "NONE" );
+    /*(err, output) => {      if (err) return ((output) => (output('Error updating user:')    });*/
+
+    return result;
+
+  }
+
 }
 
 module.exports = SlistMongo;

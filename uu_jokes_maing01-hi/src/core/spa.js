@@ -12,6 +12,7 @@ import Home from "../routes/home.js";
 import Slist from "../routes/slist";
 import Slists from "../routes/slists";
 import ProviderPermission from "./provider-permission";
+import DataListProvider from "./providers/data-list-provider";
 
 //@@viewOff:imports
 
@@ -86,22 +87,27 @@ const Spa = createVisualComponent({
           <Plus4U5App.Spa>
 
               <SessionResolver>
-                <ProviderPermission>
-                  {(slistsDataObject) => (
+
+                  <DataListProvider>
+
+
+                  {/*{(slistsDataObject) => (
                     <>
-                      {slistsDataObject.state === "pendingNoData" && <SpaPending/>}
-                      {slistsDataObject.state === "errorNoData" && <Error error={slistsDataObject.errorData}/>}
-                      {["ready", "pending", "error"].includes(slistsDataObject.state) && (
+                      {slistsDataObject.DATA.state === "pendingNoData" && <SpaPending/>}
+                      {slistsDataObject.DATA.state === "errorNoData" && <Error error={slistsDataObject.DATA.errorData}/>}
+                      {["ready", "pending", "error"].includes(slistsDataObject.DATA.state) && (
                         <>
-                          <RouteBar/>
+                          <RouteBar />
                           <Plus4U5App.Spa routeMap={ROUTE_MAP}/>
                         </>
 
                       )}
                     </>
-                  )}
+                  )}*/}
+                    <Plus4U5App.Spa routeMap={ROUTE_MAP}/>
 
-                </ProviderPermission>
+                  </DataListProvider>
+
               </SessionResolver>
 
           </Plus4U5App.Spa>

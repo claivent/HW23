@@ -1,0 +1,37 @@
+{
+  "itemList": [
+    {
+      "awid": "22222222222222222222222222222222",
+      "sysState": "active",
+      "version": "3.0",
+      "sys": {
+        "cts": "2023-12-05T20:07:23.495Z",
+        "mts": "2023-12-05T20:07:48.168Z",
+        "rev": 4
+      },
+      "awidInitiatorList": [
+        "9429-5525-6848-0000"
+      ],
+      "description": "Description of uuAppWorskapace",
+      "license": {
+        "type": "xs",
+        "size": 10
+      },
+      "name": "uuAppg01Server AppModel",
+      "adviceNote": {
+        "uuIdentity": null,
+        "startTime": "2023-12-05T20:07:48.168Z",
+        "severity": "info",
+        "message": null,
+        "estimatedEndTime": null
+      },
+      "id": "656f82fb8f9f0371c89d2cee"
+    }
+  ],
+  "pageInfo": {
+    "pageIndex": 0,
+    "pageSize": 1000,
+    "total": 1
+  },
+  "uuAppErrorMap": {}
+}

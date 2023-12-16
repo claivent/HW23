@@ -37,6 +37,11 @@ const Calls = {
     const commandUri = Calls.getCommandUri("slist/list");
     return Calls.call("get", commandUri, dtoIn);
   },
+  updateSlist(dtoIn){
+    console.log("Calls update", dtoIn);
+    const commandUri = Calls.getCommandUri("slist/update");
+    return Calls.call("post", commandUri, dtoIn);
+  },
 
   archiveSlist(dtoIn){
     console.log("Calls archive", dtoIn);

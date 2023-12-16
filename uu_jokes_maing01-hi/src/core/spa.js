@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, useSession } from "uu5g05";
+import { createVisualComponent, Utils, useSession, Environment } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
 import Plus4U5 from "uu_plus4u5g02";
 import Plus4U5App, { SpaPending, Error } from "uu_plus4u5g02-app";
@@ -81,7 +81,7 @@ const Spa = createVisualComponent({
     //@@viewOn:render
     return (
 
-      <Plus4U5.SpaProvider initialLanguageList={["en", "cs"]} skipAppWorkspaceProvider>
+      <Plus4U5.SpaProvider initialLanguageList={["en", "cs"]} baseUri={Environment.get("callsBaseUri")}>
         <Uu5Elements.ModalBus>
 
           <Plus4U5App.Spa>

@@ -128,10 +128,10 @@ const SlistsListView = createVisualComponent({
         });
     }
     function handlerMapCreate(data){
-      return datalist.handlerMap.create(data);
+      return datalist.DATA.handlerMap.create(data);
     }
     function handelMapDelete(data){
-      return datalist.handlerMap.delete(data);
+      return datalist.DATA.handlerMap.delete(data);
     }
 
 
@@ -153,12 +153,12 @@ const SlistsListView = createVisualComponent({
       },
 
     ]
-    //console.log("ssssssssssssss",datalist.data)
-    console.log("LISTWIEWPROPS",props)
+    console.log("DATALIST",datalist);
+    console.log("LISTWIEWPROPS",props);
     return (
       <>
         <Uu5Tiles.ControllerProvider
-          data={datalist.data}
+          data={datalist.DATA.data}
 
           filterDefinitionList={FILTER_DEFINITION_LIST}
           filterList={archiveFilterList}
@@ -185,7 +185,7 @@ const SlistsListView = createVisualComponent({
            <SlistsFilterBar/>
             <Uu5TilesElements.Grid  tileMinWidth={300}  tileMaxWidth={400} >
 
-              <SlistsTile key={datalist.data.id}
+              <SlistsTile key={datalist.DATA.data.id}
 
                 onUpdates={props.onUpdates}
               />
@@ -194,7 +194,7 @@ const SlistsListView = createVisualComponent({
             </Uu5TilesElements.Grid>
 
 
-            <Uu5Forms.Form.Provider key={createOpen} handlerMap={datalist.handlerMap} onSubmit={async (e) => {
+            <Uu5Forms.Form.Provider key={createOpen} handlerMap={datalist.DATA.handlerMap} onSubmit={async (e) => {
               await handlerMapCreate(handleCreateSitem({ ...e.data.value }));
               setCreateOpen(false);
               console.log("submit", e.data);

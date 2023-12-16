@@ -137,7 +137,7 @@ const SItemsListView = createVisualComponent({
     const datalist = useContext(ContextDataList);
     // console.log("datalist", datalist);
     let list = {};
-    datalist.data.find((item) => {
+    datalist.DATA.data.find((item) => {
       item.data.id.toString() === props.listId && (list = item);
     });
     let DATA = list.data.shoppingItems;
@@ -156,7 +156,7 @@ const SItemsListView = createVisualComponent({
      console.log("DATA-SERVERU", DATA, "view", view, "confirmRemove", confirmRemove, "data", data,"itemsFilterList", itemsFilterList, "modalRow", modalRow, "dataRef", dataRef, "dataRef.current", dataRef.current  );
 
     function handlerMapUpdate(data) {
-      return datalist.handlerMap.update(data);
+      return datalist.DATA.handlerMap.update(data);
     }
 
     function handleClick(id, color) {

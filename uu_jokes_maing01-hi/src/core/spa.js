@@ -1,14 +1,13 @@
 //@@viewOn:imports
-import {createVisualComponent, Utils, useSession, Environment} from "uu5g05";
+import {createVisualComponent, Utils,  Environment} from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
 import Plus4U5 from "uu_plus4u5g02";
-import Plus4U5App, {SpaPending, Error} from "uu_plus4u5g02-app";
-import {Unauthenticated} from "uu_plus4u5g02-elements";
+import Plus4U5App from "uu_plus4u5g02-app";
 import Config from "./config/config.js";
 import Home from "../routes/home.js";
 import Slist from "../routes/slist";
 import Slists from "../routes/slists";
-import DataListProvider from "./providers/data-list-provider";
+
 
 //@@viewOff:imports
 
@@ -34,19 +33,7 @@ const ROUTE_MAP = {
 
 //@@viewOff:constants
 
-function SessionResolver({children}) {
-  const session = useSession();
 
-  switch (session.state) {
-    case "pending":
-      return <SpaPending/>;
-    case "notAuthenticated":
-      return <Unauthenticated/>;
-    case "authenticated":
-    default:
-      return children;
-  }
-}
 
 //@@viewOn:css
 //@@viewOff:css

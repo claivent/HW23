@@ -130,9 +130,7 @@ const SlistsListView = createVisualComponent({
     function handlerMapCreate(data){
       return datalist.DATA.handlerMap.create(data);
     }
-    function handelMapDelete(data){
-      return datalist.DATA.handlerMap.delete(data);
-    }
+
 
     function handleMembers(data){
 
@@ -147,10 +145,8 @@ const SlistsListView = createVisualComponent({
         key: "archive",
         label: "Pouze Archivované",
         filter: (item, value) => {
-         // console.log("Archiveitem",item,"value", value);
           if (value) {
-            let itemValue = typeof item.data.isArchived === "object" ? Utils.Language.getItem(item.data.isArchived) : item.data.isArchived;
-            //console.log("archiveItemValue",itemValue);
+            //let itemValue = typeof item.data.isArchived === "object" ? Utils.Language.getItem(item.data.isArchived) : item.data.isArchived;
             return item.data.isArchived === true;
           }
           return true;

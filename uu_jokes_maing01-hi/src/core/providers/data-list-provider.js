@@ -36,6 +36,13 @@ const DataListProvider = createComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
+    const UsersDataList = useDataList({
+      handlerMap: {
+        load: Calls.Users.load,
+
+      },
+    });
+
     const slistsDataObject = useDataObject({
       handlerMap: {
         load: Calls.Slist.load,
@@ -102,10 +109,26 @@ const DataListProvider = createComponent({
             break;
           default:
 
+            switch (UsersDataList.state) {
+              case "pendingNoData":
+                result = <Uu5Elements.Pending size={"max"}/>
+                break;
+              case "errorNoData":
+                result = <Uu5Elements.Alert header={"Cannot create library."} priority={"error"}/>
+                break;
+              case "error":
+                result = <Uu5Elements.Alert header={"Data about libraries cannot be loaded."} priority={"error"}/>
+                break;
+              default:
+
+
             result =
-              <ContextDataList.Provider value={{DATA:slistDataList, PDATA: slistsDataObject}}>
-                {typeof props.children === "function" ? props.children({DATA:slistDataList, PDATA: slistsDataObject}) : props.children}
+              <ContextDataList.Provider value={{DATA:slistDataList, PDATA: slistsDataObject, UData:UsersDataList}}>
+                {typeof props.children === "function" ? props.children({DATA:slistDataList, PDATA: slistsDataObject, UData:UsersDataList}) : props.children}
               </ContextDataList.Provider>
+                break;
+            }
+
             break;
         }
 

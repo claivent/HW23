@@ -92,6 +92,13 @@ const Calls = {
     },
 
   },
+  Users: {
+    load(dtoIn) {
+      const commandUri = Calls.getCommandUri("users/list");
+      return Calls.call("get", commandUri, dtoIn);
+    },
+
+  },
 
   getCommandUri(useCase, baseUri = Environment.appBaseUri) {
     return (!baseUri.endsWith("/") ? baseUri + "/" : baseUri) + (useCase.startsWith("/") ? useCase.slice(1) : useCase);

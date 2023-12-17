@@ -1,17 +1,13 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, useSession, Environment } from "uu5g05";
+import {createVisualComponent, Utils, useSession, Environment} from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
 import Plus4U5 from "uu_plus4u5g02";
-import Plus4U5App, { SpaPending, Error } from "uu_plus4u5g02-app";
-import { Unauthenticated } from "uu_plus4u5g02-elements";
-
-import RouteBar from "./route-bar";
-
+import Plus4U5App, {SpaPending, Error} from "uu_plus4u5g02-app";
+import {Unauthenticated} from "uu_plus4u5g02-elements";
 import Config from "./config/config.js";
 import Home from "../routes/home.js";
 import Slist from "../routes/slist";
 import Slists from "../routes/slists";
-import ProviderPermission from "./provider-permission";
 import DataListProvider from "./providers/data-list-provider";
 
 //@@viewOff:imports
@@ -22,7 +18,7 @@ const InitAppWorkspace = Utils.Component.lazy(() => import("../routes/init-app-w
 const ControlPanel = Utils.Component.lazy(() => import("../routes/control-panel.js"));
 
 const ROUTE_MAP = {
-  "": { redirect: "home" },
+  "": {redirect: "home"},
   home: (props) => <Home {...props} />,
   slist: (props) => <Slist {...props} />,
   slists: (props) => <Slists {...props} />,
@@ -38,7 +34,7 @@ const ROUTE_MAP = {
 
 //@@viewOff:constants
 
-function SessionResolver({ children }) {
+function SessionResolver({children}) {
   const session = useSession();
 
   switch (session.state) {
@@ -80,47 +76,15 @@ const Spa = createVisualComponent({
 
     //@@viewOn:render
     return (
-
       <Plus4U5.SpaProvider initialLanguageList={["en", "cs"]} baseUri={Environment.get("callsBaseUri")}>
-        <Uu5Elements.ModalBus>
-
-
-
-
-
-                  <DataListProvider>
-
-
-                  {/*{(slistsDataObject) => (
-                    <>
-                      {slistsDataObject.DATA.state === "pendingNoData" && <SpaPending/>}
-                      {slistsDataObject.DATA.state === "errorNoData" && <Error error={slistsDataObject.DATA.errorData}/>}
-                      {["ready", "pending", "error"].includes(slistsDataObject.DATA.state) && (
-                        <>
-                          <RouteBar />
-                          <Plus4U5App.Spa routeMap={ROUTE_MAP}/>
-                        </>
-
-                      )}
-                    </>
-                  )}*/}
-                    <Plus4U5App.Spa routeMap={ROUTE_MAP}/>
-
-                  </DataListProvider>
-
-
-
-
-
-        </Uu5Elements.ModalBus>
+        <Plus4U5App.Spa routeMap={ROUTE_MAP} />
       </Plus4U5.SpaProvider>
-
     );
-    //@@viewOff:render
-  },
-});
+//@@viewOff:render
+        },
+        });
 
-//@@viewOn:exports
-export { Spa };
-export default Spa;
-//@@viewOff:exports
+        //@@viewOn:exports
+        export {Spa};
+        export default Spa;
+        //@@viewOff:exports

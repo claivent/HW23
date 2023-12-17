@@ -152,7 +152,7 @@ const SlistsTile = createVisualComponent({
       </div>
         <div className={Css.italic()}>
           <Uu5Elements.Text{...textStyles("content")}  >
-            {"Členové: "}({props.data.data.members ? props.data.data.members.join(", "): "Not members"})
+            {"Členové: "}({props.data.data.members ? props.members( props.data.data.members): "Not members"})
           </Uu5Elements.Text>
         </div>
           <div >

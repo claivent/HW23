@@ -16,7 +16,7 @@ import Uu5Elements from "uu5g05-elements";
 
 const DataListProvider = createComponent({
   //@@viewOn:statics
-  uu5Tag: Config.TAG + "DataListProvider",
+  uu5Tag: Config.TAG + "ImplementedDataListProvider",
   //@@viewOff:statics
 
   //@@viewOn:propTypes

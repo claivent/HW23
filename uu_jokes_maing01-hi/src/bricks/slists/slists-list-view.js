@@ -134,6 +134,13 @@ const SlistsListView = createVisualComponent({
       return datalist.DATA.handlerMap.delete(data);
     }
 
+    function handleMembers(data){
+
+      const seznam = datalist.UData.data;
+        const vybraneZaznamy = seznam.filter( zaznam => data.includes(zaznam.data._uuIdentity)  );
+     if( vybraneZaznamy.length !== 0 )  { return vybraneZaznamy.map(zaznam => zaznam.data._name).join(', ')} else { return "notMembers" }
+  }
+
 
     const FILTER_DEFINITION_LIST = [
       {
@@ -188,6 +195,7 @@ const SlistsListView = createVisualComponent({
               <SlistsTile key={datalist.DATA.data.id}
 
                 onUpdates={props.onUpdates}
+                members={handleMembers}
               />
 
 

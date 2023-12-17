@@ -52,7 +52,7 @@
       },
       "slist/archive": {
         "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "profileList": ["Authorities"]
       },
       "sitem/create": {
         "sysStateList": ["active"],

@@ -159,7 +159,7 @@ class SlistAbl {
     /*Try change is archived*/
     /*uuObject.isArchived = false;*/
     if (dtoIn) {
-      daoResult = await this.dao.Archive(uuObject, id);
+      daoResult = await this.dao.archive(uuObject, id);
     }
 
     // prepare and return dtoOut

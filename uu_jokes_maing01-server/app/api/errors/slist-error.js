@@ -208,4 +208,5 @@ module.exports = {
   List,
   Get,
   Create,
+  Archive,
 };

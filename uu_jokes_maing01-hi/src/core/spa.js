@@ -84,9 +84,9 @@ const Spa = createVisualComponent({
       <Plus4U5.SpaProvider initialLanguageList={["en", "cs"]} baseUri={Environment.get("callsBaseUri")}>
         <Uu5Elements.ModalBus>
 
-          <Plus4U5App.Spa>
 
-              <SessionResolver>
+
+
 
                   <DataListProvider>
 
@@ -108,9 +108,9 @@ const Spa = createVisualComponent({
 
                   </DataListProvider>
 
-              </SessionResolver>
 
-          </Plus4U5App.Spa>
+
+
 
         </Uu5Elements.ModalBus>
       </Plus4U5.SpaProvider>

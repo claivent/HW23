@@ -203,7 +203,7 @@ const SlistsListView = createVisualComponent({
                 setCreateOpen(false)
               }} header={"Vytvořit seznam"} footer={<Uu5Forms.SubmitButton/>}>
                 <Uu5Forms.Form.View gridLayout={{ xs: "name, notes", s: "name notes" }}>
-                  <Uu5Forms.FormText name={"name"} label="Name" required minLength={3} maxLength={100}/>
+                  <Uu5Forms.FormText name={"name"} label="Name"  minLength={3} maxLength={100} required={true} />
                   <Uu5Forms.FormText name={"notes"} label="Notes" minLength={3} maxLength={4000}/>
                 </Uu5Forms.Form.View>
               </Uu5Elements.Modal>

@@ -135,11 +135,13 @@ const SItemsListView = createVisualComponent({
 
 
     const datalist = useContext(ContextDataList);
-    // console.log("datalist", datalist);
+     console.log("datalist", datalist);
     let list = {};
     datalist.DATA.data.find((item) => {
+      console.log ("item",item);
       item.data.id.toString() === props.listId && (list = item);
     });
+    console.log("list",list);
     let DATA = list.data.shoppingItems;
 
 

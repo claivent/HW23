@@ -81,7 +81,7 @@ const SlistsTile = createVisualComponent({
 
 
 
-    console.log("TILEPROPS", props);
+    //console.log("TILEPROPS", props);
     //console.log("archive", props.data.data.isArchived);
     //@@viewOn:private
     const { children } = props;

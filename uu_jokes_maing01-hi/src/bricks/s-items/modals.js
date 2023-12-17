@@ -56,11 +56,11 @@ const Modals = createVisualComponent({
           <Uu5Forms.FormText name="color"
                              initialValue={DATA ? DATA.color:undefined}  placeholder="Neaktivní" label = "color" disabled={true} />
           <Uu5Forms.FormText name="name"
-                             initialValue={DATA? DATA.name:""} minLength={3} maxLength={100} placeholder="Vlož jméno Produktu" label = "Name" />
+                             initialValue={DATA? DATA.name:""} minLength={3} maxLength={100} placeholder="Vlož jméno Produktu" label = "Name" required ={true}/>
           <Uu5Forms.FormNumber name="amount"
-                               initialValue={DATA ? DATA.amount:0} placeholder="Vlož množství produktu" label = "Amount" />
+                               initialValue={DATA ? DATA.amount:0} placeholder="Vlož množství produktu" label = "Amount" required = {true} />
           <Uu5Forms.FormText name="unit"
-                             initialValue={DATA? DATA.unit:""} minLength={2}  maxLength={100} placeholder="Vlož jednotku (kg, bal, ks)"  label = "Unit" />
+                             initialValue={DATA? DATA.unit:""} minLength={2}  maxLength={100} placeholder="Vlož jednotku (kg, bal, ks)"  label = "Unit" required ={true} />
           <Uu5Forms.FormCheckbox name="active"
                              initialValue={DATA ? DATA.active:true} label="Zakoupeno" />
         </Uu5Elements.Modal>

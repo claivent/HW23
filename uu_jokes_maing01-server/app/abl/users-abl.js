@@ -17,22 +17,31 @@ class UsersAbl {
   async list(awid, dtoIn, session, authorizationResult) {
     console.log("init",dtoIn);
     let uuAppErrorMap = {};
+    let filter = {};
+    let projection = {};
+    dtoIn.filter ? filter = dtoIn.filter: filter;
+    dtoIn.projection ? projection = dtoIn.projection: projection;
+
 
     const DEFAULTS = { sortBy: "name", order: "asc", pageIndex: 0, pageSize: 100, };
     // validation of dtoIn
     const validationResult = this.validator.validate("slistListDtoInType", dtoIn);
     uuAppErrorMap = ValidationHelper.processValidationResult(dtoIn, validationResult, uuAppErrorMap, Warnings.List.UnsupportedKeys.code, Errors.List.InvalidDtoIn);
     // set a default value
+
     if (!dtoIn.sortBy) dtoIn.sortBy = DEFAULTS.sortBy;
     if (!dtoIn.order) dtoIn.order = DEFAULTS.order;
     if (!dtoIn.pageInfo) dtoIn.pageInfo = {};
     if (!dtoIn.pageInfo.pageSize) dtoIn.pageInfo.pageSize = DEFAULTS.pageSize;
     if (!dtoIn.pageInfo.pageIndex) dtoIn.pageInfo.pageIndex = DEFAULTS.pageIndex;
-    console.log("after",dtoIn);
+
     //get list of shopping list
     let daoResult;
+
+
     if (dtoIn) {
-      daoResult = await this.dao.list(awid, dtoIn.sortBy, dtoIn.order, dtoIn.pageInfo);
+
+      daoResult = await this.dao.list(awid, filter, projection, dtoIn.sortBy, dtoIn.order, dtoIn.pageInfo);
     }
 
     // prepare and return dtoOut

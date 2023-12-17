@@ -31,11 +31,9 @@ class UsersMongo extends UuObjectDao {
 
   }
 
-  async list(awid,sortBy, order, page) {
-    const filter = {};
+  async list(awid, filter, projection, sortBy, order, page) {
     const pageInfo = {...page }     ;
     const sort = { [sortBy]: order === "asc" ? 1 : -1, };
-    const projection ={};
     return await super.find(filter, pageInfo, sort, projection);
   }
 

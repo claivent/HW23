@@ -36,7 +36,17 @@ const slistListDtoInType  = shape({
   pageInfo: shape({
     pageIndex: integer(),
     pageSize: integer()
-  })
+  }),
+  projection: shape({
+    _uuIdentity: number(),
+    _name: number()
+  }),
+  filter: shape({
+    _uuIdentity: shape({
+      $in: array(),
+    }),
+  }),
+
 });
 
 const slistDeleteDtoInType = shape({

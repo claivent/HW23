@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, useSession } from "uu5g05";
+import { createVisualComponent, Utils, useSession, Environment } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
 import Plus4U5 from "uu_plus4u5g02";
 import Plus4U5App, { SpaPending, Error } from "uu_plus4u5g02-app";
@@ -12,6 +12,7 @@ import Home from "../routes/home.js";
 import Slist from "../routes/slist";
 import Slists from "../routes/slists";
 import ProviderPermission from "./provider-permission";
+import DataListProvider from "./providers/data-list-provider";
 
 //@@viewOff:imports
 
@@ -80,31 +81,36 @@ const Spa = createVisualComponent({
     //@@viewOn:render
     return (
 
-      <Plus4U5.SpaProvider initialLanguageList={["en", "cs"]} skipAppWorkspaceProvider>
+      <Plus4U5.SpaProvider initialLanguageList={["en", "cs"]} baseUri={Environment.get("callsBaseUri")}>
         <Uu5Elements.ModalBus>
 
-          <Plus4U5App.Spa>
 
-              <SessionResolver>
-                <ProviderPermission>
-                  {(slistsDataObject) => (
+
+
+
+                  <DataListProvider>
+
+
+                  {/*{(slistsDataObject) => (
                     <>
-                      {slistsDataObject.state === "pendingNoData" && <SpaPending/>}
-                      {slistsDataObject.state === "errorNoData" && <Error error={slistsDataObject.errorData}/>}
-                      {["ready", "pending", "error"].includes(slistsDataObject.state) && (
+                      {slistsDataObject.DATA.state === "pendingNoData" && <SpaPending/>}
+                      {slistsDataObject.DATA.state === "errorNoData" && <Error error={slistsDataObject.DATA.errorData}/>}
+                      {["ready", "pending", "error"].includes(slistsDataObject.DATA.state) && (
                         <>
-                          <RouteBar/>
+                          <RouteBar />
                           <Plus4U5App.Spa routeMap={ROUTE_MAP}/>
                         </>
 
                       )}
                     </>
-                  )}
+                  )}*/}
+                    <Plus4U5App.Spa routeMap={ROUTE_MAP}/>
 
-                </ProviderPermission>
-              </SessionResolver>
+                  </DataListProvider>
 
-          </Plus4U5App.Spa>
+
+
+
 
         </Uu5Elements.ModalBus>
       </Plus4U5.SpaProvider>

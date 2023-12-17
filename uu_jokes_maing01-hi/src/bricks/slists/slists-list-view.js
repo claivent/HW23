@@ -105,7 +105,7 @@ const SlistsListView = createVisualComponent({
 
 
     const datalist =  useDataListContext();
-    console.log("SLISTS-VIEW-datalist", datalist);
+    //console.log("SLISTS-VIEW-datalist", datalist);
     //@@viewOn:private
     const { children } = props;
 
@@ -128,10 +128,10 @@ const SlistsListView = createVisualComponent({
         });
     }
     function handlerMapCreate(data){
-      return datalist.handlerMap.create(data);
+      return datalist.DATA.handlerMap.create(data);
     }
     function handelMapDelete(data){
-      return datalist.handlerMap.delete(data);
+      return datalist.DATA.handlerMap.delete(data);
     }
 
 
@@ -140,10 +140,10 @@ const SlistsListView = createVisualComponent({
         key: "archive",
         label: "Pouze Archivované",
         filter: (item, value) => {
-          console.log("Archiveitem",item,"value", value);
+         // console.log("Archiveitem",item,"value", value);
           if (value) {
             let itemValue = typeof item.data.isArchived === "object" ? Utils.Language.getItem(item.data.isArchived) : item.data.isArchived;
-            console.log("archiveItemValue",itemValue);
+            //console.log("archiveItemValue",itemValue);
             return item.data.isArchived === true;
           }
           return true;
@@ -153,11 +153,12 @@ const SlistsListView = createVisualComponent({
       },
 
     ]
-    console.log("ssssssssssssss",datalist.data)
+    console.log("DATALIST",datalist);
+    console.log("LISTWIEWPROPS",props);
     return (
       <>
         <Uu5Tiles.ControllerProvider
-          data={datalist.data}
+          data={datalist.DATA.data}
 
           filterDefinitionList={FILTER_DEFINITION_LIST}
           filterList={archiveFilterList}
@@ -184,7 +185,7 @@ const SlistsListView = createVisualComponent({
            <SlistsFilterBar/>
             <Uu5TilesElements.Grid  tileMinWidth={300}  tileMaxWidth={400} >
 
-              <SlistsTile key={datalist.data.id}
+              <SlistsTile key={datalist.DATA.data.id}
 
                 onUpdates={props.onUpdates}
               />
@@ -193,7 +194,7 @@ const SlistsListView = createVisualComponent({
             </Uu5TilesElements.Grid>
 
 
-            <Uu5Forms.Form.Provider key={createOpen} handlerMap={datalist.handlerMap} onSubmit={async (e) => {
+            <Uu5Forms.Form.Provider key={createOpen} handlerMap={datalist.DATA.handlerMap} onSubmit={async (e) => {
               await handlerMapCreate(handleCreateSitem({ ...e.data.value }));
               setCreateOpen(false);
               console.log("submit", e.data);
@@ -202,7 +203,7 @@ const SlistsListView = createVisualComponent({
                 setCreateOpen(false)
               }} header={"Vytvořit seznam"} footer={<Uu5Forms.SubmitButton/>}>
                 <Uu5Forms.Form.View gridLayout={{ xs: "name, notes", s: "name notes" }}>
-                  <Uu5Forms.FormText name={"name"} label="Name" required minLength={3} maxLength={100}/>
+                  <Uu5Forms.FormText name={"name"} label="Name"  minLength={3} maxLength={100} required={true} />
                   <Uu5Forms.FormText name={"notes"} label="Notes" minLength={3} maxLength={4000}/>
                 </Uu5Forms.Form.View>
               </Uu5Elements.Modal>

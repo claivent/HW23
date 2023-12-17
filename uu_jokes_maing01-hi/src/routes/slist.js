@@ -60,7 +60,6 @@ let Slist = createVisualComponent({
   //@@viewOff:defaultProps
 
   render(props) {
-    console.log("SLISTS-ROUTE", props);
     //@@viewOn:private
     const { identity } = useSession();
     //@@viewOff:private
@@ -79,7 +78,7 @@ let Slist = createVisualComponent({
     return(
       <div {...attrs}>
 
-
+        <RouteBar/>
           <SItemListProvider/>
 
       </div>

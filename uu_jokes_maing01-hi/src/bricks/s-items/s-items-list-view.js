@@ -28,7 +28,7 @@ const COLUMN_LIST = [
   {value: "name", header: "Produkt"},
   {value: "amount", header: "Množství"},
   {value: "unit", header: "Jednotka"},
-  {value: "active", header: "Zakoupeno"},
+  /*{value: "active", header: "Zakoupeno"},*/
   {type: "actionList"},
 ];
 
@@ -135,11 +135,13 @@ const SItemsListView = createVisualComponent({
 
 
     const datalist = useContext(ContextDataList);
-    // console.log("datalist", datalist);
+     console.log("datalist", datalist);
     let list = {};
-    datalist.data.find((item) => {
+    datalist.DATA.data.find((item) => {
+      console.log ("item",item);
       item.data.id.toString() === props.listId && (list = item);
     });
+    console.log("list",list);
     let DATA = list.data.shoppingItems;
 
 
@@ -153,11 +155,10 @@ const SItemsListView = createVisualComponent({
     const [modalRow, setModalRow] = useState();
     const [modalOpen, setModalOpen] = useState([false, 0]);
     const dataRef = useRef(data);
-     console.log("DATA-STATE-DATA", data);
-     console.log("DATA-SERVERU", DATA);
-    // console.log("DATA-STATE-DATA", data);
+     console.log("DATA-SERVERU", DATA, "view", view, "confirmRemove", confirmRemove, "data", data,"itemsFilterList", itemsFilterList, "modalRow", modalRow, "dataRef", dataRef, "dataRef.current", dataRef.current  );
+
     function handlerMapUpdate(data) {
-      return datalist.handlerMap.update(data);
+      return datalist.DATA.handlerMap.update(data);
     }
 
     function handleClick(id, color) {
@@ -179,29 +180,21 @@ const SItemsListView = createVisualComponent({
       //save data
       delete data.id;
       setData(([...actualItemList])=>{
-        // console.log("beforeACTUALDATA", data) ;
-        // console.log("beforeACTUAL", actualItemList) ;
         const addId =Utils.String.generateId(32);
         actualItemList.push({id: addId ,  ...data, active: true, });
-        // console.log("ACTUAL", actualItemList) ;
-        // console.log("addID", addId);
         return actualItemList;
       })
     }
     function handleEditSubmit(e){
       const data =e.data.value;
-      console.log("AAAAAAAAAAAAAAA",e.data.value);
       setData(([...actualItemList])=>{
-        console.log("in",actualItemList.length);
         let actualItemListnew = actualItemList.filter(it => it.id !== data.id);
-        console.log("out",actualItemListnew.length);
-        actualItemListnew.push({id: data.id,  ...data, active: true, });
+        actualItemListnew.push({id: data.id,  ...data, color: data.active === false ? undefined : "green"  });
         setModalOpen(false, 1);
         return actualItemListnew;
       })
       return null;
     }
-
 
     useEffect(() => {
       // you know what is this, don't you?
@@ -308,9 +301,7 @@ const SItemsListView = createVisualComponent({
 
           filterDefinitionList={FILTER_DEFINITION_LIST}
           filterList={itemsFilterList}
-          onFilterChange={(e) => {
-            setItemsFilterList(e.data.filterList)
-          }}
+          onFilterChange={(e) => {setItemsFilterList(e.data.filterList)}}
         >
           <Uu5Elements.Block className={Css.main()}
                              header={<Uu5Elements.Header title="Editace položek"/>}
@@ -329,11 +320,14 @@ const SItemsListView = createVisualComponent({
                 <Uu5TilesControls.FilterManagerModal/>
                 <Uu5TilesElements.List
                  // data={data}
-                  columnList={ view == "grid" ? COLUMN_LIST.map((column) => ({ ...column,      cellComponent: (props) => {    let significance, colorScheme;      const {color} = props.data;
+                  columnList={ view === "grid" ? COLUMN_LIST.map((column) => ({ ...column,      cellComponent: (props) => {    let significance, colorScheme;      const {color} = props.data;
                           if (color) {  colorScheme = color;  significance = "highlighted";     }
+                              let listData = {...props};
 
                           return (
-                            <Uu5TilesElements.Table.Cell  {...props}  significance={significance}  colorScheme={colorScheme}   />
+                            <Uu5TilesElements.Table.Cell {...props}  significance={significance}  colorScheme={colorScheme} >
+                              {props}
+                            </Uu5TilesElements.Table.Cell>
                           );
                         },
                       }))

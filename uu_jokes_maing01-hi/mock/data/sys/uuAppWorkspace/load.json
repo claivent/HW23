@@ -54,24 +54,25 @@
     "profileData": {
       "uuIdentityProfileList": [
         "AwidInitiator",
+        "Authenticated",
         "Authorities",
         "Executives",
-        "Auditors",
-        "Authenticated",
-        "Readers"
+        "Readers",
+        "Auditors"
       ],
       "profileList": [
-        "Auditors",
         "Authorities",
-        "AwidInitiator",
-        "AwidLicenseOwner",
         "Executives",
-        "Readers"
+        "Readers",
+        "AwidLicenseOwner",
+        "AwidInitiator",
+        "Auditors"
       ]
     }
   },
   "uuAppErrorMap": {},
   "data": {
+    "name": "Shopping list (Offline mode - MOCK DATA)",
     "relatedObjectsMap": {}
   }
 }

@@ -56,6 +56,11 @@
         "httpMethod": "POST",
         "type": "CMD"
       },
+      "slist/archive": {
+        "realization": "api/controllers/SlistController.archive",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
       "sitem/create": {
         "realization": "api/controllers/SitemController.create",
         "httpMethod": "POST",

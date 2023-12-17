@@ -119,7 +119,53 @@ class SlistAbl {
   }
 
 
+  async archive(awid, dtoIn, session, authorizationResult) {
+    let uuAppErrorMap = {};
+    // validation of dtoIn
+    const validationResult = this.validator.validate("slistArchiveDtoInType", dtoIn);
+    uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn, validationResult, uuAppErrorMap,  Warnings.Archive.UnsupportedKeys.code, Errors.Archive.InvalidDtoIn
+    );
 
+    // check if document exist and  user can modify document
+
+
+    let userResult = await this.dao.get(awid, dtoIn.id);
+    if(!userResult) {
+      throw new Errors.Archive.DocumentNotExist(uuAppErrorMap, { Document_Id: dtoIn.id });
+    }
+
+    const sesId = authorizationResult
+    const userId = sesId['_uuIdentity'];
+
+    const owner = userResult.owner_id === userId;
+    const member = userResult.members.includes(userId);
+    const privateAttributes = ["owner_id", "isArchived"];  //members not allow change this attribut
+
+    if(!owner && !member){
+      throw new Errors.Archive.UserNotAuthorizedEdit(uuAppErrorMap, { user_Id: userId });
+    }
+    for (const attribute of privateAttributes) {
+      if (attribute in privateAttributes && !owner) {
+        throw new Errors.Archive.NotEditPrivateAttributes(uuAppErrorMap, {user_Id: userId});
+      }
+    }
+
+    // prepare and return dtoOut
+    let daoResult;
+    const uuObject = {...dtoIn};
+    const id = uuObject.id;
+    delete uuObject.id;
+    /*Try change is archived*/
+    /*uuObject.isArchived = false;*/
+    if (dtoIn) {
+      daoResult = await this.dao.Archive(uuObject, id);
+    }
+
+    // prepare and return dtoOut
+    const dtoOut = { ...daoResult,  uuAppErrorMap };
+    return dtoOut;
+  }
 
 
   async delete(awid, dtoIn, session, authorizationResult) {

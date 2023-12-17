@@ -26,7 +26,7 @@ const SlistsFilterBar = createComponent({
 
   render(props) {
     const datalist =  useDataListContext();
-    console.log("SLISTS-FILTER-BAR-datalist", datalist);
+    //console.log("SLISTS-FILTER-BAR-datalist", datalist);
     //@@viewOn:private
     const { children } = props;
     //@@viewOff:private

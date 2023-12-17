@@ -30,7 +30,6 @@ const SItemsListProvider = createComponent({
 
     const [route, setRoute] = useRoute();
     const {listId} = route.params;
-    console.log("SITEMS-PROVIDER", props, listId);
     //@@viewOn:private
     const { children } = props;
     //@@viewOff:private

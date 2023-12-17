@@ -51,6 +51,15 @@ class SlistController {
       ucEnv.getAuthorizationResult()
     );
   }
+
+  archive(ucEnv) {
+    return SlistAbl.archive(
+      ucEnv.getUri().getAwid(),
+      ucEnv.getDtoIn(),
+      ucEnv.getSession(),
+      ucEnv.getAuthorizationResult()
+    );
+  }
 }
 
 module.exports = new SlistController();

@@ -14,7 +14,7 @@ const slistUpdateDtoInType = shape({
     amount: number(),
     unit: string(0,100),
     active: boolean(),
-    color: string()
+    color: string() || null
   })),
   isArchived: boolean()
 
@@ -42,5 +42,11 @@ const slistListDtoInType  = shape({
 const slistDeleteDtoInType = shape({
   id: id().isRequired()
 });
+
+const slistArchiveDtoInType = shape({
+  id: id().isRequired(),
+  isArchived: boolean().isRequired()
+});
+
 
 

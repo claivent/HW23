@@ -50,6 +50,10 @@
         "sysStateList": ["active"],
         "profileList": ["Authorities","Executives"]
       },
+      "slist/archive": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
       "sitem/create": {
         "sysStateList": ["active"],
         "profileList": ["Authorities","Executives"]

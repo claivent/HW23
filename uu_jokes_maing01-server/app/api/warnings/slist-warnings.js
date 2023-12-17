@@ -20,6 +20,9 @@ const Warnings = {
     UnsupportedKeys: { code: `${Errors.Get.UC_CODE}unsupportedKeys`, },
   },
 
+  Archive: {
+    UnsupportedKeys: { code: `${Errors.Get.UC_CODE}unsupportedKeys`, },
+  },
 
 };
 

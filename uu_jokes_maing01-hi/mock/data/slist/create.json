@@ -1,3 +1,117 @@
-[
-  {"id": "c7894e08dbd1456b89abae5b5bb1862b", "name": "Kuchařské dobrodružství", "notes": "Přemýšlíme o zkoumání nových receptů a nákupu ingrediencí podle nich.", "owner_id": "456-129-321", "owner_name": "Veronika Hájková", "members":["154-852-645"], "archive": false}
-]
+{
+  "name": "MockCreateNakup",
+  "notes": "aaaaaaaaaaaaaaaaaaa",
+  "awid": "22222222222222222222222222222222",
+  "owner_id": "9429-5525-6848-0000",
+  "owner_name": "Martin Saska",
+  "members": [],
+  "shoppingItems": [
+    {
+      "id": "bf43de13d70a04506938d825175de5a2",
+      "name": "kostky",
+      "amount": 10,
+      "unit": "kg",
+      "active": true,
+      "color": "green"
+    },
+    {
+      "id": "40ff0e9935add46b7bccdf8019407832",
+      "name": "Brokolice",
+      "amount": 8,
+      "unit": "kusů",
+      "active": true,
+      "color": "green"
+    },
+    {
+      "id": "d582e522c02a14543b30c53e9c8ef8de",
+      "name": "Meruňky",
+      "amount": 25,
+      "unit": "kg",
+      "active": false
+    },
+    {
+      "id": "069662e70410840a19fc1151efaa0d21",
+      "name": "Paprika",
+      "amount": 6,
+      "unit": "kusů",
+      "active": false
+    },
+    {
+      "id": "f4d477e6e9f2a4873bae6eb9f272a703",
+      "name": "Kiwi",
+      "amount": 30,
+      "unit": "kg",
+      "active": true,
+      "color": "green"
+    },
+    {
+      "id": "ac45cf380584a465eb03d5a50edf169f",
+      "name": "Růžičková kapusta",
+      "amount": 18,
+      "unit": "balení",
+      "active": true,
+      "color": "green"
+    },
+    {
+      "id": "825fd45bf2e9541448d356e2a5d325f5",
+      "color": "green",
+      "name": "Mago",
+      "amount": 5,
+      "unit": "kusů",
+      "active": true
+    },
+    {
+      "id": "2d0f63f0756244bafbd9996c325f53bd",
+      "color": "green",
+      "name": "dFds",
+      "amount": 2,
+      "unit": "sdfsf",
+      "active": true
+    },
+    {
+      "id": "d24692563c0cd4535b8fd3fd82430528",
+      "color": "green",
+      "name": "dfsf",
+      "amount": 1,
+      "unit": "sdf",
+      "active": true
+    },
+    {
+      "id": "4680d6e31d0164c4da6516db785d4636",
+      "color": "green",
+      "name": "vcx",
+      "amount": 5,
+      "unit": "xcv",
+      "active": true
+    },
+    {
+      "id": "89a177b05b4b5427b94eafa7c6b918bc",
+      "name": "Mrkev",
+      "amount": 10,
+      "unit": "balení",
+      "active": true
+    },
+    {
+      "id": "cda2f13dbbc374be58a5112ace087eaa",
+      "name": "Hrušky",
+      "amount": 20,
+      "unit": "kg",
+      "active": true
+    },
+    {
+      "id": "be193c71d5b754361983ff8c4027c30f",
+      "color": "green",
+      "name": "Šss",
+      "amount": 12,
+      "unit": "balenís",
+      "active": true
+    }
+  ],
+  "isArchived": false,
+  "sys": {
+    "cts": "2023-12-12T18:50:09.477Z",
+    "mts": "2023-12-15T10:52:49.734Z",
+    "rev": 144
+  },
+  "id": "6578ab61ef8e501b1480ecad"
+}

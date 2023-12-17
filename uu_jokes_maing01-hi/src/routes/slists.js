@@ -88,7 +88,7 @@ let Slists = createVisualComponent({
     return(
       <div {...attrs}>
 
-
+        <RouteBar/>
         <SlistsListProvider />
 
 

@@ -37,16 +37,22 @@ const Calls = {
     const commandUri = Calls.getCommandUri("slist/list");
     return Calls.call("get", commandUri, dtoIn);
   },
-
   updateSlist(dtoIn){
     console.log("Calls update", dtoIn);
     const commandUri = Calls.getCommandUri("slist/update");
     return Calls.call("post", commandUri, dtoIn);
   },
 
+  archiveSlist(dtoIn){
+    console.log("Calls archive", dtoIn);
+    const commandUri = Calls.getCommandUri("slist/archive");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
+
   loadMokSys(dtoIn){
     const commandUri = Calls.getCommandUri("slist/mokSys");
-    return Calls.call("get", commandUri), dtoIn;
+    return Calls.call("get", commandUri, dtoIn);
   },
 
   loadSitemList(dtoIn){
@@ -79,11 +85,12 @@ const Calls = {
     return await Calls.getWorkspace();
   },
 
-  Slists: {
+  Slist: {
     load(dtoIn) {
       const commandUri = Calls.getCommandUri("sys/uuAppWorkspace/load");
       return Calls.call("get", commandUri, dtoIn);
     },
+
   },
 
   getCommandUri(useCase, baseUri = Environment.appBaseUri) {

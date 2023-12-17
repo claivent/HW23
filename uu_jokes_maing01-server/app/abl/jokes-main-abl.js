@@ -125,12 +125,14 @@ class JokesMainAbl {
     const dtoOut = await UuAppWorkspace.load(uri, session, uuAppErrorMap);
 
     // TODO Implement according to application needs...
+    const applicationName = "Shopping list (Online mode - with server data)";
+
     if (dtoOut.sysData.awidData.sysState !== UuAppWorkspace.SYS_STATES.CREATED &&
        dtoOut.sysData.awidData.sysState !== UuAppWorkspace.SYS_STATES.ASSIGNED
     ) {
       const awid = uri.getAwid();
       const appData = await this.dao.get(awid);
-      dtoOut.data = { ...appData, relatedObjectsMap: {} };
+      dtoOut.data = { ...appData, name: applicationName, relatedObjectsMap: {} };
 
     }
 

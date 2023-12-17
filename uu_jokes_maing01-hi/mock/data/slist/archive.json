@@ -1,5 +1,5 @@
-    {
-      "name": "Mock Updated",
+ {
+      "name": "Mock Archivated",
       "notes": "Mock notes updated",
       "awid": "22222222222222222222222222222222",
       "owner_id": "9429-5525-6848-0000",
@@ -107,12 +107,11 @@
           "active": true
         }
       ],
-      "isArchived": false,
+      "isArchived": true,
       "sys": {
         "cts": "2023-12-12T18:50:09.477Z",
         "mts": "2023-12-15T10:52:49.734Z",
         "rev": 144
       },
       "id": "6578ab61ef8e501b1480ecac"
-    }  
-
+    } 

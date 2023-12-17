@@ -32,34 +32,17 @@ const Modals = createVisualComponent({
   //@@viewOff:defaultProps
 
   render(props) {
-    //@@viewOn:private
+
     const { children } = props;
-    const[name, setName] = useState(props.dataRow ? props.dataRow.name:null);
-    const[amount, setAmount] = useState(props.dataRow ? props.dataRow.amount:null);
-    const[unit, setUnit] = useState(props.dataRow ? props.dataRow.unit:null);
+    const DATA = {...props.dataRow};
 
-
-
-
-    //@@viewOff:private
-
-
-
-
-    //@@viewOn:interface
-    //@@viewOff:interface
-
-    //@@viewOn:render
     const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
-
-// console.log("ModalsTile", props);
+      console.log("Atributy",attrs)
     return (
       <div {...attrs}>
-
         <Uu5Elements.Modal
           open={props.open}
           onClose={props.close}
-
           header="Create Shop Item"
           footer={
             <div>
@@ -69,23 +52,18 @@ const Modals = createVisualComponent({
           }
         >
           <Uu5Forms.FormText name="id"
-                             initialValue={props.dataRow ? props.dataRow.id:null}   placeholder="Vlož jméno Produktu" label = "Name" disabled={true}/>
+                             initialValue={DATA ? DATA.id:""}   placeholder="id" label = "id" disabled={true} />
           <Uu5Forms.FormText name="color"
-                             initialValue={props.dataRow ? props.dataRow.color:null}  placeholder="Neaktivní" label = "Name" disabled={true}/>
-
+                             initialValue={DATA ? DATA.color:undefined}  placeholder="Neaktivní" label = "color" disabled={true} />
           <Uu5Forms.FormText name="name"
-                         initialValue={name} onChange={(e)=> setName(e.data.value)}  placeholder="Vlož jméno Produktu" label = "Name"/>
-          <Uu5Forms.FormText name="amount"
-                             initialValue={amount}  onChange={(e)=> setAmount(e.data.value)}   placeholder="Vlož množství produktu"    label = "Amount"/>
+                             initialValue={DATA? DATA.name:""} minLength={3} maxLength={100} placeholder="Vlož jméno Produktu" label = "Name" required ={true}/>
+          <Uu5Forms.FormNumber name="amount"
+                               initialValue={DATA ? DATA.amount:0} placeholder="Vlož množství produktu" label = "Amount" required = {true} />
           <Uu5Forms.FormText name="unit"
-                             initialValue={unit} onChange={(e)=> setUnit(e.data.value)}     placeholder="Vlož jednotku (kg, bal, ks)"  label = "Unit"/>
-
+                             initialValue={DATA? DATA.unit:""} minLength={2}  maxLength={100} placeholder="Vlož jednotku (kg, bal, ks)"  label = "Unit" required ={true} />
+          <Uu5Forms.FormCheckbox name="active"
+                             initialValue={DATA ? DATA.active:true} label="Zakoupeno" />
         </Uu5Elements.Modal>
-
-
-
-
-
       </div>
     )
 

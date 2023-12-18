@@ -117,7 +117,8 @@ const SlistsListView = createVisualComponent({
     const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
     const [createOpen, setCreateOpen] = useState(false);
     const [archiveFilterList, setArchiveFilterList] = useState([{ key: "archive", value: false }]);
-
+    const [data, setData] = useState(datalist.DATA.data);
+    console.log("DataVIEW",data);
     function handleCreateSitem(formData) {
       console.log("submit", formData);
       return (
@@ -156,12 +157,13 @@ const SlistsListView = createVisualComponent({
       },
 
     ]
-    console.log("DATALIST",datalist);
-    console.log("LISTWIEWPROPS",props);
+    // console.log("DATALIST",datalist);
+    // console.log("LISTWIEWPROPS",props);
     return (
       <>
         <Uu5Tiles.ControllerProvider
-          data={datalist.DATA.data}
+          data={data}
+          selectable="multiple"
 
           filterDefinitionList={FILTER_DEFINITION_LIST}
           filterList={archiveFilterList}
@@ -169,6 +171,7 @@ const SlistsListView = createVisualComponent({
             setArchiveFilterList(e.data.filterList)
           }}
         >
+
           <Uu5Elements.Block className={Css.main()}
                              header={
                                <Uu5Elements.Header
@@ -188,12 +191,18 @@ const SlistsListView = createVisualComponent({
           >
 
            <SlistsFilterBar/>
-            <Uu5TilesElements.Grid  tileMinWidth={300}  tileMaxWidth={400} >
+            <Uu5TilesControls.BulkActionBar />
+            <Uu5TilesElements.Grid  tileMinWidth={400}  tileMaxWidth={400}
+                                    draggable
+                                    onDrop={(e) => setData(e.data.data)}
+            >
 
               <SlistsTile
 
                 onUpdates={props.onUpdates}
                 members={handleMembers}
+                setData={data}
+
               />
 
 

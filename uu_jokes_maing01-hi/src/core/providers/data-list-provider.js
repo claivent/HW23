@@ -80,6 +80,7 @@ const DataListProvider = createComponent({
     }
     async function handleArchive(data) {
       return await Calls.archiveSlist(data);
+
     }
 
 

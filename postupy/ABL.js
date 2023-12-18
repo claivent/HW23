@@ -11,3 +11,6 @@
                    initialValue={DATA? DATA.unit:""} minLength={2}  maxLength={100} placeholder="Vlož jednotku (kg, bal, ks)"  label = "Unit" validateOnMount = {false}/>
 <Uu5Forms.FormCheckbox name="active"
                        initialValue={DATA ? DATA.active:true} label="Zakoupeno" validateOnMount = {false}/>*/
+
+
+

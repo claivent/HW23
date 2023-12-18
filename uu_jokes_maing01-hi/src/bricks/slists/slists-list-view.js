@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, useState } from "uu5g05";
+import {createVisualComponent, Utils, useState, createComponent} from "uu5g05";
 import Config from "./config/config.js";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Uu5Elements from "uu5g05-elements";
@@ -61,7 +61,7 @@ const Css = {
       marginBottom: 16,
     }),
 
-  image: () => Config.Css.css({ width: "100%" }),
+  image: () => Config.Css.css({width: "100%"}),
 
   footer: () =>
     Config.Css.css({
@@ -103,11 +103,10 @@ const SlistsListView = createVisualComponent({
   render(props) {
 
 
-
-    const datalist =  useDataListContext();
+    const datalist = useDataListContext();
     //console.log("SLISTS-VIEW-datalist", datalist);
     //@@viewOn:private
-    const { children } = props;
+    const {children} = props;
 
     //@@viewOff:private
 
@@ -127,17 +126,20 @@ const SlistsListView = createVisualComponent({
           "notes": formData.notes
         });
     }
-    function handlerMapCreate(data){
+
+    function handlerMapCreate(data) {
       return datalist.DATA.handlerMap.create(data);
     }
 
-
-    function handleMembers(data){
-
+    function handleMembers(data) {
       const seznam = datalist.UData.data;
-        const vybraneZaznamy = seznam.filter( zaznam => data.includes(zaznam.data._uuIdentity)  );
-     if( vybraneZaznamy.length !== 0 )  { return vybraneZaznamy.map(zaznam => zaznam.data._name).join(', ')} else { return "notMembers" }
-  }
+      const vybraneZaznamy = seznam.filter(zaznam => data.includes(zaznam.data._uuIdentity));
+      if (vybraneZaznamy.length !== 0) {
+        return vybraneZaznamy.map(zaznam => zaznam.data._name).join(', ')
+      } else {
+        return "notMembers"
+      }
+    }
 
 
     const FILTER_DEFINITION_LIST = [
@@ -146,13 +148,11 @@ const SlistsListView = createVisualComponent({
         label: "Pouze Archivované",
         filter: (item, value) => {
           if (value) {
-            //let itemValue = typeof item.data.isArchived === "object" ? Utils.Language.getItem(item.data.isArchived) : item.data.isArchived;
             return item.data.isArchived === true;
           }
           return true;
         },
         inputType: "bool",
-
       },
 
     ]
@@ -169,26 +169,28 @@ const SlistsListView = createVisualComponent({
             setArchiveFilterList(e.data.filterList)
           }}
         >
-
           <Uu5Elements.Block className={Css.main()}
                              header={
                                <Uu5Elements.Header
                                  title="Nákupní seznamy"
-                                 subtitle="Pro vás"
                                  icon="uugds-favorites"
-                                 // onIconClick={() => alert("click")}
+                                 //onIconClick={() => alert("click")}
                                />}
 
                              actionList={[
-                               { component: <Uu5TilesControls.FilterButton type="bar"/> },
-                               { icon: "uugdsstencil-uiaction-plus-circle-solid", children: "vytvořit", onClick: () => setCreateOpen(true) }
+                               {component: <Uu5TilesControls.FilterButton type="bar"/>},
+                               {
+                                 icon: "uugdsstencil-uiaction-plus-circle-solid",
+                                 children: "vytvořit",
+                                 onClick: () => setCreateOpen(true)
+                               }
                              ]}
           >
 
            <SlistsFilterBar/>
             <Uu5TilesElements.Grid  tileMinWidth={300}  tileMaxWidth={400} >
 
-              <SlistsTile key={datalist.DATA.data.id}
+              <SlistsTile
 
                 onUpdates={props.onUpdates}
                 members={handleMembers}
@@ -199,15 +201,15 @@ const SlistsListView = createVisualComponent({
 
 
             <Uu5Forms.Form.Provider key={createOpen} handlerMap={datalist.DATA.handlerMap} onSubmit={async (e) => {
-              await handlerMapCreate(handleCreateSitem({ ...e.data.value }));
+              await handlerMapCreate(handleCreateSitem({...e.data.value}));
               setCreateOpen(false);
               console.log("submit", e.data);
             }}>
               <Uu5Elements.Modal open={createOpen} onClose={() => {
                 setCreateOpen(false)
               }} header={"Vytvořit seznam"} footer={<Uu5Forms.SubmitButton/>}>
-                <Uu5Forms.Form.View gridLayout={{ xs: "name, notes", s: "name notes" }}>
-                  <Uu5Forms.FormText name={"name"} label="Name"  minLength={3} maxLength={100} required={true} />
+                <Uu5Forms.Form.View gridLayout={{xs: "name, notes", s: "name notes"}}>
+                  <Uu5Forms.FormText name={"name"} label="Name" minLength={3} maxLength={100} required={true}/>
                   <Uu5Forms.FormText name={"notes"} label="Notes" minLength={3} maxLength={4000}/>
                 </Uu5Forms.Form.View>
               </Uu5Elements.Modal>
@@ -222,6 +224,6 @@ const SlistsListView = createVisualComponent({
 });
 
 //@@viewOn:exports
-export { SlistsListView };
+export {SlistsListView};
 export default SlistsListView;
 //@@viewOff:exports

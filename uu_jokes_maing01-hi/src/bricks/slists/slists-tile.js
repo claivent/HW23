@@ -84,9 +84,11 @@ const SlistsTile = createVisualComponent({
     //console.log("TILEPROPS", props);
     //console.log("archive", props.data.data.isArchived);
     //@@viewOn:private
-    const { children } = props;
+    //const { children } = props;
+    const { data, ...otherProps } = props;
     const[deleteOpen, setDeleteOpen] = useState(false);
 
+    console.log("otherprops", data);
     const [, setRoute] = useRoute();
     //@@viewOff:private
 
@@ -114,62 +116,57 @@ const SlistsTile = createVisualComponent({
     return  (
       <>
 
-      <Uu5TilesElements.Tile  className={Css.tile()}
-                              header={
+      <Uu5TilesElements.Tile
+        {...otherProps}
 
-                                <Uu5Elements.Header
-
-                                  className={Css.header()}
-                                  title={props.data.data.name}
-                                  icon="uugds-favorites"
-
-                                />  }
-
+        key ={data.data.id}
+        className={Css.tile()}
+        header={
+          <Uu5Elements.Header className={Css.header()} title={data.data.name}  icon="uugds-favorites"/>
+        }
         actionList={[
           { icon: "uugds-pencil", children: <Lsi import={importLsi} path={["Menu", "slist"]} />,
-            onClick: () => setRoute("slist", { listId: props.data.data.id }) },
+            onClick: () => setRoute("slist", { listId: data.data.id }) },
           {
           icon: "uugds-close", children: "Smazat", onClick: () => setDeleteOpen(true) },
           {icon: "uugdsstencil-uiaction-archive", children: "Archivovat", onClick: async () => {
-            handleIsArchived({...props.data});}
+            handleIsArchived({...data});}
           }
-
-
         ]}
-
       >
-        <div>
-        <Uu5Elements.Text {...titleStyles} >
+        <div key={"divNotes"}>
+        <Uu5Elements.Text key={"notes"} {...titleStyles} >
          <Uu5Elements.Icon icon="uugds-favorites" className={Css.margin("right", fixedC)} />
-          {props.data.data.notes}
+          {data.data.notes}
         </Uu5Elements.Text>
         </div>
-        <div className={Css.marginTop()}>
-        <Uu5Elements.Text >
+        <div key={"divOwner"} className={Css.marginTop()}>
+        <Uu5Elements.Text key="owner" colorScheme="green">
           <Uu5Elements.Icon icon="uugds-favorites"  />
-          {"Vlastník: "}{props.data.data.owner_name}
+          {"  Vlastník: "}{data.data.owner_name}
         </Uu5Elements.Text>
       </div>
-        <div className={Css.italic()}>
-          <Uu5Elements.Text{...textStyles("content")}  >
-            {"Členové: "}({props.data.data.members ? props.members( props.data.data.members): "Not members"})
+        <div key={"divMembers"} className={Css.italic()}>
+          <Uu5Elements.Text key={"members"}{...textStyles("content")}  >
+            {"Členové: "}({data.data.members ? props.members( data.data.members): "Not members"})
           </Uu5Elements.Text>
         </div>
-          <div >
-            <Uu5Elements.Text className={Css.display(props.data.data.isArchived)}  >
-              {"Archived "}{props.data.data.isArchived}
+          <div key={"divArchived"}>
+            <Uu5Elements.Text key={"archived"} className={Css.display(data.data.isArchived)}  >
+              {"Archived "}{data.data.isArchived}
             </Uu5Elements.Text>
           </div>
       </Uu5TilesElements.Tile>
+
         <Uu5Elements.Dialog
           open={deleteOpen}
           onCLose = {() => setDeleteOpen(false)}
           header  = "chcete smazat položku?"
-          info = {props.data.data.name}
+          info = {data.data.name}
           icon ="uugds-delete"
           actionList={[
             {children: "Smazat", colorScheme: "negative", significance: "highlighted",  onClick: async () => {
-              await handleDeleteTile({...props.data});
+              await handleDeleteTile({...data});
             } },
             {children: "Zrušit", onClick: () => setDeleteOpen(false)  },
           ]}

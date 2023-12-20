@@ -1,12 +1,13 @@
 //@@viewOn:imports
 import {createVisualComponent, Utils, Content, useSession} from "uu5g05";
-import { useSubAppData, useSystemData } from "uu_plus4u5g02";
+import {useSubAppData, useSystemData} from "uu_plus4u5g02";
 import Config from "./config/config.js";
-import { withRoute } from "uu_plus4u5g02-app";
+import {withRoute} from "uu_plus4u5g02-app";
 import Tree from "../bricks/help/tree";
 import RouteBar from "../core/route-bar.js";
 import SlistsListProvider from "../bricks/slists/slist-list-provider";
 import importLsi from "../lsi/import-lsi.js";
+import DataListProvider from "../core/providers/data-list-provider";
 
 
 //@@viewOff:imports
@@ -61,7 +62,7 @@ let Slists = createVisualComponent({
   render(props) {
     //@@viewOn:private
 
-    const { identity } = useSession();
+    const {identity} = useSession();
 
 
     //@@viewOff:private
@@ -73,7 +74,7 @@ let Slists = createVisualComponent({
     const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
 
 
-    function ProductCategoryRow({ category }) {
+    function ProductCategoryRow({category}) {
       return (
         <tr>
           <th colSpan="2">
@@ -84,27 +85,25 @@ let Slists = createVisualComponent({
     }
 
 
-
-    return(
+    return (
       <div {...attrs}>
-
-        <RouteBar/>
-        <SlistsListProvider />
-
+        <DataListProvider>
+          <RouteBar/>
+          <SlistsListProvider/>
+        </DataListProvider>
 
 
       </div>
-    ) ;
+    );
     //@@viewOff:render
   },
 });
 
 
-Slists = withRoute(Slists, { authenticated: false }); //TODO return back to true
-
+Slists = withRoute(Slists, {authenticated: false}); //TODO return back to true
 
 
 //@@viewOn:exports
-export { Slists };
+export {Slists};
 export default Slists;
 //@@viewOff:exports

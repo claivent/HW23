@@ -37,7 +37,7 @@ const Modals = createVisualComponent({
     const DATA = {...props.dataRow};
 
     const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
-      console.log("Atributy",attrs)
+     // console.log("Atributy",attrs)
     return (
       <div {...attrs}>
         <Uu5Elements.Modal

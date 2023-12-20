@@ -36,9 +36,9 @@ class SlistMongo extends UuObjectDao {
 
   }
 
-  async update(uuObject, id) {
+  async update(uuObject, id, filter, projection, ) {
     let result;
-    let filter = {_id: id};
+     !filter ? filter =  {_id: id}: null;
     let revisionStrategy = "REVISION";
     result = await super.findOneAndUpdate(filter, uuObject, "NONE" );
     /*(err, output) => {      if (err) return ((output) => (output('Error updating user:')    });*/

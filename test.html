@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Example 06</title>
+
+  <script src="https://cdn.plus4u.net/uu-uu5loaderg01/1.0.0/uu5loaderg01.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.plus4u.net/uu-uu5g05/1.0.0/assets/example-config.js?" crossorigin="anonymous"></script>
+  <script src="https://cdn.plus4u.net/uu-uu5tilesg02/2.0.0/assets/example-config.js" crossorigin="anonymous"></script>
+
+  <style>
+    body {
+      padding: 16px 32px;
+    }
+  </style>
+</head>
+<body>
+<div id="uu5">Loading...</div>
+
+<script type="text/babel">
+  import {createComponent, createVisualComponent, Utils, useState, Lsi} from "uu5g05";
+  import Uu5Elements from "uu5g05-elements";
+  import Uu5Tiles from "uu5tilesg02";
+  import Uu5TilesControls from "uu5tilesg02-controls";
+  import Uu5TilesElements from "uu5tilesg02-elements";
+  import {DATA} from "uu5tilesg02/assets/mocks/animal-mocks.jsx";
+  import {Config} from "uu5g05-dev";
+
+  Utils.Language.setLanguage("en");
+
+  const CSS = {
+    layout: (padding, gap) => {
+      let styles = {};
+      if (padding) {
+        styles = {
+          paddingTop: padding.top,
+          paddingRight: padding.right,
+          paddingBottom: padding.bottom,
+          paddingLeft: padding.left,
+        };
+      }
+      return Config.Css.css({
+        ...styles,
+        display: "flex",
+        flexDirection: "column",
+        gap,
+      });
+    },
+
+    italic: () => Config.Css.css({fontStyle: "italic"}),
+    margin: (side, size) => {
+      const style = side === "left" ? {marginLeft: size} : {marginRight: size};
+      return Config.Css.css(style);
+    },
+    image: (isModal) =>
+      Config.Css.css({
+        width: "100%",
+        height: isModal ? 400 : 120,
+        display: "block",
+        objectFit: "cover",
+      }),
+    controls: () =>
+      Config.Css.css({
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        gap: 8,
+        padding: 8,
+
+      }),
+  };
+
+  const DATA_EXAMPLE = [
+    {
+      id: "tygr01",
+      speciesName: "Bengal tiger",
+      speciesTaxonomyName: "Panthera tigris",
+      class: "Mammalia",
+      order: "Carnivora",
+      family: "Felidae",
+      location: "Asia",
+      description: "",
+      img: "tygr_01",
+    },
+    {
+      id: "pavian01",
+      speciesName: "Hamadryas baboon",
+      speciesTaxonomyName: "Papio hamadryas",
+      class: "Mammalia",
+      order: "Primates",
+      family: "Cercopithecidae",
+      location: "Africa",
+      description: "",
+      img: "pavian_01",
+    },
+    // the data of the first two items shown in this example.
+  ];
+
+  /*@@viewOn:example*/
+  const CustomTile = createVisualComponent({
+    render(props) {
+      const {data, selected, toggleSelected, dragElementRef, ...otherProps} = props;
+      const [open, setOpen] = useState(false);
+
+      const titleStyles = {category: "interface", segment: "title", type: "micro"};
+      const textStyles = (segment) => ({category: "interface", segment, type: "medium"});
+      const fixedC = Uu5Elements.UuGds.SpacingPalette.getValue(["fixed", "c"]);
+
+      return (
+        <>
+          <Uu5Elements.Tile
+            {...otherProps}
+            borderRadius="elementary"
+            onClick={() => setOpen(true)}
+            significance={selected ? "distinct" : "common"}
+            colorScheme={selected ? "green" : "building"}
+          >
+            {({padding}) => {
+              return (
+                <>
+                  <div className={CSS.controls()}>
+                    <Uu5Elements.Button colorScheme="green" elementRef={dragElementRef}>
+                      <Lsi lsi={{cs: "Přetáhnout položku", en: "Drag item"}}/>
+                    </Uu5Elements.Button>
+                    <Uu5Elements.Button
+                      colorScheme="green"
+                      significance="distinct"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        typeof toggleSelected === "function" ? toggleSelected() : undefined;
+                      }}
+                    >
+                      <Lsi lsi={{cs: "Vybrat položku", en: "Select item"}}/>
+                    </Uu5Elements.Button>
+                  </div>
+
+                  <div className={CSS.layout(padding)}>
+                    <Uu5Elements.Text {...titleStyles}>
+                      <Uu5Elements.Icon icon="uugds-favorites" className={CSS.margin("right", fixedC)}/>
+                      {data.speciesName}
+                    </Uu5Elements.Text>
+                    <Uu5Elements.Text {...textStyles("content")} className={CSS.italic()}>
+                      ({data.speciesTaxonomyName})
+                    </Uu5Elements.Text>
+                  </div>
+                  <img
+                    src={`https://uuapp.plus4u.net/uu-webkit-maing02/1bdb540a0c53458aa20cfd9c179e6a1c/${data.img}`}
+                    alt={data.img}
+                    className={CSS.image(false)}
+                  />
+                  <div className={CSS.layout(padding, fixedC)}>
+                    <Uu5Elements.Text {...titleStyles} colorScheme="green">
+                      <Uu5Elements.Icon icon="uugdsstencil-navigation-mapmarker-solid"
+                                        className={CSS.margin("right", fixedC)}/>
+                      {data.location}
+                    </Uu5Elements.Text>
+                    <div className={CSS.layout()}>
+                      {data.class && (
+                        <div>
+                          <Uu5Elements.Text {...textStyles("content")}>
+                            <Lsi lsi={{cs: "Třída", en: "Class"}}/>
+                          </Uu5Elements.Text>
+                          <Uu5Elements.Text {...textStyles("interactive")} className={CSS.margin("left", fixedC)}>
+                            {data.class}
+                          </Uu5Elements.Text>
+                        </div>
+                      )}
+                      {data.order && (
+                        <div>
+                          <Uu5Elements.Text {...textStyles("content")}>
+                            <Lsi lsi={{cs: "Řád", en: "Order"}}/>
+                          </Uu5Elements.Text>
+                          <Uu5Elements.Text {...textStyles("interactive")} className={CSS.margin("left", fixedC)}>
+                            {data.order}
+                          </Uu5Elements.Text>
+                        </div>
+                      )}
+                      {data.family && (
+                        <div>
+                          <Uu5Elements.Text {...textStyles("content")}>
+                            <Lsi lsi={{cs: "Čeleď", en: "Family"}}/>
+                          </Uu5Elements.Text>
+                          <Uu5Elements.Text {...textStyles("interactive")} className={CSS.margin("left", fixedC)}>
+                            {data.family}
+                          </Uu5Elements.Text>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </>
+              );
+            }}
+          </Uu5Elements.Tile>
+          <Uu5Elements.Modal open={open} onClose={() => setOpen(false)} header={data.speciesName}>
+            <img
+              src={`https://uuapp.plus4u.net/uu-webkit-maing02/1bdb540a0c53458aa20cfd9c179e6a1c/${data.img}`}
+              alt={data.img}
+              className={CSS.image(true)}
+            />
+          </Uu5Elements.Modal>
+        </>
+      );
+      //@@viewOff:render
+    },
+  });
+
+  /*@@viewOff:example*/
+
+  const Page = createComponent({
+    render() {
+      const [data, setData] = useState(DATA);
+
+      return (
+        <div>
+          {/*@@viewOn:example*/}
+          <Uu5Tiles.ControllerProvider data={data} selectable="multiple">
+            <Uu5TilesControls.BulkActionBar/>
+            <Uu5TilesElements.Grid
+              tileMinWidth={250}
+              tileMaxWidth={260}
+              draggable
+              onDrop={(e) => setData(e.data.data)}
+            >
+              <CustomTile/>
+            </Uu5TilesElements.Grid>
+          </Uu5Tiles.ControllerProvider>
+          {/*@@viewOff:example*/}
+        </div>
+      );
+    },
+  });
+
+  Utils.Dom.render(<Page/>, document.getElementById("uu5"));
+</script>
+</body>
+</html>

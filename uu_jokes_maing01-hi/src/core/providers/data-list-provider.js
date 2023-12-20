@@ -55,6 +55,7 @@ const DataListProvider = createComponent({
         load: handleDataListLoad,
         create: handleDataListCreate,
         update:handleUpdate,
+        changePosition: handlePosition,
       },
       itemHandlerMap: {
         delete: handleDataListDelete,
@@ -62,7 +63,9 @@ const DataListProvider = createComponent({
       }
     });
 
-
+    function handlePosition(data){
+      Calls.deleteSlist(data);
+    }
     function handleDataListLoad() {
       return Calls.loadSlistsList();
     }

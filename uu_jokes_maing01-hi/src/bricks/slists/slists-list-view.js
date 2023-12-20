@@ -104,6 +104,9 @@ const SlistsListView = createVisualComponent({
 
 
     const datalist = useDataListContext();
+
+    console.log("SLISTS-LIST-VIEW-PROPS", props);
+    console.log("SLISTS-LIST-VIEW-CONTEXT-DATALIST", datalist);
     //console.log("SLISTS-VIEW-datalist", datalist);
     //@@viewOn:private
     const {children} = props;
@@ -117,8 +120,8 @@ const SlistsListView = createVisualComponent({
     const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
     const [createOpen, setCreateOpen] = useState(false);
     const [archiveFilterList, setArchiveFilterList] = useState([{ key: "archive", value: false }]);
-    const [data, setData] = useState(datalist.DATA.data);
-    console.log("DataVIEW",data);
+    const [data, setData] = useState(props.setData);
+    console.log("SLISTS-LIST-VIEW-STATE-data", data);
     function handleCreateSitem(formData) {
       console.log("submit", formData);
       return (
@@ -159,10 +162,11 @@ const SlistsListView = createVisualComponent({
     ]
     // console.log("DATALIST",datalist);
     // console.log("LISTWIEWPROPS",props);
+
     return (
       <>
         <Uu5Tiles.ControllerProvider
-          data={data}
+          data={props.setData}
           selectable="multiple"
 
           filterDefinitionList={FILTER_DEFINITION_LIST}
@@ -194,7 +198,7 @@ const SlistsListView = createVisualComponent({
             <Uu5TilesControls.BulkActionBar />
             <Uu5TilesElements.Grid  tileMinWidth={400}  tileMaxWidth={400}
                                     draggable
-                                    onDrop={(e) => setData(e.data.data)}
+                                    onDrop={(e) => props.drop(e.data.data)}
             >
 
               <SlistsTile

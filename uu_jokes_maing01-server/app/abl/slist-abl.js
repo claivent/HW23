@@ -72,6 +72,10 @@ class SlistAbl {
 
   async update(awid, dtoIn, session, authorizationResult) {
     let uuAppErrorMap = {};
+    let filter = {};
+    let projection = {};
+    dtoIn.filter ? filter = dtoIn.filter: filter;
+    dtoIn.projection ? projection = dtoIn.projection: projection;
     // validation of dtoIn
     const validationResult = this.validator.validate("slistUpdateDtoInType", dtoIn);
     uuAppErrorMap = ValidationHelper.processValidationResult(
@@ -110,7 +114,7 @@ class SlistAbl {
     /*Try change is archived*/
     /*uuObject.isArchived = false;*/
     if (dtoIn) {
-      daoResult = await this.dao.update(uuObject, id);
+      daoResult = await this.dao.update(uuObject, id, filter, projection );
     }
 
     // prepare and return dtoOut

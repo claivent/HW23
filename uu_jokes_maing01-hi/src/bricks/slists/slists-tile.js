@@ -93,7 +93,7 @@ const SlistsTile = createVisualComponent({
     //const { children } = props;
     const {data, selected, toggleSelected, dragElementRef, ...otherProps} = props;
     const [deleteOpen, setDeleteOpen] = useState(false);
-
+    console.log("propsTile", props);
 
 
     //console.log("otherprops", data);

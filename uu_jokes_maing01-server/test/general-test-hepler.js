@@ -5,7 +5,11 @@ const { Config } = require("uu_appg01_server").Utils;
 Config.set("server_root", path.resolve(__dirname, ".."));
 
 const SLIST_INSTANCE_INIT = "sys/uuAppWorkspace/init";
+const SLIST_GET = "slist/get";
+const SLIST_LIST = "slist/list";
 const SLIST_CREATE = "slist/create";
+const SLIST_UPDATE = "slist/update";
+const SLIST_DELETE = "slist/delete";
 const MONGO_ID = "012345678910111213141516";
 
 
@@ -37,7 +41,11 @@ const getAuthzResultMock = () => {
 
 module.exports = {
   SLIST_INSTANCE_INIT,
+  SLIST_GET,
+  SLIST_LIST,
   SLIST_CREATE,
+  SLIST_UPDATE,
+  SLIST_DELETE,
   MONGO_ID,
 
   mockDaoFactory,

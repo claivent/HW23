@@ -9,19 +9,19 @@ const Warnings = {
   },
 
   List: {
-    UnsupportedKeys: { code: `${Errors.Get.UC_CODE}unsupportedKeys`, },
+    UnsupportedKeys: { code: `${Errors.List.UC_CODE}unsupportedKeys`, },
   },
 
   Delete: {
-    UnsupportedKeys: { code: `${Errors.Get.UC_CODE}unsupportedKeys`, },
+    UnsupportedKeys: { code: `${Errors.Delete.UC_CODE}unsupportedKeys`, },
   },
 
   Update: {
-    UnsupportedKeys: { code: `${Errors.Get.UC_CODE}unsupportedKeys`, },
+    UnsupportedKeys: { code: `${Errors.Update.UC_CODE}unsupportedKeys`, },
   },
 
   Archive: {
-    UnsupportedKeys: { code: `${Errors.Get.UC_CODE}unsupportedKeys`, },
+    UnsupportedKeys: { code: `${Errors.Archive.UC_CODE}unsupportedKeys`, },
   },
 
 };

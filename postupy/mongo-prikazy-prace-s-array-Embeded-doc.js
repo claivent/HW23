@@ -92,4 +92,23 @@ db.customers.find(
   { travel: { $elemMatch:
         { country: "Thailand", visits: { $gt: 1 }, rating: { $gte: 9 } } } } );
 
+//Nalézt documents pro zákazníka, který cestuje do Polska
+
+db = db.getSiblingDB("sales");
+db.getCollection("customers2").find(
+  {
+    "travel" : {
+      "$elemMatch" : {
+        "country" : "Poland"
+      }
+    }
+  }
+);
+
+//Vymazání záznamů z db
+
+db.customers.deleteMany( { _id: { $in: [ 1, 2, 3 ] } } );
+
+
+
 

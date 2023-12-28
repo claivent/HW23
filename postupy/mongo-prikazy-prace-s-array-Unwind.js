@@ -89,3 +89,89 @@ db.getCollection("customers").find(
   }
 );
 
+//předání výstupu do jiné databáze
+db.customers.aggregate([
+  { $unwind: { path: "$interests" } },
+  { $sortByCount: "$interests" },
+  {
+    $merge: {
+      into: { db: "marketing", coll: "clients" },
+      whenMatched: "keepExisting"
+    }
+  }
+])
+
+
+{ $and: [
+  { interests: { $in: [ "Software" ] } },
+  { $or: [
+      { interests: { $in: [ "Web Design" ] } },
+      { package: "Premium" } ]
+  } ]
+}
+
+
+
+//vše dohromady
+
+db = db.getSiblingDB("sales");
+db.getCollection("customers").aggregate(
+  [
+    {
+      "$match" : {
+        "$and" : [
+          {
+            "interests" : {
+              "$in" : [
+                "Software"
+              ]
+            }
+          },
+          {
+            "$or" : [
+              {
+                "interests" : {
+                  "$in" : [
+                    "Web Design"
+                  ]
+                }
+              },
+              {
+                "package" : "Premium"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "$project" : {
+        "first" : "$first",
+        "last" : "$last",
+        "interests" : "$interests"
+      }
+    },
+    {
+      "$unwind" : {
+        "path" : "$interests"
+      }
+    },
+    {
+      "$sortByCount" : "$interests"
+    },
+    {
+      "$merge" : {
+        "into" : {
+          "db" : "reference",
+          "coll" : "interests"
+        },
+        "whenMatched" : "replace"
+      }
+    }
+  ],
+  {
+    "allowDiskUse" : false
+  }
+);
+
+

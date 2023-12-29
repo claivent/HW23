@@ -29,3 +29,8 @@ package-lock.json
 gradle-app.setting
 gradlew
 gradlew.bat
+
+
+/.run/jest.config.js.run.xml
+/uu_jokes_maing01-server/test-no.zip
+/postupy/

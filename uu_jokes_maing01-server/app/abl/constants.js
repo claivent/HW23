@@ -14,9 +14,9 @@ const Constants = {
       UNDER_CONSTRUCTION: "underConstruction",
       CLOSED: "closed",
     },
-    get NonFinalStates() {
+   /* get NonFinalStates() {
       return new Set([this.States.ACTIVE, this.States.UNDER_CONSTRUCTION]);
-    },
+    },*/
   },
 
   Profiles: {

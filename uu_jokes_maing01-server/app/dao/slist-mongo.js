@@ -14,7 +14,7 @@ class SlistMongo extends UuObjectDao {
     return await super.insertOne(slist);
   }
 
-  async list(awid, filterIn, userId, sortBy, order, page) {
+  async list(awid, filterIn,  sortBy, order, page, userId) {
     const pageInfo = page;
     const sort = {[sortBy]: order === "asc" ? 1 : -1,};
     const filter= filterIn;

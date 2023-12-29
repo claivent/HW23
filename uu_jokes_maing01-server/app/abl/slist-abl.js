@@ -95,13 +95,14 @@ class SlistAbl {
 
     const owner = userResult.owner_id === userId;
     const member = userResult.members.includes(userId);
-    const privateAttributes = ["owner_id", "isArchived"];  //members not allow change this attribut
+    const privateAttributes = ["owner_id", "isArchived", "name"];  //members not allow change this attribut
+    const dtoInAttributes = Object.keys(dtoIn);
 
     if(!owner && !member){
       throw new Errors.Update.UserNotAuthorizedEdit(uuAppErrorMap, { user_Id: userId });
     }
-    for (const attribute of privateAttributes) {
-      if (attribute in privateAttributes && !owner) {
+    for (const attribute of dtoInAttributes) {
+      if (privateAttributes.includes(attribute) && owner === false) {
         throw new Errors.Update.NotEditPrivateAttributes(uuAppErrorMap, {user_Id: userId});
       }
     }
@@ -144,7 +145,7 @@ class SlistAbl {
 
     const owner = userResult.owner_id === userId;
     const member = userResult.members.includes(userId);
-    const privateAttributes = ["owner_id", "isArchived"];  //members not allow change this attribut
+    const privateAttributes = ["owner_id", "isArchived", "name"];  //members not allow change this attribut
 
     if(!owner && !member){
       throw new Errors.Archive.UserNotAuthorizedEdit(uuAppErrorMap, { user_Id: userId });
@@ -177,7 +178,7 @@ class SlistAbl {
     // validation of dtoIn
     const validationResult = this.validator.validate("slistDeleteDtoInType", dtoIn);
     uuAppErrorMap = ValidationHelper.processValidationResult(
-      dtoIn, validationResult, uuAppErrorMap, Warnings.Create.UnsupportedKeys.code, Errors.Create.InvalidDtoIn
+      dtoIn, validationResult, uuAppErrorMap, Warnings.Delete.UnsupportedKeys.code, Errors.Delete.InvalidDtoIn
     );
 
 
@@ -192,14 +193,14 @@ class SlistAbl {
       const owner = userResult.owner_id === userId;
 
       if(!owner ){
-        throw new Errors.Delete.UserNotAuthorizedEdit(uuAppErrorMap, { user_Id: userId });
+        throw new Errors.Delete.UserNotAuthorized(uuAppErrorMap, { user_Id: userId });
       }
 
 
 
 
       let daoResult;
-      if (dtoIn) {
+      if (dtoIn && owner) {
         daoResult = await this.dao.delete(awid, dtoIn.id);
       }
 
@@ -226,7 +227,7 @@ class SlistAbl {
     // validation of dtoIn
     const validationResult = this.validator.validate("slistListDtoInType", dtoIn);
     uuAppErrorMap = ValidationHelper.processValidationResult(
-      dtoIn, validationResult, uuAppErrorMap, Warnings.Create.UnsupportedKeys.code, Errors.Create.InvalidDtoIn
+      dtoIn, validationResult, uuAppErrorMap, Warnings.List.UnsupportedKeys.code, Errors.List.InvalidDtoIn
     );
 
     // 1.4

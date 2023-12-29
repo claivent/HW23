@@ -26,13 +26,9 @@
         "sysStateList": ["created","assigned","active","restricted","readOnly","closed","suspended"],
         "profileList": ["Public"]
       },
-      "joke/create": {
-        "sysStateList": ["active"],
-        "profileList": ["Authorities","Authenticated"]
-      },
       "slist/create": {
         "sysStateList": ["active"],
-        "profileList": ["Authorities","Executives","Readers","Public"]
+        "profileList": ["Authorities","Executives","Readers"]
       },
       "slist/get": {
         "sysStateList": ["active"],

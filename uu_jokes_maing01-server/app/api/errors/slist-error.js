@@ -33,7 +33,7 @@ const Get = {
   InvalidDtoIn: class extends JokesMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Create.UC_CODE}invalidDtoIn`;
+      this.code = `${Get.UC_CODE}invalidDtoIn`;
       this.message = "DtoIn is not valid.";
     }
   },
@@ -41,7 +41,7 @@ const Get = {
   DocumentNotExist: class extends JokesMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Create.UC_CODE}documentNotExist`;
+      this.code = `${Get.UC_CODE}documentNotExist`;
       this.message = "Document is no more in Database";
     }
   },
@@ -63,7 +63,7 @@ const List = {
   DocumentNotExist: class extends JokesMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Create.UC_CODE}documentNotExist`;
+      this.code = `${List.UC_CODE}documentNotExist`;
       this.message = "Document is no more in Database";
     }
   },
@@ -76,7 +76,7 @@ const Delete = {
   InvalidDtoIn: class extends JokesMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${List.UC_CODE}invalidDtoIn`;
+      this.code = `${Delete.UC_CODE}invalidDtoIn`;
       this.message = "DtoIn is not valid.";
     }
   },
@@ -91,7 +91,7 @@ const Delete = {
   DocumentNotExist: class extends JokesMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Create.UC_CODE}documentNotExist`;
+      this.code = `${Delete.UC_CODE}documentNotExist`;
       this.message = "Document is no more in Database";
     }
   },
@@ -112,7 +112,7 @@ const Update = {
   InvalidDtoIn: class extends JokesMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${List.UC_CODE}invalidDtoIn`;
+      this.code = `${Update.UC_CODE}invalidDtoIn`;
       this.message = "DtoIn is not valid.";
     }
   },
@@ -120,7 +120,7 @@ const Update = {
   SlistDaoCreateFailed: class extends JokesMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Create.UC_CODE}SlistDaoCreateFailed`;
+      this.code = `${Update.UC_CODE}SlistDaoCreateFailed`;
       this.message = "Create slist by slist DAO create failed.";
       this.status = 400;
     }
@@ -129,7 +129,7 @@ const Update = {
   DocumentNotExist: class extends JokesMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Create.UC_CODE}documentNotExist`;
+      this.code = `${Update.UC_CODE}documentNotExist`;
       this.message = "Document is no more in Database";
     }
   },
@@ -138,7 +138,7 @@ const Update = {
   UserNotAuthorizedEdit: class extends JokesMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Create.UC_CODE}userNotAuthorizedEdit`;
+      this.code = `${Update.UC_CODE}userNotAuthorizedEdit`;
       this.message = "You are not member or owner of this document";
     }
   },
@@ -146,7 +146,7 @@ const Update = {
   NotEditPrivateAttributes: class extends JokesMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Create.UC_CODE}notEditPrivateAttributes`;
+      this.code = `${Update.UC_CODE}notEditPrivateAttributes`;
       this.message = "You can not edit private attributes";
     }
   },

@@ -26,11 +26,6 @@
         "httpMethod": "GET",
         "type": "UVE"
       },
-      "joke/create": {
-        "realization": "api/controllers/JokeController.create",
-        "httpMethod": "GET",
-        "type": "CMD"
-      },
       "slist/create": {
         "realization": "api/controllers/SlistController.create",
         "httpMethod": "POST",

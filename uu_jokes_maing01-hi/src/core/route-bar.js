@@ -1,15 +1,48 @@
 //@@viewOn:imports
-import {createVisualComponent, Lsi,  useRoute, useSession} from "uu5g05";
+import {AppBackgroundProvider, createVisualComponent, Lsi, useRoute, useSession} from "uu5g05";
 import Plus4U5App from "uu_plus4u5g02-app";
 import Config from "./config/config.js";
 import importLsi from "../lsi/import-lsi.js";
 import {useSubAppData} from "uu_plus4u5g02";
+import DarkModeToggle from "./dark-mode-toogle";
+const { UuGds } = require("uu5g05-elements");
+import {Header} from "uu5g05-elements";
 //@@viewOff:imports
 
 //@@viewOn:constants
 //@@viewOff:constants
 
 //@@viewOn:css
+const Css = {
+  main: () =>
+    Config.Css.css({
+      display: "flex",
+      flexDirection: "column",
+      height: "90%",
+      maxWidth: "90%",
+      marginLeft: "auto",
+      marginRight: "auto",
+      marginTop: "50px"
+
+    }),
+
+  header: () =>
+    Config.Css.css({
+      display: "block",
+      textAlign: "left",
+      padding: 16,
+      height: 46,
+    }),
+
+block: () =>
+  Config.Css.css({
+    display: "block",
+    textAlign: "left",
+    padding: 16,
+    height: 48,
+  }),
+}
+
 //@@viewOff:css
 
 //@@viewOn:helpers
@@ -30,6 +63,7 @@ const RouteBar = createVisualComponent({
   //@@viewOff:defaultProps
 
   render(props) {
+    console.log("UUGDS",UuGds);
     //@@viewOn:private
     const [, setRoute] = useRoute();
     const subAppDataObject = useSubAppData();
@@ -54,11 +88,26 @@ const RouteBar = createVisualComponent({
 
     //@@viewOn:render
     return (
+      <>
+
 
         <Plus4U5App.RouteBar appActionList={appActionList} {...props}>
-          <Plus4U5App.RouteHeader title={"" + subAppDataObject.data.name + " / Přihlášený uživatel: " + identity.name + ", " + identity.uuIdentity} />
+
+          <Plus4U5App.RouteHeader   />
         </Plus4U5App.RouteBar>
 
+        <DarkModeToggle />
+          <Header
+            className={Css.header()}
+            /*title={" " + subAppDataObject.data.name + " / Přihlášený uživatel: " + identity.name + ", " + identity.uuIdentity}*/
+          />
+
+
+
+
+
+
+      </>
     )
 
 

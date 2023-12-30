@@ -34,5 +34,72 @@
     "slist": "Nákupní seznam",
     "slists": "Nákupní seznamy",
     "about": "O aplikaci"
+  },
+  "SlistsTile": {
+    "dragBtn": "Přetáhnout položku",
+    "selectBtn": "Vybrat Položku",
+    "name": "Název: ",
+    "desc": "Popis: ",
+    "owner": "Vlastník: ",
+    "member": "Členové: ",
+    "archived": "Archivováno: ",
+    "arch": "Archivovat",
+    "del": "Smazat",
+    "detail": "Detail"
+
+  },
+  "SlistsView": {
+    "headerLists": "Nákupní seznamy",
+    "archOnly": "Pouze Archivované ",
+    "notMembers": "Bez členů",
+    "createList": "Nový nákupní seznam",
+    "title": "Nákupní seznamy",
+    "dialogMessage": "chcete smazat položku?",
+    "dialogSubmit": "Smazat",
+    "dialogCancel": "Zrušit"
+  },
+  "SlistsViewForm": {
+    "submit": "Vytvořit Seznam",
+    "name": "Jméno seznamu",
+    "desc": "Popis, poznámky",
+    "title": "Vytvoř nový seznam"
+
+  },
+  "ItemTile": {
+    "product": "Produkt ",
+    "amount": "Množství ",
+    "unit": "Jednotka",
+    "dialogMessage": "Smazat tuto položku?",
+    "table": "Tabulka",
+    "grid": "Dlaždice",
+    "toolTipGreen": "Archivuj",
+    "toolTipEdit": "Uprav položku",
+    "toolTipCreate": "Vytvoř položku",
+    "toolTipDelete": "Odstraň položku",
+    "notBuy": "Nenakoupeno",
+    "itemsEdit": "Editace nákupních položek",
+    "create": "Vytvoř položku"
+
+
+  },
+  "SlistsModal": {
+    "name": "List name ",
+    "desc": "Description, notes",
+    "title": "Nová položka",
+    "id": "Identifikátor položky (generuje se)",
+    "color": "Barva generuje se",
+    "amount": "Množství ",
+    "unit": "Jednotka",
+    "placeId": "Generuje se",
+    "placeColor": "Generuje se",
+    "placeName" : "Vlož množství produktu",
+    "placeAmount": "Vlož množství produktu ",
+    "placeUnit": "Vlož jednotku (kg, bal, ks)",
+    "bought": "Zakoupeno",
+    "submit": "Odeslat položku",
+    "cancel": "Zrušit zadávání"
+  },
+  "DarkMode": {
+    "switch": "Přepni pozadí"
   }
 }

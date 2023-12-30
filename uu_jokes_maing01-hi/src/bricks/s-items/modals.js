@@ -1,8 +1,9 @@
 //@@viewOn:imports
-import {createVisualComponent, Utils, Content, useState} from "uu5g05";
+import {createVisualComponent, Utils, Content, useState, Lsi} from "uu5g05";
 import Config from "./config/config.js";
 import Uu5Forms from "uu5g05-forms";
 import Uu5Elements from "uu5g05-elements";
+import importLsi from "../../lsi/import-lsi";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -43,26 +44,26 @@ const Modals = createVisualComponent({
         <Uu5Elements.Modal
           open={props.open}
           onClose={props.close}
-          header="Create Shop Item"
+          header= {<Lsi import={importLsi} path={["SlistsModal", "title"]}/>}
           footer={
             <div>
-              <Uu5Forms.CancelButton onClick= {props.onClick} />
-              <Uu5Forms.SubmitButton  />
+              <Uu5Forms.CancelButton label = {<Lsi import={importLsi} path={["SlistsModal", "submit"]}/>} onClick= {props.onClick} />
+              <Uu5Forms.SubmitButton  label = {<Lsi import={importLsi} path={["SlistsModal", "cancel"]}/>} />
             </div>
           }
         >
           <Uu5Forms.FormText name="id"
-                             initialValue={DATA ? DATA.id:""}   placeholder="id" label = "id" disabled={true} />
+                             initialValue={DATA ? DATA.id:""}   label ={<Lsi import={importLsi} path={["SlistsModal", "id"]}/>} disabled={true} />
           <Uu5Forms.FormText name="color"
-                             initialValue={DATA ? DATA.color:undefined}  placeholder="Neaktivní" label = "color" disabled={true} />
+                             initialValue={DATA ? DATA.color:undefined}   label ={<Lsi import={importLsi} path={["SlistsModal", "color"]}/>} disabled={true} />
           <Uu5Forms.FormText name="name"
-                             initialValue={DATA? DATA.name:""} minLength={3} maxLength={100} placeholder="Vlož jméno Produktu" label = "Name" required ={true}/>
+                             initialValue={DATA? DATA.name:""} minLength={3} maxLength={100}  label ={<Lsi import={importLsi} path={["SlistsModal", "name"]}/>} required ={true}/>
           <Uu5Forms.FormNumber name="amount"
-                               initialValue={DATA ? DATA.amount:0} placeholder="Vlož množství produktu" label = "Amount" required = {true} />
+                               initialValue={DATA ? DATA.amount:0} label = {<Lsi import={importLsi} path={["SlistsModal", "amount"]}/>} required = {true} />
           <Uu5Forms.FormText name="unit"
-                             initialValue={DATA? DATA.unit:""} minLength={2}  maxLength={100} placeholder="Vlož jednotku (kg, bal, ks)"  label = "Unit" required ={true} />
+                             initialValue={DATA? DATA.unit:""} minLength={2}  maxLength={100}   label = {<Lsi import={importLsi} path={["SlistsModal", "unit"]}/>} required ={true} />
           <Uu5Forms.FormCheckbox name="active"
-                             initialValue={DATA ? DATA.active:true} label="Zakoupeno" />
+                             initialValue={DATA ? DATA.active:true} label={<Lsi import={importLsi} path={["SlistsModal", "bought"]}/>} />
         </Uu5Elements.Modal>
       </div>
     )

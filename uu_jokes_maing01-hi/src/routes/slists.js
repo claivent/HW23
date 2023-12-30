@@ -8,6 +8,7 @@ import RouteBar from "../core/route-bar.js";
 import SlistsListProvider from "../bricks/slists/slist-list-provider";
 import importLsi from "../lsi/import-lsi.js";
 import DataListProvider from "../core/providers/data-list-provider";
+import {UuGds} from "uu5g05-elements";
 
 
 //@@viewOff:imports
@@ -88,7 +89,7 @@ let Slists = createVisualComponent({
     return (
       <div {...attrs}>
         <DataListProvider>
-          <RouteBar/>
+          <RouteBar />
           <SlistsListProvider/>
         </DataListProvider>
 

@@ -1,8 +1,17 @@
 //@@viewOn:imports
-import { createComponent, useDataList, useDataObject, useEffect, useState } from "uu5g05";
+import {
+  AppBackgroundProvider,
+  BackgroundProvider,
+  createComponent,
+  useDataList,
+  useDataObject,
+  useEffect,
+  useState
+} from "uu5g05";
 import Config from "./config/config.js";
 import SlistsListView from "./slists-list-view";
 import {useDataListContext} from "../../core/providers/data-list-context";
+import DarkModeToggle from "../../core/dark-mode-toogle";
 
 
 //@@viewOff:imports
@@ -34,18 +43,26 @@ const SlistsListProvider = createComponent({
     // console.log("SLISTS-LIST-PROVIDER-DATALIST", datalist);
     // console.log("SLISTS-LIST-PROVIDER-STATE-DATA", data);
     //@@viewOn:private
-    const { children } = props;
+    const {children} = props;
 
-    function handleDrop(e){
+    function handleDrop(e) {
       setData(e);
       return console.log("TODO-FUNCTIONHANDLEDROP", e);
 
     }
 
 
+    console.log("datalist.DATA.data", datalist.DATA.data);
+    return (
+        <>
 
-    return(
-        <SlistsListView drop={handleDrop} setData={datalist.DATA.data}/>
+
+
+          <SlistsListView drop={handleDrop} setData={datalist.DATA.data} />
+
+  </>
+
+
     );
 
 
@@ -53,6 +70,6 @@ const SlistsListProvider = createComponent({
 });
 
 //@@viewOn:exports
-export { SlistsListProvider };
+export {SlistsListProvider};
 export default SlistsListProvider;
 //@@viewOff:exports

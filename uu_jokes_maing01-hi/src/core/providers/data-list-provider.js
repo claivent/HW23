@@ -4,6 +4,7 @@ import Config from "./config/config.js";
 import Calls from "calls";
 import ContextDataList from "./data-list-context";
 import Uu5Elements from "uu5g05-elements";
+import DarkModeToggle from "../dark-mode-toogle";
 
 
 //@@viewOff:imports
@@ -131,10 +132,16 @@ const DataListProvider = createComponent({
               default:
 
 
-            result =
+            result =(
+              <>
+
+
               <ContextDataList.Provider value={{DATA:slistDataList, PDATA: slistsDataObject, UData:UsersDataList}}>
+
                 {typeof props.children === "function" ? props.children({DATA:slistDataList, PDATA: slistsDataObject, UData:UsersDataList}) : props.children}
               </ContextDataList.Provider>
+              </>
+              )
                 break;
             }
 

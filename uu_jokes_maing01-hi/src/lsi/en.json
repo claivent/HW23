@@ -32,7 +32,74 @@
   "Menu": {
     "home": "Welcome",
     "slist": "Shopping list",
-    "slists": "Lists",
+    "slists": "Shopping Lists",
     "about": "About Application"
+  },
+  "SlistsTile": {
+    "dragBtn": "Drag Item",
+    "selectBtn": "Select Item",
+    "name": "Name: ",
+    "desc": "Description: ",
+    "owner": "Owner: ",
+    "member": "Members: ",
+    "archived": "Archived: ",
+    "arch": "To archive",
+    "del": "Deleted",
+    "detail": "Detail"
+
+
+  },
+  "SlistsView": {
+    "headerLists": "Shopping lists",
+    "archOnly": "Archived       ",
+    "notMembers": "notMembers",
+    "createList": "Create shopping list",
+    "title": "Shopping lists",
+    "dialogMessage": "Delete this item?",
+    "dialogSubmit": "Delete Item",
+    "dialogCancel": "Cancel"
+  },
+  "SlistsViewForm": {
+    "submit": "Create list",
+    "name": "List name ",
+    "desc": "Description, notes",
+    "title": "Nový nákupní seznam"
+
+  },
+  "ItemTile": {
+    "product": "Product ",
+    "amount": "Amount ",
+    "unit": "Unit",
+    "dialogMessage": "Delete this item?",
+    "table": "Table",
+    "grid": "Grid",
+    "toolTipGreen": "Set to archived",
+    "toolTipEdit": "Edit Item",
+    "toolTipCreate": "Create Item",
+    "toolTipDelete": "Delete item",
+    "notBuy": "Not buy",
+    "itemsEdit": "Edit shopping list items",
+    "create": "Create Items"
+  },
+  "SlistsModal": {
+    "create": "Create Item",
+    "name": "Item name ",
+    "desc": "Description, notes",
+    "title": "New item",
+    "id": "Item ID (self-generated)",
+    "color": "Color",
+    "amount": "Amount ",
+    "unit": "Unit",
+    "placeId": "Self-generated",
+    "placeColor": "Self-generated",
+    "placeName" : "Input item name",
+    "placeAmount": "input item amount",
+    "placeUnit": "Input unit (kg, stock, pieces)",
+    "bought": "Bought",
+    "submit": "Submit item",
+    "cancel": "Cancel"
+  },
+  "DarkMode": {
+    "switch": " switch background "
   }
 }

@@ -4,6 +4,7 @@ import "uu5g04"; // required for proper integration with uu5g05
 import "calls";
 
 import Spa from "./core/spa.js";
+import DarkModeToggle from "./core/dark-mode-toogle";
 
 // propagate app version into environment
 Environment["appVersion"] = process.env.VERSION;

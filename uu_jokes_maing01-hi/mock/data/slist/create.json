@@ -84,20 +84,7 @@
       "unit": "xcv",
       "active": true
     },
-    {
-      "id": "89a177b05b4b5427b94eafa7c6b918bc",
-      "name": "Mrkev",
-      "amount": 10,
-      "unit": "balení",
-      "active": true
-    },
-    {
-      "id": "cda2f13dbbc374be58a5112ace087eaa",
-      "name": "Hrušky",
-      "amount": 20,
-      "unit": "kg",
-      "active": true
-    },
+
     {
       "id": "be193c71d5b754361983ff8c4027c30f",
       "color": "green",

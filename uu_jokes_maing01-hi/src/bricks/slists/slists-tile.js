@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import {createComponent, createVisualComponent, Lsi, useRoute, useState, Utils} from "uu5g05";
+import {BackgroundProvider, createComponent, createVisualComponent, Lsi, useRoute, useState, Utils} from "uu5g05";
 import Config from "./config/config.js";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Uu5Elements from "uu5g05-elements";
@@ -142,15 +142,15 @@ const SlistsTile = createVisualComponent({
           }
           actionList={[
             {
-              icon: "uugds-pencil", children: <Lsi import={importLsi} path={["Menu", "slist"]}/>,
+              icon: "uugds-pencil", children: <Lsi import={importLsi} path={["SlistsTile", "detail"]}/>,
               onClick: () => setRoute("slist", {listId: data.data.id})
             },
             {
-              icon: "uugds-close", children: "Smazat", onClick: () => setDeleteOpen(true)
+              icon: "uugds-close", children: <Lsi import={importLsi} path={["SlistsTile", "del"]}/>, onClick: () => setDeleteOpen(true)
             },
             {
-              icon: "uugdsstencil-uiaction-archive", children: "Archivovat", onClick: async () => {
-                handleIsArchived({...props.data});
+              icon: "uugdsstencil-uiaction-archive", children: <Lsi import={importLsi} path={["SlistsTile", "arch"]}/>, onClick: async () => {
+                await handleIsArchived({...props.data});
               }
             }
           ]}
@@ -160,7 +160,7 @@ const SlistsTile = createVisualComponent({
               <>
                 <div className={Css.controls()}>
                   <Uu5Elements.Button colorScheme="green" elementRef={dragElementRef}>
-                    <Lsi lsi={{cs: "Přetáhnout položku", en: "Drag item"}}/>
+                    <Lsi import={importLsi} path={["SlistsTile", "dragBtn"]}/>
                   </Uu5Elements.Button>
                   <Uu5Elements.Button
                     colorScheme="blue"
@@ -170,41 +170,42 @@ const SlistsTile = createVisualComponent({
                       typeof toggleSelected === "function" ? toggleSelected() : undefined;
                     }}
                   >
-                    <Lsi lsi={{cs: "Vybrat položku", en: "Select item"}}/>
+                    <Lsi import={importLsi} path={["SlistsTile", "selectBtn"]}/>
                   </Uu5Elements.Button>
                 </div>
 
                 <div className={Css.layout(padding)}>
                   <Uu5Elements.Text {...titleStyles}>
                     <Uu5Elements.Icon icon="uugds-favorites" className={Css.margin("right", fixedC)}/>
+                    <Lsi import={importLsi} path={["SlistsTile", "name"]}/>
                     {data.data.name}
                   </Uu5Elements.Text>
-                  <Uu5Elements.Text {...textStyles("content")} className={Css.italic()}>
-                    ({"neco"})
-                  </Uu5Elements.Text>
+
                 </div>
 
 
                 <div key={"divNotes"}>
                   <Uu5Elements.Text key={"notes"} {...textStyles("content")} >
                     <Uu5Elements.Icon icon="uugds-favorites" className={Css.margin("right", fixedC)}/>
+                    <Lsi import={importLsi} path={["SlistsTile", "desc"]}/>
                     {data.data.notes}
                   </Uu5Elements.Text>
                 </div>
                 <div key={"divOwner"} className={Css.marginTop()}>
                   <Uu5Elements.Text {...textStyles("interactive")} className={Css.margin("left", fixedC)} key="owner" colorScheme="green">
                     <Uu5Elements.Icon icon="uugds-favorites"/>
-                    {"  Vlastník: "}{data.data.owner_name}
+                    <Lsi import={importLsi} path={["SlistsTile", "owner"]}/>
+                    {data.data.owner_name}
                   </Uu5Elements.Text>
                 </div>
                 <div key={"divMembers"} className={Css.marginTop()}>
                   <Uu5Elements.Text key={"members"} {...textStyles("interactive")} className={Css.margin("left", fixedC)}  >
-                    {"Členové: "}({data.data.members ? props.members(data.data.members) : "Not members"})
+                    <Lsi import={importLsi} path={["SlistsTile", "member"]}/> ({data.data.members ? props.members(data.data.members) : "Not members"})
                   </Uu5Elements.Text>
                 </div>
                 <div key={"divArchived"}>
                   <Uu5Elements.Text key={"archived"} className={Css.display(props.data.data.isArchived)}>
-                    {"Archived "}{props.data.data.isArchived}
+                    <Lsi import={importLsi} path={["SlistsTile", "archived"]}/> {props.data.data.isArchived}
                   </Uu5Elements.Text>
                 </div>
 
@@ -213,22 +214,23 @@ const SlistsTile = createVisualComponent({
           }
           }
         </Uu5TilesElements.Tile>
-
+        <BackgroundProvider background="light">
         <Uu5Elements.Dialog
           open={deleteOpen}
           onCLose={() => setDeleteOpen(false)}
-          header="chcete smazat položku?"
+          header={ <Lsi import={importLsi} path={["SlistsView", "dialogMessage"]}/>}
           info={data.data.name}
           icon="uugds-delete"
           actionList={[
             {
-              children: "Smazat", colorScheme: "negative", significance: "highlighted", onClick: async () => {
+              children:  <Lsi import={importLsi} path={["SlistsView", "dialogSubmit"]}/>, colorScheme: "negative", significance: "highlighted", onClick: async () => {
                 await handleDeleteTile({...data});
               }
             },
-            {children: "Zrušit", onClick: () => setDeleteOpen(false)},
+            {children:  <Lsi import={importLsi} path={["SlistsView", "dialogCancel"]}/>, onClick: () => setDeleteOpen(false)},
           ]}
         />
+          </BackgroundProvider>
 
 
       </>

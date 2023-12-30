@@ -7,6 +7,7 @@ import Config from "./config/config.js";
 import Home from "../routes/home.js";
 import Slist from "../routes/slist";
 import Slists from "../routes/slists";
+import DarkModeToggle from "./dark-mode-toogle";
 
 
 //@@viewOff:imports
@@ -63,11 +64,14 @@ const Spa = createVisualComponent({
 
     //@@viewOn:render
     return (
+      <>
+
       <Plus4U5.SpaProvider initialLanguageList={["en", "cs"]} baseUri={Environment.get("callsBaseUri")}>
 
         <Plus4U5App.Spa routeMap={ROUTE_MAP} />
 
       </Plus4U5.SpaProvider>
+      </>
     );
 //@@viewOff:render
         },

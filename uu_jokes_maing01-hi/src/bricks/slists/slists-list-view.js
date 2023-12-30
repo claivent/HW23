@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import {createVisualComponent, Utils, useState, createComponent} from "uu5g05";
+import {createVisualComponent, Utils, useState, createComponent, Lsi} from "uu5g05";
 import Config from "./config/config.js";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Uu5Elements from "uu5g05-elements";
@@ -9,6 +9,7 @@ import Uu5Tiles from "uu5tilesg02";
 import Uu5TilesControls from "uu5tilesg02-controls";
 import SlistsFilterBar from "./slists-filter-bar";
 import {useDataListContext} from "../../core/providers/data-list-context";
+import importLsi from "../../lsi/import-lsi";
 
 //@@viewOff:imports
 
@@ -141,7 +142,7 @@ const SlistsListView = createVisualComponent({
       if (vybraneZaznamy.length !== 0) {
         return vybraneZaznamy.map(zaznam => zaznam.data._name).join(', ')
       } else {
-        return "notMembers"
+        return  <Lsi import={importLsi} path={["SlistsView", "notMembers"]}/>;
       }
     }
 
@@ -149,7 +150,7 @@ const SlistsListView = createVisualComponent({
     const FILTER_DEFINITION_LIST = [
       {
         key: "archive",
-        label: "Pouze Archivované",
+        label: {children: <Lsi import={importLsi} path={["SlistsView", "archOnly"]}/>},
         filter: (item, value) => {
           if (value) {
             return item.data.isArchived === true;
@@ -164,7 +165,7 @@ const SlistsListView = createVisualComponent({
     // console.log("LISTWIEWPROPS",props);
 
     return (
-      <>
+
         <Uu5Tiles.ControllerProvider
           data={props.setData}
           selectable="multiple"
@@ -179,7 +180,7 @@ const SlistsListView = createVisualComponent({
           <Uu5Elements.Block className={Css.main()}
                              header={
                                <Uu5Elements.Header
-                                 title="Nákupní seznamy"
+                                 title= {<Lsi import={importLsi} path={["SlistsView", "title"]}/>}
                                  icon="uugds-favorites"
                                  //onIconClick={() => alert("click")}
                                />}
@@ -188,7 +189,7 @@ const SlistsListView = createVisualComponent({
                                {component: <Uu5TilesControls.FilterButton type="bar"/>},
                                {
                                  icon: "uugdsstencil-uiaction-plus-circle-solid",
-                                 children: "vytvořit",
+                                 children:  <Lsi import={importLsi} path={["SlistsView", "createList"]}/>,
                                  onClick: () => setCreateOpen(true)
                                }
                              ]}
@@ -216,21 +217,22 @@ const SlistsListView = createVisualComponent({
             <Uu5Forms.Form.Provider key={createOpen} handlerMap={datalist.DATA.handlerMap} onSubmit={async (e) => {
               await handlerMapCreate(handleCreateSitem({...e.data.value}));
               setCreateOpen(false);
-              console.log("submit", e.data);
+
             }}>
               <Uu5Elements.Modal open={createOpen} onClose={() => {
                 setCreateOpen(false)
-              }} header={"Vytvořit seznam"} footer={<Uu5Forms.SubmitButton/>}>
+              }} header={<Lsi import={importLsi} path={["SlistsViewForm", "title"]}/>} footer={<Uu5Forms.SubmitButton
+              label = {<Lsi import={importLsi} path={["SlistsViewForm", "title"]}/>}     />}>
                 <Uu5Forms.Form.View gridLayout={{xs: "name, notes", s: "name notes"}}>
-                  <Uu5Forms.FormText name={"name"} label="Name" minLength={3} maxLength={100} required={true}/>
-                  <Uu5Forms.FormText name={"notes"} label="Notes" minLength={3} maxLength={4000}/>
+                  <Uu5Forms.FormText name={"name"} label= {<Lsi import={importLsi} path={["SlistsViewForm", "name"]}/>} minLength={3} maxLength={100} required={true}/>
+                  <Uu5Forms.FormText name={"notes"} label={<Lsi import={importLsi} path={["SlistsViewForm", "desc"]}/>} minLength={3} maxLength={4000}/>
                 </Uu5Forms.Form.View>
               </Uu5Elements.Modal>
             </Uu5Forms.Form.Provider>
           </Uu5Elements.Block>
         </Uu5Tiles.ControllerProvider>
 
-      </>
+
     );
     //@@viewOff:render
   },

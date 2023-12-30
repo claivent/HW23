@@ -87,6 +87,7 @@ const Calls = {
 
   Slist: {
     load(dtoIn) {
+      console.log("Calls load", dtoIn)
       const commandUri = Calls.getCommandUri("sys/uuAppWorkspace/load");
       return Calls.call("get", commandUri, dtoIn);
     },

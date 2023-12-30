@@ -20,27 +20,22 @@ import {ContextDataList} from "../../core/providers/data-list-context";
 import Uu5Forms from "uu5g05-forms";
 import useDidMountEffect from "../../core/hookUseDidMounEffect";
 import Modals from "./modals";
+import importLsi from "../../lsi/import-lsi";
 
 //@@viewOff:imports
 //@@viewOn:constants
 
 const COLUMN_LIST = [
-  {value: "name", header: "Produkt"},
-  {value: "amount", header: "Množství"},
-  {value: "unit", header: "Jednotka"},
+  {value: "name", header: <Lsi import={importLsi} path={["ItemTile", "product"]}/> },
+  {value: "amount", header: <Lsi import={importLsi} path={["ItemTile", "amount"]}/> },
+  {value: "unit", header: <Lsi import={importLsi} path={["ItemTile", "unit"]}/> },
   /*{value: "active", header: "Zakoupeno"},*/
   {type: "actionList"},
 ];
 
-
-const DIALOG_MESSAGE = {
-  cs: "Smazat tuto položku?",
-  en: "Delete this item?",
-};
-
 const VIEW_LIST = [
-  {label: "Table", icon: "uugds-view-list", value: "table"},
-  {label: "Grid", icon: "uugds-view-grid", value: "grid"},
+  {label: <Lsi import={importLsi} path={["ItemTile", "table"]}/>, icon: "uugds-view-list", value: "table"},
+  {label: <Lsi import={importLsi} path={["ItemTile", "grid"]}/>, icon: "uugds-view-grid", value: "grid"},
 ];
 
 //@@viewOff:constants
@@ -139,7 +134,7 @@ const SItemsListView = createVisualComponent({
     datalist.DATA.data.find((item) => {
       item.data.id.toString() === props.listId && (list = item);
     });
-    console.log("datalist",datalist.DATA.data, "list",list)
+
 
     let DATA = list.data.shoppingItems;
 
@@ -232,24 +227,26 @@ const SItemsListView = createVisualComponent({
             setModalRow(data);
             console.log("DATA-Z-FORMULARE",data);
           },
+          tooltip: <Lsi import={importLsi} path={["ItemTile", "toolTipEdit"]}/>,
           collapsed: false,
         },
         {
           icon: "uugds-plus",
           onClick: () => setModalOpen([true, 1]),
+          tooltip: <Lsi import={importLsi} path={["ItemTile", "toolTipCreate"]}/>,
           collapsed: false,
         },
         {
           icon: "uugdsstencil-alert-check-circle",
           colorScheme: "green",
-          tooltip: "Set to Green",
+          tooltip: <Lsi import={importLsi} path={["ItemTile", "toolTipGreen"]}/>,
           onClick: (e) => handleClick(data.id, "green"),
           collapsed: false,
         },
 
         {
           icon: "uugds-delete",
-          tooltip: "Delete item",
+          tooltip: <Lsi import={importLsi} path={["ItemTile", "toolTipDelete"]}/>,
           onClick: (e) => setConfirmRemove({open: true, id: data.id}),
         },
       ];
@@ -272,7 +269,7 @@ const SItemsListView = createVisualComponent({
     const FILTER_DEFINITION_LIST = [
       {
         key: "koupeno",
-        label: "Pouze nenakoupené",
+        label: <Lsi import={importLsi} path={["ItemTile", "notBuy"]}/>,
         filter: (item, value) => {
           if (value) {
             let itemValue = typeof item.active === "object" ? Utils.Language.getItem(item.active) : item.active;
@@ -302,7 +299,7 @@ const SItemsListView = createVisualComponent({
           onFilterChange={(e) => {setItemsFilterList(e.data.filterList)}}
         >
           <Uu5Elements.Block className={Css.main()}
-                             header={<Uu5Elements.Header title="Editace položek"/>}
+                             header={<Uu5Elements.Header title={<Lsi import={importLsi} path={["ItemTile", "itemsEdit"]}/>} />}
                              actionList={[     ]}
           >
 
@@ -311,7 +308,7 @@ const SItemsListView = createVisualComponent({
               <Uu5Elements.Block {...blockProps}
                      actionList={[{component: <Uu5TilesControls.ViewButton/>},
                        {component: <Uu5TilesControls.FilterButton type="bar"/>},
-                    { icon: "uugdsstencil-uiaction-plus-circle-solid", children: "vytvořit", onClick: ()=> setModalOpen([true, 1])   }
+                    { icon: "uugdsstencil-uiaction-plus-circle-solid", children: <Lsi import={importLsi} path={["ItemTile", "create"]}/>, onClick: ()=> setModalOpen([true, 1])   }
                      ]}
               >
                 <Uu5TilesControls.FilterBar initialExpanded={true} displayManagerButton={false} displayClearButton={false}/>
@@ -338,7 +335,7 @@ const SItemsListView = createVisualComponent({
                     getRowProps={getRowProps}
                     header={
                       <Uu5Elements.Text category="interface" segment="title" type="micro">
-                        <Lsi lsi={{cs: "Produkt", en: "Products"}}/>
+                        <Lsi import={importLsi} path={["ItemTile", "product"]}/>
                       </Uu5Elements.Text>
                     }
                   />
@@ -353,7 +350,7 @@ const SItemsListView = createVisualComponent({
             <Uu5Elements.Dialog
               open={confirmRemove.open}
               onClose={() => setConfirmRemove({open: false})}
-              header={<Lsi lsi={DIALOG_MESSAGE}/>}
+              header={  <Lsi import={importLsi} path={["ItemTile", "dialogMessage"]}/> }
               icon={<Uu5Elements.Svg code="uugdssvg-svg-delete"/>}
               actionDirection="horizontal"
               actionList={[

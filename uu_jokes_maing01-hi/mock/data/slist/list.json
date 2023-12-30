@@ -26,6 +26,7 @@
         },
         {
           "id": "d582e522c02a14543b30c53e9c8ef8de",
+          "color": "",
           "name": "Meruňky",
           "amount": 25,
           "unit": "kg",
@@ -33,6 +34,7 @@
         },
         {
           "id": "069662e70410840a19fc1151efaa0d21",
+          "color": "",
           "name": "Paprika",
           "amount": 6,
           "unit": "kusů",
@@ -51,8 +53,8 @@
           "name": "Růžičková kapusta",
           "amount": 18,
           "unit": "balení",
-          "active": true,
-          "color": "green"
+          "active": false,
+          "color": ""
         },
         {
           "id": "825fd45bf2e9541448d356e2a5d325f5",
@@ -86,20 +88,8 @@
           "unit": "xcv",
           "active": true
         },
-        {
-          "id": "89a177b05b4b5427b94eafa7c6b918bc",
-          "name": "Mrkev",
-          "amount": 10,
-          "unit": "balení",
-          "active": true
-        },
-        {
-          "id": "cda2f13dbbc374be58a5112ace087eaa",
-          "name": "Hrušky",
-          "amount": 20,
-          "unit": "kg",
-          "active": true
-        },
+
+
         {
           "id": "be193c71d5b754361983ff8c4027c30f",
           "color": "green",

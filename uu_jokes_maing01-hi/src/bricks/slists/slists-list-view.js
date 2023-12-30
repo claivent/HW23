@@ -101,12 +101,12 @@ const SlistsListView = createVisualComponent({
   //@@viewOff:defaultProps
 
   render(props) {
-
+    console.log("START-slists-list-view");
 
     const datalist = useDataListContext();
 
-    console.log("SLISTS-LIST-VIEW-PROPS", props);
-    console.log("SLISTS-LIST-VIEW-CONTEXT-DATALIST", datalist);
+    // console.log("SLISTS-LIST-VIEW-PROPS", props);
+    // console.log("SLISTS-LIST-VIEW-CONTEXT-DATALIST", datalist);
     //console.log("SLISTS-VIEW-datalist", datalist);
     //@@viewOn:private
     const {children} = props;
@@ -121,7 +121,7 @@ const SlistsListView = createVisualComponent({
     const [createOpen, setCreateOpen] = useState(false);
     const [archiveFilterList, setArchiveFilterList] = useState([{ key: "archive", value: false }]);
     const [data, setData] = useState(props.setData);
-    console.log("SLISTS-LIST-VIEW-STATE-data", data);
+    // console.log("SLISTS-LIST-VIEW-STATE-data", data);
     function handleCreateSitem(formData) {
       console.log("submit", formData);
       return (

@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import {createComponent, useDataList, useDataObject} from "uu5g05";
+import {createComponent, useDataList, useDataObject, useState} from "uu5g05";
 import Config from "./config/config.js";
 import Calls from "calls";
 import ContextDataList from "./data-list-context";
@@ -28,6 +28,9 @@ const DataListProvider = createComponent({
   //@@viewOff:defaultProps
 
   render(props) {
+    console.log("START-data-list-provider");
+
+    const [slist, setSlist] = useState({});
     //@@viewOn:private
     const {children} = props;
     //@@viewOff:private
@@ -63,15 +66,15 @@ const DataListProvider = createComponent({
       }
     });
 
-    function handlePosition(data){
-      Calls.deleteSlist(data);
+    async function handlePosition(data){
+      return await Calls.deleteSlist(data);
     }
-    function handleDataListLoad() {
-      return Calls.loadSlistsList();
+    async function handleDataListLoad() {
+      return await Calls.loadSlistsList();
     }
 
-    function handleDataListCreate(data) {
-      return Calls.createSlist(data);
+    async function handleDataListCreate(data) {
+      return await Calls.createSlist(data);
     }
 
     async function handleDataListDelete(data) {
@@ -79,7 +82,9 @@ const DataListProvider = createComponent({
     }
 
     async function handleUpdate(data) {
-      return await Calls.updateSlist(data);
+      let result = await Calls.updateSlist(data)
+      await setSlist(result.shoppingItems);
+      return result;
     }
     async function handleArchive(data) {
       return await Calls.archiveSlist(data);

@@ -27,11 +27,12 @@ const SlistsListProvider = createComponent({
   //@@viewOff:defaultProps
 
   render(props) {
+    console.log("START-slists-list-provider");
     const datalist = useDataListContext();
     const [data, setData] = useState(datalist.DATA.data);
-    console.log("SLISTS-LIST-PROVIDER-PROPS", props);
-    console.log("SLISTS-LIST-PROVIDER-DATALIST", datalist);
-    console.log("SLISTS-LIST-PROVIDER-STATE-DATA", data);
+    // console.log("SLISTS-LIST-PROVIDER-PROPS", props);
+    // console.log("SLISTS-LIST-PROVIDER-DATALIST", datalist);
+    // console.log("SLISTS-LIST-PROVIDER-STATE-DATA", data);
     //@@viewOn:private
     const { children } = props;
 

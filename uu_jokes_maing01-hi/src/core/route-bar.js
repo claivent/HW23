@@ -49,8 +49,8 @@ const RouteBar = createVisualComponent({
 
     //@@viewOn:interface
     //@@viewOff:interface
-    console.log("Identity", identity);
-    console.log("subAppDataObject", subAppDataObject);
+    //console.log("Identity", identity);
+    //console.log("subAppDataObject", subAppDataObject);
 
     //@@viewOn:render
     return (

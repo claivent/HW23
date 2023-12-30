@@ -132,16 +132,15 @@ const SItemsListView = createVisualComponent({
   //@@viewOff:defaultProps
 
   render(props) {
-
-
+    console.log("START-s-items-list-view");
+    console.log("START-s-items-list-view-props",props);
     const datalist = useContext(ContextDataList);
-     console.log("datalist", datalist);
     let list = {};
     datalist.DATA.data.find((item) => {
-      console.log ("item",item);
       item.data.id.toString() === props.listId && (list = item);
     });
-    console.log("list",list);
+    console.log("datalist",datalist.DATA.data, "list",list)
+
     let DATA = list.data.shoppingItems;
 
 
@@ -149,16 +148,16 @@ const SItemsListView = createVisualComponent({
 
     const [view, setView] = useState("grid");
     const [confirmRemove, setConfirmRemove] = useState({open: false, id: undefined});
-    const [data, setData] = useState(DATA.map((it) => ({ ...it,
-      color: it.active === false ? undefined : "green" })));
+    const [data, setData] = useState(DATA.map((it) => ({ ...it, color: it.active === false ? undefined : "green" })));
     const [itemsFilterList, setItemsFilterList] = useState([{key: "koupeno", value: false}]);
     const [modalRow, setModalRow] = useState();
     const [modalOpen, setModalOpen] = useState([false, 0]);
     const dataRef = useRef(data);
-     console.log("DATA-SERVERU", DATA, "view", view, "confirmRemove", confirmRemove, "data", data,"itemsFilterList", itemsFilterList, "modalRow", modalRow, "dataRef", dataRef, "dataRef.current", dataRef.current  );
+    console.log("DATA-SERVERU", DATA, "view", view, "confirmRemove", confirmRemove, "data", data,"itemsFilterList", itemsFilterList, "modalRow", modalRow, "dataRef", dataRef, "dataRef.current", dataRef.current  );
 
-    function handlerMapUpdate(data) {
-      return datalist.DATA.handlerMap.update(data);
+    async function handlerMapUpdate(data) {
+
+      return await datalist.DATA.handlerMap.update(data);
     }
 
     function handleClick(id, color) {
@@ -202,10 +201,13 @@ const SItemsListView = createVisualComponent({
 
 
     useDidMountEffect(() => {
-      if (dataRef.current !== undefined) {
-        handlerMapUpdate({id: list.data.id, shoppingItems: data})
 
-        console.log("useeffect proběhl", list.data.id, data);
+      if (dataRef.current !== undefined) {
+
+
+        handlerMapUpdate({id: props.listId, shoppingItems: data})
+
+        console.log("useeffect proběhl", props.listId, data);
       } else {
         //console.log("první mount neproběhl")
       }
@@ -272,11 +274,9 @@ const SItemsListView = createVisualComponent({
         key: "koupeno",
         label: "Pouze nenakoupené",
         filter: (item, value) => {
-          //console.log("Archiveitem", item, "value", value);
           if (value) {
             let itemValue = typeof item.active === "object" ? Utils.Language.getItem(item.active) : item.active;
-           // console.log("archiveItemValue", itemValue);
-            return item.active === false;
+           return item.active === false;
           }
           return true;
         },
@@ -291,9 +291,7 @@ const SItemsListView = createVisualComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
-    // console.log("DATA",DATA.filter((id)=> id.id === rowId));
-    // console.log("FORM-PROPS",props);
-    // console.log("ROWID",rowId);
+
     return (
       <div>
         <Uu5Tiles.ControllerProvider

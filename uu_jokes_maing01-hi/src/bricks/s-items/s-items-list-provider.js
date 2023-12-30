@@ -1,9 +1,9 @@
 //@@viewOn:imports
-import {createComponent, useRoute} from "uu5g05";
+import {createComponent, useContext, useRoute} from "uu5g05";
 import Config from "./config/config.js";
 import DataListProvider from "../../core/providers/data-list-provider";
 import SItemsListView from "./s-items-list-view";
-import {useDataListContext} from "../../core/providers/data-list-context";
+import {ContextDataList, useDataListContext} from "../../core/providers/data-list-context";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -26,8 +26,9 @@ const SItemsListProvider = createComponent({
   //@@viewOff:defaultProps
 
   render(props) {
+    console.log("START-s-items-list-provider");
 
-
+    // grab id of shopping list
     const [route, setRoute] = useRoute();
     const {listId} = route.params;
     //@@viewOn:private
@@ -38,9 +39,10 @@ const SItemsListProvider = createComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
+
     return(
-      <DataListProvider >
-        <SItemsListView listId={listId}/>
+      <DataListProvider>
+        <SItemsListView  listId={listId}/>
       </DataListProvider>
 
     );
